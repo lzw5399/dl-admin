@@ -137,7 +137,7 @@ namespace Doublelives.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "doublelives album V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "doublelives admin");
                 c.RoutePrefix = string.Empty;
             });
 

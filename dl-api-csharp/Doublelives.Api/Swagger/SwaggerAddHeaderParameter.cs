@@ -46,7 +46,11 @@ namespace Doublelives.Api.Swagger
                     Description = "Example: \"{your token}\"",
                     Name = ApiHeaders.TOKEN,
                     In = ParameterLocation.Header,
-                    Required = false
+                    Required = false,
+                    Schema = new OpenApiSchema
+                    {
+                        Type = "apikey"
+                    }
                 });
             }
         }
