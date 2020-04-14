@@ -31,7 +31,7 @@ namespace Doublelives.Api.Controllers
         [HttpGet("getToken")]
         public IActionResult GetToken(string id)
         {
-            id = id ?? "2069b03a-9167-455c-9db8-5846334e5f20";
+            id ??= "2069b03a-9167-455c-9db8-5846334e5f20";
             var token = _userService.GenerateToken(id);
 
             return Ok(token);
