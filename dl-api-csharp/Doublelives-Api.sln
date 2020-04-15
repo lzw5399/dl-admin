@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doublelives.Shared", "Doubl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doublelives.Infrastructure", "Doublelives.Infrastructure\Doublelives.Infrastructure.csproj", "{A50AC59D-8513-4563-83AD-3081526B3722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doublelives.Query", "Doublelives.Query\Doublelives.Query.csproj", "{BAFE542D-B370-4DB9-BADA-CFC453C748B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{A50AC59D-8513-4563-83AD-3081526B3722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A50AC59D-8513-4563-83AD-3081526B3722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A50AC59D-8513-4563-83AD-3081526B3722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAFE542D-B370-4DB9-BADA-CFC453C748B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFE542D-B370-4DB9-BADA-CFC453C748B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFE542D-B370-4DB9-BADA-CFC453C748B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFE542D-B370-4DB9-BADA-CFC453C748B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{BDA149EE-05FD-4958-A0C1-83ECCFF8DAE3} = {63DBA218-4075-453B-A6E3-DB26CC67C7DB}
 		{5633A978-1313-41F9-880D-900B242EE611} = {0D6A0283-13ED-4ED7-A222-CE899C76AA95}
 		{A50AC59D-8513-4563-83AD-3081526B3722} = {0D6A0283-13ED-4ED7-A222-CE899C76AA95}
+		{BAFE542D-B370-4DB9-BADA-CFC453C748B3} = {63DBA218-4075-453B-A6E3-DB26CC67C7DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1688CB2B-C0AB-4682-AA07-E2A096F98B20}

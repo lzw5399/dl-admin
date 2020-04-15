@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Doublelives.Shared.ConfigModels;
 
 namespace Doublelives.Core
 {
@@ -40,7 +41,7 @@ namespace Doublelives.Core
                 {
                     options
                     .UseMySql(
-                        configuration.GetConnectionString("Album"),
+                        configuration.GetConnectionString("album"),
                         it => it.MigrationsAssembly("Doublelives.Migrations"));
                 },
                 ServiceLifetime.Transient);
@@ -51,8 +52,8 @@ namespace Doublelives.Core
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)
         {
-            var csredis = new CSRedis.CSRedisClient(configuration.GetConnectionString("TxRedis"));
-            services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis));
+            var csredis = new CSRedis.CSRedisClient(configuration["cache:redisconn"]);
+            services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis);
         }
 
         private static void ConfigureWorkContext(IServiceCollection services)

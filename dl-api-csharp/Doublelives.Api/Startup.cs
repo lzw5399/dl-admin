@@ -52,8 +52,9 @@ namespace Doublelives.Api
                 c.OperationFilter<SwaggerAddHeaderParameter>();
             });
 
-            services.Configure<TencentCosOptions>(Configuration.GetSection("TencentCos"));
-            services.Configure<JwtOptions>(Configuration.GetSection("Jwt"));
+            services.Configure<TencentCosOptions>(Configuration.GetSection("tencentCos"));
+            services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
+            services.Configure<CacheOptions>(Configuration.GetSection("cache"));
 
             services.AddAutoMapper(c =>
             {
@@ -128,7 +129,7 @@ namespace Doublelives.Api
             loggerFactory
                 .AddSentry(options =>
                 {
-                    options.Dsn = Configuration["SentryClientKey"];
+                    options.Dsn = Configuration["sentryClientKey"];
                     options.Environment = env.EnvironmentName;
                     options.MinimumEventLevel = LogLevel.Error;
                     options.Debug = env.IsDevelopment();
