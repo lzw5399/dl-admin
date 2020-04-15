@@ -1,7 +1,6 @@
 using AutoMapper;
 using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Account;
-using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 

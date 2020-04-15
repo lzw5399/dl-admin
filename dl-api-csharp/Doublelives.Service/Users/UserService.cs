@@ -74,14 +74,14 @@ namespace Doublelives.Service.Users
                 throw new NotFoundException("user.NotFound", "user doesn't not found!");
             }
 
-            _distributedCache.SetAsObject(dbUser.Id.ToString(), dbUser);
+            _distributedCache.SetAsObject(dbUser.Id, dbUser);
 
             return dbUser;
         }
 
         public void Add(User user)
         {
-            _distributedCache.SetAsObject(user.Id.ToString(), user);
+            _distributedCache.SetAsObject(user.Id, user);
 
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
@@ -89,7 +89,7 @@ namespace Doublelives.Service.Users
 
         public void Update(User user)
         {
-            _distributedCache.SetAsObject(user.Id.ToString(), user);
+            _distributedCache.SetAsObject(user.Id, user);
 
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();

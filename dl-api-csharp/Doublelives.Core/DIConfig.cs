@@ -1,7 +1,6 @@
-﻿using COSXML;
-using COSXML.Auth;
-using Doublelives.Cos;
+﻿using Doublelives.Cos;
 using Doublelives.Persistence;
+using Doublelives.Service.Cache;
 using Doublelives.Service.Pictures;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -10,10 +9,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Doublelives.Shared.ConfigModels;
 
 namespace Doublelives.Core
 {
@@ -40,9 +35,9 @@ namespace Doublelives.Core
                 options =>
                 {
                     options
-                    .UseMySql(
-                        configuration.GetConnectionString("album"),
-                        it => it.MigrationsAssembly("Doublelives.Migrations"));
+                        .UseMySql(
+                            configuration.GetConnectionString("album"),
+                            it => it.MigrationsAssembly("Doublelives.Migrations"));
                 },
                 ServiceLifetime.Transient);
             services
@@ -53,7 +48,8 @@ namespace Doublelives.Core
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)
         {
             var csredis = new CSRedis.CSRedisClient(configuration["cache:redisconn"]);
-            services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis);
+            services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis));
+            services.AddSingleton<ICacheService, CacheService>();
         }
 
         private static void ConfigureWorkContext(IServiceCollection services)

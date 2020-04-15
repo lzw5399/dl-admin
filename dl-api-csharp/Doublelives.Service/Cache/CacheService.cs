@@ -1,26 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Doublelives.Infrastructure.Extensions;
 using Doublelives.Shared.ConfigModels;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 namespace Doublelives.Service.Cache
 {
     public class CacheService : ICacheService
     {
-        public static Dictionary<string, int> CacheKeyNTimes = new Dictionary<string, int>();
+        private static readonly Dictionary<string, int> CacheKeyNTimes = new Dictionary<string, int>();
         private static object _lockObj = new object();
         private readonly CacheOptions _cacheOptions;
         private readonly IDistributedCache _cache;
-        
-        public CacheService(CacheOptions cacheOptions,IDistributedCache cache)
+
+        public CacheService(IOptions<CacheOptions> options, IDistributedCache cache)
         {
-            _cacheOptions = cacheOptions;
+            _cacheOptions = options.Value;
             _cache = cache;
         }
-        
-        public async Task<T> GetOrCreateAsync<T>(string cacheKey, Func<ICacheEntry, Task<T>> factory)
+
+        public async Task<T> GetOrCreateAsync<T>(string cacheKey, Func<DistributedCacheEntryOptions, Task<T>> factory)
         {
             int cacheTime = _cacheOptions.DefaultExpireMinutes;
             if (IsCacheTimeChanged(cacheKey, cacheTime))
@@ -31,25 +33,9 @@ namespace Doublelives.Service.Cache
 
             return await _cache.GetOrCreateAsync(cacheKey, async entry =>
             {
-                entry.AbsoluteExpiration = DateTimeOffset.Now.AddHours(cacheTime);
+                entry.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(cacheTime);
                 return await factory(entry);
             });
-        }
-
-        public void Remove(List<string> cacheKeys)
-        {
-            lock (_lockObj)
-            {
-                foreach (var cacheKey in cacheKeys)
-                {
-                    CacheKeyNTimes.Remove(cacheKey);
-                }
-            }
-
-            foreach (var cacheKey in cacheKeys)
-            {
-                _cache.Remove(cacheKey);
-            }
         }
 
         public void Remove(string cacheKey)
@@ -58,31 +44,26 @@ namespace Doublelives.Service.Cache
             {
                 CacheKeyNTimes.Remove(cacheKey);
             }
+
             _cache.Remove(cacheKey);
         }
 
         private bool IsCacheTimeChanged(string cacheKey, int cacheTime)
         {
-            if (CacheKeyNTimes.ContainsKey(cacheKey))
-            {
-                var oldCacheTime = CacheKeyNTimes[cacheKey];
+            if (!CacheKeyNTimes.ContainsKey(cacheKey)) return false;
+            var oldCacheTime = CacheKeyNTimes[cacheKey];
 
-                return oldCacheTime != cacheTime;
-            }
-
-            return false;
+            return oldCacheTime != cacheTime;
         }
 
         private static void AddCacheKey(string cachekey, int time = 1)
         {
-            if (!CacheKeyNTimes.ContainsKey(cachekey))
+            if (CacheKeyNTimes.ContainsKey(cachekey)) return;
+            lock (_lockObj)
             {
-                lock (_lockObj)
+                if (!CacheKeyNTimes.ContainsKey(cachekey))
                 {
-                    if (!CacheKeyNTimes.ContainsKey(cachekey))
-                    {
-                        CacheKeyNTimes[cachekey] = time;
-                    }
+                    CacheKeyNTimes[cachekey] = time;
                 }
             }
         }
