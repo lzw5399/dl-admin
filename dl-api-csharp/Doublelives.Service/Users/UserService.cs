@@ -1,21 +1,17 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Doublelives.Persistence;
 using Doublelives.Domain.Users;
-using Doublelives.Infrastructure.Exceptions;
-using Doublelives.Infrastructure.Extensions;
 using Doublelives.Shared.ConfigModels;
 using IdentityModel;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Doublelives.Infrastructure.Cache;
-using Doublelives.Query.Users;
 using System.Threading.Tasks;
+using Doublelives.Infrastructure.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doublelives.Service.Users
 {
@@ -23,23 +19,17 @@ namespace Doublelives.Service.Users
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly JwtOptions _jwtConfig;
-        private readonly IDistributedCache _distributedCache;
         private readonly ICacheManager _cacheManager;
-        private readonly IUserQuery _userQuery;
         private const string USER_CACHE_PREFIX = "user";
 
         public UserService(
             IUnitOfWork unitOfWork,
             IOptions<JwtOptions> jwtOptions,
-            IDistributedCache distributedCache,
-            ICacheManager cacheManager,
-            IUserQuery userQuery)
+            ICacheManager cacheManager)
         {
             _unitOfWork = unitOfWork;
             _jwtConfig = jwtOptions.Value;
-            _distributedCache = distributedCache;
             _cacheManager = cacheManager;
-            _userQuery = userQuery;
         }
 
         public string GenerateToken(string id)
@@ -68,10 +58,10 @@ namespace Doublelives.Service.Users
 
         public async Task<User> GetById(string id)
         {
-            var cacheKey = $"{USER_CACHE_PREFIX}_id";
+            var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry =>
             {
-                return await _userQuery.GetById(id);
+                return await GetByIdFromDb(id);
             });
 
             return user;
@@ -79,27 +69,40 @@ namespace Doublelives.Service.Users
 
         public void Add(User user)
         {
-            _distributedCache.SetAsObject(user.Id, user);
-
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
+
+            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
         public void Update(User user)
         {
-            _distributedCache.SetAsObject(user.Id, user);
-
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
+
+            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
         public void Delete(string id)
         {
-            _distributedCache.Remove(id);
-
             var user = _unitOfWork.UserRepository.GetById(id);
             user.IsDeleted = true;
             _unitOfWork.Commit();
+
+            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+        }
+
+        private async Task<User> GetByIdFromDb(string id)
+        {
+            var guid = Guid.Parse(id);
+            var user = await _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefaultAsync(it => it.Id == guid);
+
+            if (user == null)
+            {
+                throw new NotFoundException("user.NotFound", "user doesn't not found!");
+            }
+
+            return user;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Doublelives.Cos;
 using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
-using Doublelives.Query.Users;
 using Doublelives.Service.Pictures;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -33,7 +32,6 @@ namespace Doublelives.Core
 
         private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IUserQuery, UserQuery>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doublelives.Persistence
 {
@@ -13,5 +14,9 @@ namespace Doublelives.Persistence
         void Update(TEntity entity);
 
         void Delete(TEntity entity);
+
+        Task<TEntity> GetByIdAsync(object id);
+
+        Task InsertAsync(TEntity entity);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Doublelives.Domain.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doublelives.Persistence
 {
@@ -36,6 +37,16 @@ namespace Doublelives.Persistence
         public virtual void Delete(TEntity entity)
         {
             Entities.Remove(entity);
+        }
+
+        public virtual async Task<TEntity> GetByIdAsync(object id)
+        {
+            return await Entities.FindAsync(id);
+        }
+
+        public virtual async Task InsertAsync(TEntity entity)
+        {
+            await Entities.AddAsync(entity);
         }
     }
 }
