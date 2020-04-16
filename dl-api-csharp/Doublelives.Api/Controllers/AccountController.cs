@@ -2,6 +2,8 @@ using AutoMapper;
 using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
+using Doublelives.Api.Validators.Account;
+using Doublelives.Infrastructure.Validations;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Authorization;
@@ -30,10 +32,11 @@ namespace Doublelives.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login(AccountLoginRequest request)
         {
-            return Ok();
-            // var token = _userService.GenerateToken(request);
-            //
-            // return Ok(token);
+            ModelValidator<AccountLoginRequest, LoginRequestValidator>.Validate(request);
+
+            var token = _userService.GenerateToken("2069b03a-9167-455c-9db8-5846334e5f20");
+
+            return Ok(token);
         }
 
         /// <summary>获取当前账户信息</summary>
