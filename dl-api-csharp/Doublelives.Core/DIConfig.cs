@@ -25,9 +25,9 @@ namespace Doublelives.Core
 
         private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<ITencentCosService, TencentCosService>();
-            services.AddTransient<IPictureService, PictureService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<ITencentCosService, TencentCosService>();
+            services.AddScoped<IPictureService, PictureService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)
