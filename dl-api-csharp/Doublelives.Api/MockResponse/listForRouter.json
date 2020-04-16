@@ -1,0 +1,356 @@
+﻿[ 
+  {
+    "children": [
+      {
+        "children": [],
+        "component": "views/system/user/index",
+        "hidden": false,
+        "id": "4",
+        "meta": {
+          "icon": "user",
+          "title": "mgr"
+        },
+        "name": "用户管理",
+        "num": 1,
+        "parentId": "1",
+        "path": "/mgr"
+      },
+      {
+        "children": [],
+        "component": "views/system/role/index",
+        "hidden": false,
+        "id": "12",
+        "meta": {
+          "icon": "peoples",
+          "title": "role"
+        },
+        "name": "角色管理",
+        "num": 2,
+        "parentId": "1",
+        "path": "/role"
+      },
+      {
+        "children": [],
+        "component": "views/system/dept/index",
+        "hidden": false,
+        "id": "21",
+        "meta": {
+          "icon": "dept",
+          "title": "dept"
+        },
+        "name": "部门管理",
+        "num": 3,
+        "parentId": "1",
+        "path": "/dept"
+      },
+      {
+        "children": [],
+        "component": "views/system/menu/index",
+        "hidden": false,
+        "id": "17",
+        "meta": {
+          "icon": "menu",
+          "title": "menu"
+        },
+        "name": "菜单管理",
+        "num": 4,
+        "parentId": "1",
+        "path": "/menu"
+      },
+      {
+        "children": [],
+        "component": "views/system/dict/index",
+        "hidden": false,
+        "id": "22",
+        "meta": {
+          "icon": "dict",
+          "title": "dict"
+        },
+        "name": "字典管理",
+        "num": 4,
+        "parentId": "1",
+        "path": "/dict"
+      },
+      {
+        "children": [],
+        "component": "views/system/taskLog/index",
+        "hidden": true,
+        "id": "47",
+        "meta": {
+          "icon": "task",
+          "title": "taskLog"
+        },
+        "name": "任务日志",
+        "num": 4,
+        "parentId": "1",
+        "path": "/taskLog"
+      },
+      {
+        "children": [],
+        "component": "views/system/cfg/index",
+        "hidden": false,
+        "id": "33",
+        "meta": {
+          "icon": "cfg",
+          "title": "cfg"
+        },
+        "name": "参数管理",
+        "num": 10,
+        "parentId": "1",
+        "path": "/cfg"
+      },
+      {
+        "children": [],
+        "component": "views/system/task/index",
+        "hidden": false,
+        "id": "37",
+        "meta": {
+          "icon": "task",
+          "title": "task"
+        },
+        "name": "任务管理",
+        "num": 11,
+        "parentId": "1",
+        "path": "/task"
+      }
+    ],
+    "component": "layout",
+    "hidden": false,
+    "id": "1",
+    "meta": {
+      "icon": "system",
+      "title": "system"
+    },
+    "name": "系统管理",
+    "num": 1,
+    "parentId": "0",
+    "path": "/system"
+  },
+  {
+    "children": [
+      {
+        "children": [],
+        "component": "views/operation/druid/index",
+        "hidden": false,
+        "id": "54",
+        "meta": {
+          "icon": "monitor",
+          "title": "druid"
+        },
+        "name": "数据库管理",
+        "num": 1,
+        "parentId": "3",
+        "path": "/druid"
+      },
+      {
+        "children": [],
+        "component": "views/operation/api/index",
+        "hidden": false,
+        "id": "55",
+        "meta": {
+          "icon": "swagger",
+          "title": "swagger"
+        },
+        "name": "接口文档",
+        "num": 2,
+        "parentId": "3",
+        "path": "/swagger"
+      },
+      {
+        "children": [],
+        "component": "views/operation/log/index",
+        "hidden": false,
+        "id": "48",
+        "meta": {
+          "icon": "log",
+          "title": "log"
+        },
+        "name": "业务日志",
+        "num": 6,
+        "parentId": "3",
+        "path": "/log"
+      },
+      {
+        "children": [],
+        "component": "views/operation/loginLog/index",
+        "hidden": false,
+        "id": "49",
+        "meta": {
+          "icon": "logininfor",
+          "title": "loginLog"
+        },
+        "name": "登录日志",
+        "num": 6,
+        "parentId": "3",
+        "path": "/loginLog"
+      }
+    ],
+    "component": "layout",
+    "hidden": false,
+    "id": "3",
+    "meta": {
+      "icon": "operation",
+      "title": "operationMgr"
+    },
+    "name": "运维管理",
+    "num": 2,
+    "parentId": "0",
+    "path": "/optionMgr"
+  },
+  {
+    "children": [
+      {
+        "children": [],
+        "component": "views/cms/channel/index",
+        "hidden": false,
+        "id": "41",
+        "meta": {
+          "icon": "channel",
+          "title": "channel"
+        },
+        "name": "栏目管理",
+        "num": 1,
+        "parentId": "2",
+        "path": "/channel"
+      },
+      {
+        "children": [],
+        "component": "views/cms/article/edit.vue",
+        "hidden": false,
+        "id": "46",
+        "meta": {
+          "icon": "articleEdit",
+          "title": "editArticle"
+        },
+        "name": "新建文章",
+        "num": 1,
+        "parentId": "2",
+        "path": "/cms/articleEdit"
+      },
+      {
+        "children": [],
+        "component": "views/cms/article/index",
+        "hidden": false,
+        "id": "42",
+        "meta": {
+          "icon": "documentation",
+          "title": "article"
+        },
+        "name": "文章管理",
+        "num": 2,
+        "parentId": "2",
+        "path": "/article"
+      },
+      {
+        "children": [],
+        "component": "views/cms/banner/index",
+        "hidden": false,
+        "id": "43",
+        "meta": {
+          "icon": "banner",
+          "title": "banner"
+        },
+        "name": "banner管理",
+        "num": 3,
+        "parentId": "2",
+        "path": "/banner"
+      },
+      {
+        "children": [],
+        "component": "views/cms/contacts/index",
+        "hidden": false,
+        "id": "44",
+        "meta": {
+          "icon": "contacts",
+          "title": "contacts"
+        },
+        "name": "邀约管理",
+        "num": 4,
+        "parentId": "2",
+        "path": "/contacts"
+      },
+      {
+        "children": [],
+        "component": "views/cms/file/index",
+        "hidden": false,
+        "id": "45",
+        "meta": {
+          "icon": "file",
+          "title": "file"
+        },
+        "name": "文件管理",
+        "num": 5,
+        "parentId": "2",
+        "path": "/fileMgr"
+      }
+    ],
+    "component": "layout",
+    "hidden": false,
+    "id": "2",
+    "meta": {
+      "icon": "documentation",
+      "title": "cms"
+    },
+    "name": "CMS管理",
+    "num": 3,
+    "parentId": "0",
+    "path": "/cms"
+  },
+  {
+    "children": [
+      {
+        "children": [],
+        "component": "views/message/message/index",
+        "hidden": false,
+        "id": "57",
+        "meta": {
+          "icon": "message",
+          "title": "msg"
+        },
+        "name": "历史消息",
+        "num": 1,
+        "parentId": "56",
+        "path": "/history"
+      },
+      {
+        "children": [],
+        "component": "views/message/template/index",
+        "hidden": false,
+        "id": "58",
+        "meta": {
+          "icon": "template",
+          "title": "msgTpl"
+        },
+        "name": "消息模板",
+        "num": 2,
+        "parentId": "56",
+        "path": "/template"
+      },
+      {
+        "children": [],
+        "component": "views/message/sender/index",
+        "hidden": false,
+        "id": "59",
+        "meta": {
+          "icon": "sender",
+          "title": "msgSender"
+        },
+        "name": "消息发送者",
+        "num": 3,
+        "parentId": "56",
+        "path": "/sender"
+      }
+    ],
+    "component": "layout",
+    "hidden": false,
+    "id": "56",
+    "meta": {
+      "icon": "message",
+      "title": "messageMgr"
+    },
+    "name": "消息管理",
+    "num": 4,
+    "parentId": "0",
+    "path": "/message"
+  }
+]

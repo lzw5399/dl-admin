@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function getList() {
   return request({
-    url: '/menu/list',
+    url: 'api/menu/list',
     method: 'get'
   })
 }
 
 export function listForRouter(params) {
   return request({
-    url: '/menu/listForRouter',
+    url: 'api/menu/listForRouter',
     method: 'get',
     params
   })
@@ -17,7 +17,7 @@ export function listForRouter(params) {
 
 export function save(params) {
   return request({
-    url: '/menu',
+    url: 'api/menu',
     method: 'post',
     params: params
   })
@@ -25,7 +25,7 @@ export function save(params) {
 
 export function delMenu(id) {
   return request({
-    url: '/menu',
+    url: 'api/menu',
     method: 'delete',
     params: {
       id: id
@@ -34,7 +34,7 @@ export function delMenu(id) {
 }
 export function menuTreeListByRoleId(roleId) {
   return request({
-    url: '/menu/menuTreeListByRoleId',
+    url: 'api/menu/menuTreeListByRoleId',
     method: 'get',
     params: {
       roleId: roleId

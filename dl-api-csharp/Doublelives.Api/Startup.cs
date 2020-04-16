@@ -67,7 +67,6 @@ namespace Doublelives.Api
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
-                .WithExposedHeaders(ApiHeaders.TOKEN)
                 .SetPreflightMaxAge(TimeSpan.FromDays(1));
             }));
 
@@ -85,7 +84,6 @@ namespace Doublelives.Api
                     options.TokenValidationParameters.ValidIssuer = Configuration["Jwt:Issuer"];
                     options.TokenValidationParameters.NameClaimType = JwtClaimTypes.Name;
                     options.TokenValidationParameters.RoleClaimType = JwtClaimTypes.Role;
-
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = it =>
