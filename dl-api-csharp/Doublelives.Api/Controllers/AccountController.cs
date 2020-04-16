@@ -40,7 +40,6 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>获取当前账户信息</summary>
-        /// <returns name="AccountViewModel"></returns>
         [HttpGet("info")]
         public IActionResult Info()
         {
