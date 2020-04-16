@@ -1,6 +1,7 @@
 ﻿using Doublelives.Cos;
+using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
-using Doublelives.Service.Cache;
+using Doublelives.Query.Users;
 using Doublelives.Service.Pictures;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -17,6 +18,7 @@ namespace Doublelives.Core
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
             ConfigureServices(services, configuration);
+            ConfigureQueries(services, configuration);
             ConfigurePersistence(services, configuration);
             ConfigureDistributedCache(services, configuration);
             ConfigureWorkContext(services);
@@ -27,6 +29,11 @@ namespace Doublelives.Core
             services.AddTransient<ITencentCosService, TencentCosService>();
             services.AddTransient<IPictureService, PictureService>();
             services.AddTransient<IUserService, UserService>();
+        }
+
+        private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddTransient<IUserQuery, UserQuery>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
@@ -49,7 +56,7 @@ namespace Doublelives.Core
         {
             var csredis = new CSRedis.CSRedisClient(configuration["cache:redisconn"]);
             services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis));
-            services.AddSingleton<ICacheService, CacheService>();
+            services.AddSingleton<ICacheManager, CacheManager>();
         }
 
         private static void ConfigureWorkContext(IServiceCollection services)

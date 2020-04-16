@@ -1,19 +1,14 @@
 ﻿using COSXML;
 using System;
 using Microsoft.Extensions.Options;
-using COSXML.Model.Service;
 using COSXML.Utils;
-using COSXML.CosException;
 using COSXML.Model.Bucket;
 using Doublelives.Shared.ConfigModels;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web;
-using Microsoft.Extensions.Logging;
 using Doublelives.Domain.Pictures;
-using Doublelives.Domain;
 using COSXML.Auth;
-using COSXML.Model.Object;
 using System.Drawing;
 
 namespace Doublelives.Cos

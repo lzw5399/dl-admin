@@ -1,22 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Doublelives.Infrastructure.Extensions;
+﻿using Doublelives.Infrastructure.Extensions;
 using Doublelives.Shared.ConfigModels;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Doublelives.Service.Cache
+namespace Doublelives.Infrastructure.Cache
 {
-    public class CacheService : ICacheService
+    public class CacheManager : ICacheManager
     {
         private static readonly Dictionary<string, int> CacheKeyNTimes = new Dictionary<string, int>();
         private static object _lockObj = new object();
         private readonly CacheOptions _cacheOptions;
         private readonly IDistributedCache _cache;
 
-        public CacheService(IOptions<CacheOptions> options, IDistributedCache cache)
+        public CacheManager(IOptions<CacheOptions> options, IDistributedCache cache)
         {
             _cacheOptions = options.Value;
             _cache = cache;
@@ -24,6 +24,12 @@ namespace Doublelives.Service.Cache
 
         public async Task<T> GetOrCreateAsync<T>(string cacheKey, Func<DistributedCacheEntryOptions, Task<T>> factory)
         {
+            // 如果不启用cache直接请求
+            if (!_cacheOptions.Enable)
+            {
+                return await factory(new DistributedCacheEntryOptions());
+            }
+
             int cacheTime = _cacheOptions.DefaultExpireMinutes;
             if (IsCacheTimeChanged(cacheKey, cacheTime))
             {

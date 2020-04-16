@@ -41,7 +41,7 @@ namespace Doublelives.Api.Middlewares
                 var userService = context.RequestServices.GetService<IUserService>();
                 var userId = context.User.Claims.First(it => it.Type == JwtClaimTypes.Subject).Value;
 
-                var user = userService.GetById(userId);
+                var user = userService.GetById(userId).Result;
 
                 return new Domain.Users.Dto.CurrentUserDto
                 {
@@ -52,7 +52,7 @@ namespace Doublelives.Api.Middlewares
                     Language = user.LanguageCode
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

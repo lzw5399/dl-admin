@@ -24,7 +24,6 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Doublelives.Api
 {

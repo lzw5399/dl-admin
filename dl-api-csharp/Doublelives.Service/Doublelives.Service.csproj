@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Doublelives.Domain\Doublelives.Domain.csproj" />
     <ProjectReference Include="..\Doublelives.Infrastructure\Doublelives.Infrastructure.csproj" />
     <ProjectReference Include="..\Doublelives.Persistence\Doublelives.Persistence.csproj" />
+    <ProjectReference Include="..\Doublelives.Query\Doublelives.Query.csproj" />
   </ItemGroup>
 
   <ItemGroup>

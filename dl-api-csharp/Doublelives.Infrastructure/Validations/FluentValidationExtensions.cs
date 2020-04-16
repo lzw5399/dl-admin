@@ -5,9 +5,7 @@ using FluentValidation.Resources;
 using FluentValidation.Results;
 using FluentValidation.Validators;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Doublelives.Infrastructure.Validations
 {

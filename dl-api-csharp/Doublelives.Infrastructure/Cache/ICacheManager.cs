@@ -1,12 +1,12 @@
+﻿using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 
-namespace Doublelives.Service.Cache
+namespace Doublelives.Infrastructure.Cache
 {
-    public interface ICacheService
+    public interface ICacheManager
     {
         Task<T> GetOrCreateAsync<T>(string cacheKey, Func<DistributedCacheEntryOptions, Task<T>> factory);
 
