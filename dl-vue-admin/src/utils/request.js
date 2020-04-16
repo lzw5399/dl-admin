@@ -1,18 +1,20 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import router from '@/router'
 
 // create an axios instance
-const service = axios.create({
+const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  withCredentials: true // send cookies when cross-domain requests
-  // timeout: 25000
+  withCredentials: true, // send cookies when cross-domain requests
+  // timeout: 25000, // request timeout,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
-
 // request interceptor
-service.interceptors.request.use(
+instance.interceptors.request.use(
   config => {
     // do something before request is sent
     var token = getToken()
@@ -29,38 +31,40 @@ service.interceptors.request.use(
 )
 
 // response interceptor
-service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
+instance.interceptors.response.use(
   response => {
     const res = response.data
     if (response.headers.token) {
       // 如果后台通过header返回token，说明token已经更新，则更新客户端本地token
       store.dispatch('user/updateToken', { token: response.headers.token })
     }
-    // if the custom code is not 200, it is judged as an error.
-    if (response.status !== 200 || response.statu !== 201) {
+    // if the custom code is not 20000, it is judged as an error.
+    if (res.code !== 20000) {
       Message({
         message: res.msg || 'error',
         type: 'error',
         duration: 5 * 1000
       })
 
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+        // to re-login
+        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+          confirmButtonText: 'Re-Login',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
+        })
+      }
       return Promise.reject(res)
     } else {
       return res
     }
   },
   error => {
-    // 401直接返回login page，其他show message
     if (error.response.status === 401) {
       store.dispatch('user/logout').then(() => {
         router.replace({
@@ -71,7 +75,7 @@ service.interceptors.response.use(
       return
     }
     Message({
-      message: error.message,
+      message: error.message || 'unknown error, please contact adminstrator',
       type: 'error',
       duration: 5 * 1000
     })
@@ -79,4 +83,4 @@ service.interceptors.response.use(
   }
 )
 
-export default service
+export default instance

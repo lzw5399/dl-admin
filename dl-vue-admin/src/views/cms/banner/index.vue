@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-row :gutter="20">
+      <el-row  :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.title" size="mini" placeholder="标题" />
+          <el-input v-model="listQuery.title" size="mini" placeholder="标题"></el-input>
         </el-col>
 
         <el-col :span="6">
@@ -20,34 +20,28 @@
       </el-row>
     </div>
 
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-      @current-change="handleCurrentChange"
-    >
+
+    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
+              @current-change="handleCurrentChange">
 
       <el-table-column label="ID">
         <template slot-scope="scope">
-          {{ scope.row.id }}
+          {{scope.row.id}}
         </template>
       </el-table-column>
       <el-table-column label="标题">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{scope.row.title}}
         </template>
       </el-table-column>
       <el-table-column label="类别">
         <template slot-scope="scope">
-          {{ scope.row.type }}
+          {{scope.row.type}}
         </template>
       </el-table-column>
       <el-table-column label="url">
         <template slot-scope="scope">
-          {{ scope.row.url }}
+          {{scope.row.url}}
         </template>
       </el-table-column>
       <el-table-column label="图片">
@@ -60,18 +54,17 @@
     <el-dialog
       :title="formTitle"
       :visible.sync="formVisible"
-      width="70%"
-    >
+      width="70%">
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="标题" prop="title">
-              <el-input v-model="form.title" minlength="1" />
+              <el-input v-model="form.title" minlength=1></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="url" prop="url">
-              <el-input v-model="form.url" minlength="1" />
+              <el-input v-model="form.url"  minlength=1></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -81,24 +74,25 @@
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value"
-                />
+                  :value="item.value">
+                </el-option>
               </el-select>
             </el-form-item>
           </el-col>
+
 
           <el-col :span="12">
             <el-form-item label="banner图片">
               <el-upload
                 class="upload-demo"
                 drag
-                multiple="false"
+                multiple=false
                 :action="uploadUrl"
                 :headers="uploadHeaders"
                 :before-upload="handleBeforeUpload"
                 :on-success="handleUploadSuccess"
               >
-                <i class="el-icon-upload" />
+                <i class="el-icon-upload"></i>
                 <div class="el-upload__text">上传图片</div>
               </el-upload>
             </el-form-item>
@@ -115,6 +109,7 @@
 </template>
 
 <script src="./banner.js"></script>
+
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";

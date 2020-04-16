@@ -16,7 +16,7 @@ namespace Doublelives.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-        
+
         public AccountController(
             IWorkContextAccessor workContextAccessor,
             IMapper mapper,
@@ -26,7 +26,7 @@ namespace Doublelives.Api.Controllers
             _mapper = mapper;
             _userService = userService;
         }
-        
+
         /// <summary>账户登陆</summary>
         [AllowAnonymous]
         [HttpPost("login")]
@@ -36,7 +36,7 @@ namespace Doublelives.Api.Controllers
 
             var token = _userService.GenerateToken("2069b03a-9167-455c-9db8-5846334e5f20");
 
-            return Ok(token);
+            return Ok(new { token });
         }
 
         /// <summary>获取当前账户信息</summary>
@@ -44,12 +44,12 @@ namespace Doublelives.Api.Controllers
         public IActionResult Info()
         {
             if (WorkContext.CurrentUser == null) return Unauthorized();
-            
+
             var response = _mapper.Map<AccountViewModel>(WorkContext.CurrentUser);
 
             return Ok(response);
         }
-        
+
         /// <summary>更新密码</summary>
         [AllowAnonymous]
         [HttpPost("updatePwd")]

@@ -1,4 +1,4 @@
-import { updatePwd } from '@/api/account'
+import { updatePwd } from '@/api/user'
 
 export default {
   data() {
@@ -27,11 +27,11 @@ export default {
     this.init()
   },
   methods: {
-    init(){
+    init() {
       this.user = this.$store.state.user.profile
     },
-    handleClick(tab, event){
-      this.$router.push({ path: '/account/'+tab.name})
+    handleClick(tab, event) {
+      this.$router.push({ path: '/account/' + tab.name })
     },
     updatePwd() {
       this.$refs['form'].validate((valid) => {
@@ -45,14 +45,14 @@ export default {
               message: '密码修改成功',
               type: 'success'
             })
-            //退出登录，该操作是个异步操作，所以后面跳转到登录页面延迟1s再执行（如果有更好的方法再调整）
+            // 退出登录，该操作是个异步操作，所以后面跳转到登录页面延迟1s再执行（如果有更好的方法再调整）
             this.$store.dispatch('user/logout')
             const self = this
-            setTimeout(function(){
+            setTimeout(function() {
               self.$router.push(`/login`)
-            },1000)
-
+            }, 1000)
           }).catch((err) => {
+            console.log(err)
           })
         } else {
           return false

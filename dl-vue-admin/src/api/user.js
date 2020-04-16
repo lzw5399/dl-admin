@@ -4,9 +4,9 @@ export function login(data) {
   return request({
     url: 'api/account/login',
     method: 'post',
-    params: {
-      username: data.username,
-      password: data.password
+    data: {
+      'username': data.username,
+      'password': data.password
     }
   })
 }
@@ -29,6 +29,7 @@ export function updatePwd(params) {
   return request({
     url: 'api/account/updatePwd',
     method: 'post',
-    params
+    data: params
   })
 }
+
