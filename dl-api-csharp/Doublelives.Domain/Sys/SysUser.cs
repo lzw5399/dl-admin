@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Doublelives.Domain.Infrastructure;
+using System;
 
-namespace Doublelives.Migrations.DbFirstProcess
+namespace Doublelives.Domain.Sys
 {
     public class SysUser : AuditableEntityBase
     {

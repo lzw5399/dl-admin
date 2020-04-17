@@ -1,10 +1,13 @@
 ﻿using System;
+using Doublelives.Domain.Cms;
+using Doublelives.Domain.Messages;
+using Doublelives.Domain.Sys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Doublelives.Migrations.DbFirstProcess
 {
-    public partial class dladminContext : DbContext
+    public class dladminContext : DbContext
     {
         public dladminContext()
         {
@@ -35,8 +38,6 @@ namespace Doublelives.Migrations.DbFirstProcess
         public virtual DbSet<SysTask> SysTask { get; set; }
         public virtual DbSet<SysTaskLog> SysTaskLog { get; set; }
         public virtual DbSet<SysUser> SysUser { get; set; }
-        public virtual DbSet<Tesboy> Tesboy { get; set; }
-        public virtual DbSet<Tesgirl> Tesgirl { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1267,117 +1268,6 @@ namespace Doublelives.Migrations.DbFirstProcess
                     .HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<Tesboy>(entity =>
-            {
-                entity.ToTable("tesboy");
-
-                entity.HasComment("男孩");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("bigint(20)");
-
-                entity.Property(e => e.Age)
-                    .HasColumnName("age")
-                    .HasColumnType("int(11)")
-                    .HasComment("年龄");
-
-                entity.Property(e => e.Birthday)
-                    .HasColumnName("birthday")
-                    .HasColumnType("varchar(12)")
-                    .HasComment("生日")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-
-                entity.Property(e => e.CreateBy)
-                    .HasColumnName("create_by")
-                    .HasColumnType("bigint(20)")
-                    .HasComment("创建人");
-
-                entity.Property(e => e.CreateTime)
-                    .HasColumnName("create_time")
-                    .HasColumnType("datetime")
-                    .HasComment("创建时间/注册时间");
-
-                entity.Property(e => e.HasGirlFriend)
-                    .HasColumnName("has_girl_friend")
-                    .HasColumnType("tinyint(4)")
-                    .HasComment("是否有女朋友");
-
-                entity.Property(e => e.ModifyBy)
-                    .HasColumnName("modify_by")
-                    .HasColumnType("bigint(20)")
-                    .HasComment("最后更新人");
-
-                entity.Property(e => e.ModifyTime)
-                    .HasColumnName("modify_time")
-                    .HasColumnType("datetime")
-                    .HasComment("最后更新时间");
-
-                entity.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .HasColumnType("varchar(32)")
-                    .HasComment("姓名")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-            });
-
-            modelBuilder.Entity<Tesgirl>(entity =>
-            {
-                entity.ToTable("tesgirl");
-
-                entity.HasComment("女孩");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("bigint(20)");
-
-                entity.Property(e => e.Age)
-                    .HasColumnName("age")
-                    .HasColumnType("int(11)")
-                    .HasComment("年龄");
-
-                entity.Property(e => e.Birthday)
-                    .HasColumnName("birthday")
-                    .HasColumnType("date")
-                    .HasComment("生日");
-
-                entity.Property(e => e.CreateBy)
-                    .HasColumnName("create_by")
-                    .HasColumnType("bigint(20)")
-                    .HasComment("创建人");
-
-                entity.Property(e => e.CreateTime)
-                    .HasColumnName("create_time")
-                    .HasColumnType("datetime")
-                    .HasComment("创建时间/注册时间");
-
-                entity.Property(e => e.HasBoyFriend)
-                    .HasColumnName("has_boy_friend")
-                    .HasColumnType("tinyint(4)")
-                    .HasComment("是否有男朋友");
-
-                entity.Property(e => e.ModifyBy)
-                    .HasColumnName("modify_by")
-                    .HasColumnType("bigint(20)")
-                    .HasComment("最后更新人");
-
-                entity.Property(e => e.ModifyTime)
-                    .HasColumnName("modify_time")
-                    .HasColumnType("datetime")
-                    .HasComment("最后更新时间");
-
-                entity.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .HasColumnType("varchar(32)")
-                    .HasComment("姓名")
-                    .HasCharSet("utf8")
-                    .HasCollation("utf8_general_ci");
-            });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

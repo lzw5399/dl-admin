@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using Doublelives.Domain.Infrastructure;
+using System;
 
-namespace Doublelives.Migrations.DbFirstProcess
+namespace Doublelives.Domain.Sys
 {
     public class SysOperationLog : EntityBase
     {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Doublelives.Domain.Infrastructure;
 using System.Collections.Generic;
 
-namespace Doublelives.Migrations.DbFirstProcess
+namespace Doublelives.Domain.Messages
 {
     public class MessageSender : AuditableEntityBase
     {

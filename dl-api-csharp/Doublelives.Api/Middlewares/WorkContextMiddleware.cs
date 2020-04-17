@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using IdentityModel;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Doublelives.Api.Middlewares
 {
@@ -42,7 +41,7 @@ namespace Doublelives.Api.Middlewares
                 var userService = context.RequestServices.GetService<IUserService>();
                 var userId = context.User.Claims.First(it => it.Type == JwtClaimTypes.Subject).Value;
 
-                var user = userService.GetById(userId).Result;
+                var user = userService.GetById(int.Parse(userId)).Result;
 
                 return new Domain.Users.Dto.CurrentUserDto
                 {

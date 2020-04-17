@@ -56,7 +56,7 @@ namespace Doublelives.Service.Users
             return tokenString;
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User> GetById(int id)
         {
             var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry =>
@@ -92,10 +92,9 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
-        private async Task<User> GetByIdFromDb(string id)
+        private async Task<User> GetByIdFromDb(int id)
         {
-            var guid = Guid.Parse(id);
-            var user = await _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefaultAsync(it => it.Id == guid);
+            var user = await _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefaultAsync(it => it.Id == id);
 
             if (user == null)
             {

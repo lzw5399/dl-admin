@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Doublelives.Domain.Infrastructure;
 
-namespace Doublelives.Migrations.DbFirstProcess
+namespace Doublelives.Domain.Sys
 {
     public class SysNotice : AuditableEntityBase
     {

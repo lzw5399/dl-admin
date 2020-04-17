@@ -7,7 +7,7 @@ namespace Doublelives.Service.Users
     {
         string GenerateToken(string id);
 
-        Task<User> GetById(string id);
+        Task<User> GetById(int id);
 
         void Add(User user);
 

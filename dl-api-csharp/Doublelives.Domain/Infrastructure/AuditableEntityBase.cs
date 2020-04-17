@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Doublelives.Domain.Infrastructure
 {
@@ -8,15 +6,15 @@ namespace Doublelives.Domain.Infrastructure
     {
         protected AuditableEntityBase()
         {
-            CreatedDate = DateTime.UtcNow;
+            CreateTime = DateTime.Now;
         }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreateTime { get; set; }
 
-        public string CreatedBy { get; set; }
+        public string CreateBy { get; set; }
 
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime? ModifyTime { get; set; }
 
-        public string ModifiedBy { get; set; }
+        public string ModifyBy { get; set; }
     }
 }
