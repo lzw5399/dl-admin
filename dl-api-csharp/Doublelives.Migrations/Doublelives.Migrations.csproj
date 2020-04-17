@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputPath>..\Doublelives.Data\bin\$(Configuration)\</OutputPath>
+    <OutputPath>..\Doublelives.Persistence\bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
