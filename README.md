@@ -4,7 +4,6 @@
 
 ## 目录说明
 - dl-api-csharp 基于C#&.Net Core WebAPI实现的后台api服务
-- dl-api-golang 基于Golang&Gin实现的后台api服务(计划中...)
 - dl-vue-admin 基于vuejs的后台管理系统
 
 ## 技术选型
