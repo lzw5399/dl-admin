@@ -4,7 +4,7 @@ using Doublelives.Persistence.Mapping;
 
 namespace Doublelives.Persistence
 {
-    public class AlbumDbContext : DbContext, IAlbumDbContext
+    public class AlbumDbContext : DbContext
     {
         public AlbumDbContext(DbContextOptions opts)
         : base(opts)

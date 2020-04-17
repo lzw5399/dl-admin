@@ -50,9 +50,7 @@ namespace Doublelives.Core
                             });
                 },
                 ServiceLifetime.Transient);
-            services
-                .AddScoped<IAlbumDbContext, AlbumDbContext>()
-                .AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)

@@ -9,7 +9,7 @@ namespace Doublelives.Persistence
     {
         private DbSet<TEntity> Entities { get; set; }
 
-        public Repository(IAlbumDbContext context)
+        public Repository(AlbumDbContext context)
         {
             Entities = context.Set<TEntity>();
         }

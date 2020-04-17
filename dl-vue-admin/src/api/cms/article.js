@@ -8,12 +8,11 @@ export function getList(params) {
   })
 }
 
-
 export function save(params) {
   return request({
     url: '/article',
     method: 'post',
-    data : params
+    data: params
   })
 }
 

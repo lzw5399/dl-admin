@@ -38,15 +38,6 @@ namespace Doublelives.Migrations.DbFirstProcess
         public virtual DbSet<Tesboy> Tesboy { get; set; }
         public virtual DbSet<Tesgirl> Tesgirl { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=47.100.220.174;database=dl-admin;user id=root;password=LZWxm!@#123456");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CmsArticle>(entity =>
