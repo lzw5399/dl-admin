@@ -1,6 +1,5 @@
 ﻿using Doublelives.Domain.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Doublelives.Persistence.Mapping;
 
 namespace Doublelives.Persistence
 {
@@ -18,8 +17,8 @@ namespace Doublelives.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new PictureEntityMapping());
-            modelBuilder.ApplyConfiguration(new UserEntityMapping());
+            //modelBuilder.ApplyConfiguration(new PictureEntityMapping());
+            //modelBuilder.ApplyConfiguration(new UserEntityMapping());
 
             base.OnModelCreating(modelBuilder);
         }

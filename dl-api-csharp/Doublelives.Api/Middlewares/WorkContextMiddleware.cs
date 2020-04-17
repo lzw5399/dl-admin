@@ -43,7 +43,7 @@ namespace Doublelives.Api.Middlewares
 
                 var user = userService.GetById(int.Parse(userId)).Result;
 
-                return new Domain.Users.Dto.CurrentUserDto
+                return new CurrentUserDto
                 {
                     Id = user.Id,
                     Email = user.Email,
