@@ -42,7 +42,12 @@ namespace Doublelives.Core
                     options
                         .UseMySql(
                             configuration.GetConnectionString("dl"),
-                            it => it.MigrationsAssembly("Doublelives.Migrations"));
+                            it =>
+                            {
+                                it.MigrationsAssembly("Doublelives.Migrations");
+                                it.ServerVersion("8.0.17-mysql");
+                                it.EnableRetryOnFailure();
+                            });
                 },
                 ServiceLifetime.Transient);
             services
