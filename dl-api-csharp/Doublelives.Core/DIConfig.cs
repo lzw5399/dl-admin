@@ -48,8 +48,7 @@ namespace Doublelives.Core
                                 it.ServerVersion("8.0.17-mysql");
                                 it.EnableRetryOnFailure();
                             });
-                },
-                ServiceLifetime.Transient);
+                });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

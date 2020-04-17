@@ -9,12 +9,12 @@ namespace Doublelives.Domain.Infrastructure
             CreateTime = DateTime.Now;
         }
 
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
 
-        public string CreateBy { get; set; }
+        public int? CreateBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
 
-        public string ModifyBy { get; set; }
+        public int? ModifyBy { get; set; }
     }
 }

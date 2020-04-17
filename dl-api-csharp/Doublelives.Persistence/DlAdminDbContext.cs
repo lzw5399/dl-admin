@@ -6,11 +6,7 @@ namespace Doublelives.Persistence
 {
     public class DlAdminDbContext : DbContext
     {
-        public DlAdminDbContext()
-        {
-        }
-
-        public DlAdminDbContext(DbContextOptions<DlAdminDbContext> options)
+        public DlAdminDbContext(DbContextOptions options)
             : base(options)
         {
         }
