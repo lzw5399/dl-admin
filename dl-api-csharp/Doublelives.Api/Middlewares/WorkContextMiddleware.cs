@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using IdentityModel;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Doublelives.Api.Middlewares
 {

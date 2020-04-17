@@ -41,12 +41,12 @@ namespace Doublelives.Core
                 {
                     options
                         .UseMySql(
-                            configuration.GetConnectionString("album"),
+                            configuration.GetConnectionString("dl"),
                             it => it.MigrationsAssembly("Doublelives.Migrations"));
                 },
                 ServiceLifetime.Transient);
             services
-                .AddTransient<IAlbumDbContext, AlbumDbContext>()
+                .AddScoped<IAlbumDbContext, AlbumDbContext>()
                 .AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

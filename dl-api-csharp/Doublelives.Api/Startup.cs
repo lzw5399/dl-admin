@@ -100,7 +100,7 @@ namespace Doublelives.Api
             services
                 .AddControllers(options =>
                 {
-                    options.Filters.Add<GlobalExceptionFilter>();
+                    options.Filters.Add(typeof(GlobalExceptionFilter));
                 })
                 .AddNewtonsoftJson(options =>
                 {
