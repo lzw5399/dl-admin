@@ -36,7 +36,7 @@ namespace Doublelives.Core
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DlAdminContext>(
+            services.AddDbContext<DlAdminDbContext>(
                 options =>
                 {
                     options

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Doublelives.Persistence
 {
-    public class DlAdminContext : DbContext
+    public class DlAdminDbContext : DbContext
     {
-        public DlAdminContext()
+        public DlAdminDbContext()
         {
         }
 
-        public DlAdminContext(DbContextOptions<DlAdminContext> options)
+        public DlAdminDbContext(DbContextOptions<DlAdminDbContext> options)
             : base(options)
         {
         }
