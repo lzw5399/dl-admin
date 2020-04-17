@@ -10,7 +10,7 @@ namespace Doublelives.Migrations.DbFirstProcess
 
         public DateTime? Birthday { get; set; }
 
-        public long? Deptid { get; set; }
+        public int? Deptid { get; set; }
 
         public string Email { get; set; }
 

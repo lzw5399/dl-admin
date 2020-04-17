@@ -5,13 +5,13 @@ namespace Doublelives.Migrations.DbFirstProcess
 {
     public class SysRole : AuditableEntityBase
     {
-        public long? Deptid { get; set; }
+        public int? Deptid { get; set; }
 
         public string Name { get; set; }
 
         public int? Num { get; set; }
 
-        public long? Pid { get; set; }
+        public int? Pid { get; set; }
 
         public string Tips { get; set; }
 

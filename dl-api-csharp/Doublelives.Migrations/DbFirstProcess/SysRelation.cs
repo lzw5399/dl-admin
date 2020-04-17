@@ -5,8 +5,8 @@ namespace Doublelives.Migrations.DbFirstProcess
 {
     public class SysRelation : EntityBase
     {
-        public long? Menuid { get; set; }
+        public int? Menuid { get; set; }
 
-        public long? Roleid { get; set; }
+        public int? Roleid { get; set; }
     }
 }

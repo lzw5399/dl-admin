@@ -9,7 +9,7 @@ namespace Doublelives.Migrations.DbFirstProcess
 
         public string Num { get; set; }
 
-        public long? Pid { get; set; }
+        public int? Pid { get; set; }
 
         public string Tips { get; set; }
     }

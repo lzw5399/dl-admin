@@ -5,7 +5,7 @@ namespace Doublelives.Migrations.DbFirstProcess
 {
     public class CmsBanner : AuditableEntityBase
     {
-        public long? IdFile { get; set; }
+        public int? IdFile { get; set; }
 
         public string Title { get; set; }
 

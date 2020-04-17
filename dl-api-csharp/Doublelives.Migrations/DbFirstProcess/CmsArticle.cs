@@ -9,7 +9,7 @@ namespace Doublelives.Migrations.DbFirstProcess
 
         public string Content { get; set; }
 
-        public long IdChannel { get; set; }
+        public int IdChannel { get; set; }
 
         public string Img { get; set; }
 

@@ -6,7 +6,7 @@
 
         public string Uploader { get; set; }
         
-        public long Size { get; set; }
+        public int Size { get; set; }
 
         public string Url { get; set; }
     }
