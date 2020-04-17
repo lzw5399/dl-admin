@@ -16,9 +16,7 @@ namespace Doublelives.Api.AutoMapper
             
             // user related
             CreateMap<User, UserViewModel>();
-            CreateMap<User, AccountViewModel>();
             CreateMap<CurrentUserDto, UserViewModel>();
-            CreateMap<CurrentUserDto, AccountViewModel>();
         }
     }
 }

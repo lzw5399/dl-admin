@@ -9,7 +9,6 @@ using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -32,7 +31,7 @@ namespace Doublelives.Api.Controllers
         /// <summary>账户登陆</summary>
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(AccountLoginRequest request)
+        public IActionResult Login(AccountLoginRequest request)
         {
             ModelValidator<AccountLoginRequest, LoginRequestValidator>.Validate(request);
 
@@ -40,19 +39,17 @@ namespace Doublelives.Api.Controllers
 
             var viewModel = new LoginViewModel(token);
 
-            await Task.Run(() => { });
             return Ok(viewModel);
         }
 
         /// <summary>获取当前账户信息</summary>
         [HttpGet("info")]
-        public async Task<IActionResult> Info()
+        public IActionResult Info()
         {
             //if (WorkContext.CurrentUser == null) return Unauthorized();
             //var response = _mapper.Map<AccountViewModel>(WorkContext.CurrentUser);
             //return Ok(response);
             var model = MockResponseHelper.GetMockModel<AccountData>("info");
-            await Task.Run(() => { });
             return Ok(model);
         }
 

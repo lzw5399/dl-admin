@@ -3,7 +3,6 @@ using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Notice;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -16,10 +15,9 @@ namespace Doublelives.Api.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> List()
+        public IActionResult List()
         {
             var model = MockResponseHelper.GetMockModel<NoticeViewModel>("noticelist");
-            await Task.Run(() => { });
 
             return Ok(model);
         }

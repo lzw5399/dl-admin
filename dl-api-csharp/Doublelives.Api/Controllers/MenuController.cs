@@ -4,7 +4,6 @@ using Doublelives.Api.Models.Menu;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -18,10 +17,9 @@ namespace Doublelives.Api.Controllers
         }
 
         [HttpGet("listForRouter")]
-        public async Task<IActionResult> ListForRouter()
+        public IActionResult ListForRouter()
         {
             var model = MockResponseHelper.GetMockModel<List<ListFouRouterViewModel>>("listForRouter");
-            await Task.Run(() => { });
 
             return Ok(model);
         }
