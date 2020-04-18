@@ -38,9 +38,9 @@ namespace Doublelives.Api.Middlewares
         {
             try
             {
-                var userService = context.RequestServices.GetService<IUserService>();
                 var userId = context.User.Claims.First(it => it.Type == JwtClaimTypes.Subject).Value;
 
+                var userService = context.RequestServices.GetService<IUserService>();
                 var user = userService.GetById(int.Parse(userId)).Result;
 
                 return new CurrentUserDto
