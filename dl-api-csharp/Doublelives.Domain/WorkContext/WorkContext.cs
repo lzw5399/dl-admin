@@ -1,7 +1,4 @@
 ﻿using Doublelives.Domain.Users.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Doublelives.Domain.WorkContext
 {
