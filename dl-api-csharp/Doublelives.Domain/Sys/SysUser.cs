@@ -11,7 +11,7 @@ namespace Doublelives.Domain.Sys
 
         public DateTime? Birthday { get; set; }
 
-        public int? Deptid { get; set; }
+        public long? Deptid { get; set; }
 
         public string Email { get; set; }
 
@@ -29,6 +29,6 @@ namespace Doublelives.Domain.Sys
 
         public int? Status { get; set; }
 
-        public int? Version { get; set; }
+        public long? Version { get; set; }
     }
 }

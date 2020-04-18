@@ -7,7 +7,7 @@ namespace Doublelives.Domain.Users.Dto
 {
     public class CurrentUserDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public Role Role { get; set; }
 

@@ -9,16 +9,16 @@ namespace Doublelives.Service.Users
     {
         (bool, string) Login(string username, string pwd);
 
-        string GenerateToken(int id);
+        string GenerateToken(long id);
 
-        Task<SysUser> GetById(int id);
+        Task<SysUser> GetById(long id);
 
         void Add(SysUser user);
 
         void Update(SysUser user);
 
-        void Delete(int id);
+        void Delete(long id);
 
-        AccountInfoDto GetInfo(int userid);
+        AccountInfoDto GetInfo(long userid);
     }
 }

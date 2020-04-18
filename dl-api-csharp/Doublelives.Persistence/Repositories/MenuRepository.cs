@@ -14,32 +14,40 @@ namespace Doublelives.Persistence.Repositories
             _context = context;
         }
 
+
         public List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
         {
             List<string> permissions;
             if (activeOnly)
             {
                 permissions = _context.Set<SysRelation>()
-                   .Join(
-                   _context.Set<SysMenu>().Where(
-                       it => (it.Status == (int)MenuStatus.Active) && roleIds.Contains(it.Id)),
-                   relation => relation.Menuid.Value,
-                   menu => menu.Id,
-                   (relation, menu) => menu.Url)
-                   .ToList();
+                    .Where(it => roleIds.Contains(it.Roleid))
+                    .Join(
+                    _context.Set<SysMenu>().Where(
+                        menu => (menu.Status == (int)MenuStatus.Active)),
+                    relation => relation.Menuid,
+                    menu => menu.Id,
+                    (relation, menu) => menu.Url)
+                    .ToList();
+                //var qw = from r in _context.Set<SysRelation>()
+                //         join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
+                //         where roleIds.Contains(r.Roleid) && m.Status == (int)MenuStatus.Active
+                //         select m.Url;
+                //var rr = qw.ToList();
+            }
+            else
+            {
+                permissions = _context.Set<SysRelation>()
+                    .Where(it => roleIds.Contains(it.Roleid))
+                    .Join(
+                    _context.Set<SysMenu>(),
+                    relation => relation.Menuid,
+                    menu => menu.Id,
+                    (relation, menu) => menu.Url)
+                    .ToList();
             }
 
-            permissions = _context.Set<SysRelation>()
-               .Join(
-               _context.Set<SysMenu>().Where(it => roleIds.Contains(it.Id)),
-               relation => relation.Menuid.Value,
-               menu => menu.Id,
-               (relation, menu) => menu.Url)
-               .ToList();
-
-            var x = permissions.Distinct().ToList();
-
-            return x;
+            return permissions.Distinct().ToList();
         }
     }
 }

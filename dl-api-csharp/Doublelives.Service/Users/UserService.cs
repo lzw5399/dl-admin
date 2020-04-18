@@ -14,11 +14,9 @@ using System.Linq;
 using Doublelives.Infrastructure.Helpers;
 using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
-using Doublelives.Service.WorkContextAccess;
-using Doublelives.Domain.WorkContext;
 using Doublelives.Infrastructure.Exceptions;
 using System.Collections.Generic;
-using Doublelives.Shared.Enum;
+using Doublelives.Service.Mappers;
 
 namespace Doublelives.Service.Users
 {
@@ -52,7 +50,7 @@ namespace Doublelives.Service.Users
             return (true, token);
         }
 
-        public string GenerateToken(int id)
+        public string GenerateToken(long id)
         {
             var key = Encoding.UTF8.GetBytes(_jwtConfig.Key);
 
@@ -76,7 +74,7 @@ namespace Doublelives.Service.Users
             return tokenString;
         }
 
-        public AccountInfoDto GetInfo(int userid)
+        public AccountInfoDto GetInfo(long userid)
         {
             var user = GetById(userid).Result;
             if (user == null) throw new NotFoundException("code", "用户无法找到，请重新登录!");
@@ -98,42 +96,10 @@ namespace Doublelives.Service.Users
 
             var dept = _unitOfWork.DeptRepository.GetById(user.Deptid);
 
-
-            var dto = new AccountInfoDto
-            {
-                Name = user.Name,
-                Role = user.Account, // todo??
-                Roles = roles.Select(it => it.Tips).ToList(),
-                Profile = new AccountProfileDto
-                {
-                    Dept = dept.Fullname,
-                    Deptid = dept.Id,
-                    Account = user.Account,
-                    Sex = user.Sex,
-                    Avatar = user.Avatar,
-                    Birthday = user.Birthday,
-                    Version = user.Version,
-                    CreateBy = user.CreateBy,
-                    CreateTime = user.CreateTime,
-                    Email = user.Email,
-                    Id = user.Id,
-                    ModifyBy = user.ModifyBy,
-                    ModifyTime = user.ModifyTime,
-                    Name = user.Name,
-                    Password = user.Password,
-                    Phone = user.Phone,
-                    Roleid = user.Roleid,
-                    Roles = roles.Select(it => it.Name).ToList(),
-                    Salt = user.Salt,
-                    Status = user.Status ?? (int)AccountStatus.InActive
-                },
-                Permissions = permissions
-            };
-
-            return dto;
+            return UserMapper.ToAccountInfoDto(user, dept, roles, permissions);
         }
 
-        public async Task<SysUser> GetById(int id)
+        public async Task<SysUser> GetById(long id)
         {
             var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry => await GetByIdFromDb(id));
@@ -164,7 +130,7 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             _unitOfWork.UserRepository.DeleteById(id);
             _unitOfWork.Commit();
@@ -172,7 +138,7 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove($"{USER_CACHE_PREFIX}_{id}");
         }
 
-        private async Task<SysUser> GetByIdFromDb(int id)
+        private async Task<SysUser> GetByIdFromDb(long id)
         {
             var user = await _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefaultAsync(it => it.Id == id);
 

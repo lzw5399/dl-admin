@@ -1,7 +1,7 @@
 ﻿namespace Doublelives.Domain.Infrastructure
 {
-    public abstract class EntityBase
+    public class EntityBase
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

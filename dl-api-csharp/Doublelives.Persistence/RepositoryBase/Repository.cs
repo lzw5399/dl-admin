@@ -39,7 +39,7 @@ namespace Doublelives.Persistence
             Entities.Remove(entity);
         }
 
-        public virtual void DeleteById(int id)
+        public virtual void DeleteById(long id)
         {
             var obj = Entities.Find(id);
             if (obj == null) return;

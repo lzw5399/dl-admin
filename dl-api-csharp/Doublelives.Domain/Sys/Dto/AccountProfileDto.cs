@@ -49,7 +49,7 @@ namespace Doublelives.Domain.Sys.Dto
         /// <summary>
         /// 部门id
         /// </summary>
-        public int Deptid { get; set; }
+        public long Deptid { get; set; }
 
         /// <summary>
         /// 账号状态 1激活 2停用
@@ -59,26 +59,26 @@ namespace Doublelives.Domain.Sys.Dto
         /// <summary>
         /// 修改的版本
         /// </summary>
-        public int? Version { get; set; }
+        public long? Version { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public DateTime? CreateTime { get; set; }
 
         /// <summary>
         /// 创建人的id
         /// </summary>
-        public int? CreateBy { get; set; }
+        public long? CreateBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
 
         /// <summary>
         /// 修改者的id
         /// </summary>
-        public int? ModifyBy { get; set; }
+        public long? ModifyBy { get; set; }
 
         /// <summary>
         /// 部门名

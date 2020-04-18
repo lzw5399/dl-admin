@@ -56,12 +56,12 @@ namespace Doublelives.Api.Models.Account
         /// </summary>
         public string Name { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         /// <summary>
         /// 性别 1男 2女
         /// </summary>
-        public int Sex { get; set; }
+        public int? Sex { get; set; }
 
         public string Email { get; set; }
 
@@ -70,12 +70,12 @@ namespace Doublelives.Api.Models.Account
         /// <summary>
         /// 角色id， 多个以逗号区分 e.g. (1,2,)
         /// </summary>
-        public int Roleid { get; set; }
+        public string Roleid { get; set; }
 
         /// <summary>
         /// 部门id
         /// </summary>
-        public int Deptid { get; set; }
+        public long Deptid { get; set; }
 
         /// <summary>
         /// 账号状态 1激活 2停用
@@ -85,26 +85,26 @@ namespace Doublelives.Api.Models.Account
         /// <summary>
         /// 修改的版本
         /// </summary>
-        public int Version { get; set; }
+        public long? Version { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
 
         /// <summary>
         /// 创建人的id
         /// </summary>
-        public string CreateBy { get; set; }
+        public long? CreateBy { get; set; }
 
-        public DateTime ModifyTime { get; set; }
+        public DateTime? ModifyTime { get; set; }
 
         /// <summary>
         /// 修改者的id
         /// </summary>
-        public int ModifyBy { get; set; }
+        public long? ModifyBy { get; set; }
 
         /// <summary>
         /// 部门名

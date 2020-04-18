@@ -74,7 +74,7 @@ instance.interceptors.response.use(
       })
       return
     }
-    const msg = error.response.data.Message || error.response.data
+    const msg = error.response.data.message || error.response.data
     Message({
       message: msg || 'unknown error, please contact adminstrator',
       type: 'error',

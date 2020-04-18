@@ -24,6 +24,6 @@ namespace Doublelives.Domain.Sys
 
         public string Succeed { get; set; }
 
-        public int? Userid { get; set; }
+        public long? Userid { get; set; }
     }
 }

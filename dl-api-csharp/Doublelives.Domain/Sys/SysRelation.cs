@@ -4,8 +4,8 @@ namespace Doublelives.Domain.Sys
 {
     public class SysRelation : EntityBase
     {
-        public int? Menuid { get; set; }
+        public int Menuid { get; set; }
 
-        public int? Roleid { get; set; }
+        public int Roleid { get; set; }
     }
 }

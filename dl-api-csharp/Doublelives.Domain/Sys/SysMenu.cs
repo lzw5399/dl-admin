@@ -20,7 +20,7 @@ namespace Doublelives.Domain.Sys
 
         public string Name { get; set; }
 
-        public int Num { get; set; }
+        public long Num { get; set; }
 
         public string Pcode { get; set; }
 
