@@ -8,7 +8,7 @@ namespace Doublelives.Infrastructure.Exceptions
     {
         public ErrorMessage ErrorMessage { get; private set; } = new ErrorMessage();
 
-        public NotFoundException() 
+        public NotFoundException()
             : base()
         {
         }

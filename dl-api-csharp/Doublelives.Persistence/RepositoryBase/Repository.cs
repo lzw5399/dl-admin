@@ -19,9 +19,9 @@ namespace Doublelives.Persistence
             return Entities.AsQueryable();
         }
 
-        public virtual TEntity GetById(object id)
+        public virtual TEntity GetById(long id)
         {
-            return Entities.Find(id);
+            return Entities.FirstOrDefault(it => it.Id == id);
         }
 
         public virtual void Insert(TEntity entity)
@@ -41,15 +41,15 @@ namespace Doublelives.Persistence
 
         public virtual void DeleteById(long id)
         {
-            var obj = Entities.Find(id);
+            var obj = Entities.FirstOrDefault(it => it.Id == id);
             if (obj == null) return;
 
             Entities.Remove(obj);
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(object id)
+        public virtual async Task<TEntity> GetByIdAsync(long id)
         {
-            return await Entities.FindAsync(id);
+            return await Entities.FirstOrDefaultAsync(it => it.Id == id);
         }
 
         public virtual async Task InsertAsync(TEntity entity)

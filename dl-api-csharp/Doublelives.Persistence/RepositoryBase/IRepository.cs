@@ -7,7 +7,7 @@ namespace Doublelives.Persistence
     {
         IQueryable<TEntity> GetAsQueryable();
 
-        TEntity GetById(object id);
+        TEntity GetById(long id);
 
         void Insert(TEntity entity);
 
@@ -17,7 +17,7 @@ namespace Doublelives.Persistence
 
         void DeleteById(long id);
 
-        Task<TEntity> GetByIdAsync(object id);
+        Task<TEntity> GetByIdAsync(long id);
 
         Task InsertAsync(TEntity entity);
     }

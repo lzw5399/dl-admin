@@ -48,13 +48,19 @@ namespace Doublelives.Api.Controllers
         [HttpGet("info")]
         public IActionResult Info()
         {
-            // todo: delete mock
-            //var model = MockResponseHelper.GetMockModel<AccountData>("info");
-            //return Ok(model);
             var result = _userService.GetInfo(WorkContext.CurrentUser.Id);
-            var info =  _mapper.Map<AccountInfoDto>(result);
+            var info = _mapper.Map<AccountInfoDto>(result);
 
             return Ok(info);
+        }
+
+        /// <summary>注销</summary>
+        [AllowAnonymous]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // api端针对logout没有什么需要做的
+            return Ok("注销成功");
         }
 
         /// <summary>更新密码</summary>

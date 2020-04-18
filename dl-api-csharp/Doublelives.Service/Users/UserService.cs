@@ -17,6 +17,7 @@ using Doublelives.Domain.Sys.Dto;
 using Doublelives.Infrastructure.Exceptions;
 using System.Collections.Generic;
 using Doublelives.Service.Mappers;
+using Doublelives.Infrastructure.Extensions;
 
 namespace Doublelives.Service.Users
 {
@@ -77,7 +78,7 @@ namespace Doublelives.Service.Users
         public AccountInfoDto GetInfo(long userid)
         {
             var user = GetById(userid).Result;
-            if (user == null) throw new NotFoundException("code", "用户无法找到，请重新登录!");
+            if (user == null) throw new UserNotFoundException();
 
             var roles = new List<SysRole>();
             var permissions = new List<string>();
@@ -94,7 +95,7 @@ namespace Doublelives.Service.Users
                 permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
             }
 
-            var dept = _unitOfWork.DeptRepository.GetById(user.Deptid);
+            var dept = _unitOfWork.DeptRepository.GetById(user.Deptid.Value());
 
             return UserMapper.ToAccountInfoDto(user, dept, roles, permissions);
         }

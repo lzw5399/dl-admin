@@ -40,6 +40,7 @@ instance.interceptors.response.use(
     }
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
+      debugger
       Message({
         message: res.msg || 'error',
         type: 'error',

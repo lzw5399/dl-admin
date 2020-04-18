@@ -43,6 +43,16 @@ namespace Doublelives.Core.Filters
                     DeclaredType = typeof(CosServerException)
                 };
             }
+            else if (context.Exception is UserNotFoundException userNotFoundException)
+            {
+                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(userNotFoundException.Message)}\r\n\r\nStackTrace: {userNotFoundException.StackTrace}");
+
+                context.Result = new ObjectResult(userNotFoundException.Message)
+                {
+                    StatusCode = StatusCodes.Status401Unauthorized,
+                    DeclaredType = typeof(IEnumerable<UserNotFoundException>)
+                };
+            }
             else if(context.Exception is InvalidException invalidException)
             {
                 _logger.LogWarning($"Error: {JsonConvert.SerializeObject(invalidException.Errors)}\r\n\r\nStackTrace: {invalidException.StackTrace}");
