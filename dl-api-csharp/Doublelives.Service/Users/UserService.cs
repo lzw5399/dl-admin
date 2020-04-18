@@ -12,6 +12,8 @@ using Doublelives.Infrastructure.Cache;
 using System.Threading.Tasks;
 using Doublelives.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Doublelives.Infrastructure.Helpers;
 
 namespace Doublelives.Service.Users
 {
@@ -32,9 +34,22 @@ namespace Doublelives.Service.Users
             _cacheManager = cacheManager;
         }
 
-        public string GenerateToken(string id)
+        public (bool, string) Login(string username, string pwd)
         {
-            var key = Encoding.ASCII.GetBytes(_jwtConfig.Key);
+            var user = _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefault(it => it.Name == username);
+
+            if (user == null) return (false, null);
+
+            if (HashHelper.GetHashedString(HashType.MD5, pwd, Encoding.UTF8) != user.Password) return (false, null);
+
+            var token = GenerateToken(user.Id);
+
+            return (true, token);
+        }
+
+        public string GenerateToken(int id)
+        {
+            var key = Encoding.UTF8.GetBytes(_jwtConfig.Key);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -43,7 +58,7 @@ namespace Doublelives.Service.Users
                 {
                     new Claim(JwtClaimTypes.Audience, _jwtConfig.Audience),
                     new Claim(JwtClaimTypes.Issuer, _jwtConfig.Issuer),
-                    new Claim(JwtClaimTypes.Subject, id),
+                    new Claim(JwtClaimTypes.Subject, id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtConfig.ExpireMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -103,5 +118,7 @@ namespace Doublelives.Service.Users
 
             return user;
         }
+
+
     }
 }

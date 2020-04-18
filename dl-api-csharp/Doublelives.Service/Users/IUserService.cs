@@ -5,7 +5,9 @@ namespace Doublelives.Service.Users
 {
     public interface IUserService
     {
-        string GenerateToken(string id);
+        (bool, string) Login(string username, string pwd);
+
+        string GenerateToken(int id);
 
         Task<User> GetById(int id);
 

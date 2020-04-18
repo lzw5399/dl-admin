@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Doublelives.Api.Controllers
 {
-    [Route("api/album")]
     public class AlbumController : AuthControllerBase
     {
         private readonly IPictureService _pictureService;

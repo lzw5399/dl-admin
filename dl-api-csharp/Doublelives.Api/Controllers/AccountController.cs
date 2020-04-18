@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Doublelives.Api.Controllers
 {
-    [Route("api/account")]
     public class AccountController : AuthControllerBase
     {
         private readonly IMapper _mapper;
@@ -35,7 +34,9 @@ namespace Doublelives.Api.Controllers
         {
             ModelValidator<AccountLoginRequest, LoginRequestValidator>.Validate(request);
 
-            var token = _userService.GenerateToken("2069b03a-9167-455c-9db8-5846334e5f20");
+            (var valid, var token) = _userService.Login(request.UserName, request.Password);
+
+            if (!valid) return NotFound();
 
             var viewModel = new LoginViewModel(token);
 

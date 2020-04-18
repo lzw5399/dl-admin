@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Doublelives.Api.Controllers
 {
-    [Route("api/menu")]
     public class MenuController : AuthControllerBase
     {
         public MenuController(IWorkContextAccessor workContextAccessor)

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Doublelives.Api.Controllers
 {
-    [Route("api/notice")]
     public class NoticeController : AuthControllerBase
     {
         public NoticeController(IWorkContextAccessor workContextAccessor)

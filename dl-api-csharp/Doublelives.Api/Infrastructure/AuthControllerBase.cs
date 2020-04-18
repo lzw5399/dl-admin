@@ -9,7 +9,8 @@ namespace Doublelives.Api.Infrastructure
 {
     [Authorize]
     [ApiController]
-    public class AuthControllerBase : ControllerBase
+    [Route("api/[controller]")]
+    public abstract class AuthControllerBase : ControllerBase
     {
         protected WorkContext WorkContext { get; }
 

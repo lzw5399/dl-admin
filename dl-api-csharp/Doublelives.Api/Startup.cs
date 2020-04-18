@@ -74,7 +74,7 @@ namespace Doublelives.Api
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
+                    var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
                     options.TokenValidationParameters.ValidateIssuer = true;
                     options.TokenValidationParameters.ValidateAudience = true;
                     options.TokenValidationParameters.ValidateIssuerSigningKey = true;

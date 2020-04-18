@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Doublelives.Api.Controllers
 {
-    [Route("api/user")]
     public class UserController : AuthControllerBase
     {
         private readonly IUserService _userService;
@@ -29,9 +28,9 @@ namespace Doublelives.Api.Controllers
         /// <param name="id">若id为空，则使用默认的一个id</param>
         [AllowAnonymous]
         [HttpGet("getToken")]
-        public IActionResult GetToken(string id)
+        public IActionResult GetToken(int id)
         {
-            id ??= "2069b03a-9167-455c-9db8-5846334e5f20";
+            id = id == 0 ? 1 : id;
             var token = _userService.GenerateToken(id);
 
             return Ok(token);
