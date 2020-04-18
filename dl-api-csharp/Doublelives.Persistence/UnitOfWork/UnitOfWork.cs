@@ -1,5 +1,7 @@
 ﻿using Doublelives.Domain.Pictures;
+using Doublelives.Domain.Sys;
 using Doublelives.Domain.Users;
+using Doublelives.Persistence.Repositories;
 
 namespace Doublelives.Persistence
 {
@@ -7,16 +9,25 @@ namespace Doublelives.Persistence
     {
         private readonly DlAdminDbContext _albumDbContext;
 
-        public IRepository<Picture> PictureRepository { get; private set; }
-
-        public IRepository<User> UserRepository { get; private set; }
-
         public UnitOfWork(DlAdminDbContext albumDbContext)
         {
             _albumDbContext = albumDbContext;
             PictureRepository = new Repository<Picture>(albumDbContext);
-            UserRepository = new Repository<User>(albumDbContext);
+            UserRepository = new Repository<SysUser>(albumDbContext);
+            RoleRepository = new Repository<SysRole>(albumDbContext);
+            DeptRepository = new Repository<SysDept>(albumDbContext);
+            MenuRepository = new MenuRepository(albumDbContext);
         }
+
+        public IRepository<Picture> PictureRepository { get; private set; }
+
+        public IRepository<SysUser> UserRepository { get; private set; }
+
+        public IRepository<SysRole> RoleRepository { get; private set; }
+
+        public IRepository<SysDept> DeptRepository { get; private set; }
+
+        public IMenuRepository MenuRepository { get; private set; }
 
         public void Commit()
         {

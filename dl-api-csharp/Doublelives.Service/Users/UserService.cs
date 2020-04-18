@@ -3,17 +3,22 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Doublelives.Persistence;
-using Doublelives.Domain.Users;
 using Doublelives.Shared.ConfigModels;
 using IdentityModel;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Doublelives.Infrastructure.Cache;
 using System.Threading.Tasks;
-using Doublelives.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Doublelives.Infrastructure.Helpers;
+using Doublelives.Domain.Sys;
+using Doublelives.Domain.Sys.Dto;
+using Doublelives.Service.WorkContextAccess;
+using Doublelives.Domain.WorkContext;
+using Doublelives.Infrastructure.Exceptions;
+using System.Collections.Generic;
+using Doublelives.Shared.Enum;
 
 namespace Doublelives.Service.Users
 {
@@ -34,9 +39,9 @@ namespace Doublelives.Service.Users
             _cacheManager = cacheManager;
         }
 
-        public (bool, string) Login(string username, string pwd)
+        public (bool, string) Login(string account, string pwd)
         {
-            var user = _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefault(it => it.Name == username);
+            var user = GetByAccountName(account);
 
             if (user == null) return (false, null);
 
@@ -71,18 +76,79 @@ namespace Doublelives.Service.Users
             return tokenString;
         }
 
-        public async Task<User> GetById(int id)
+        public AccountInfoDto GetInfo(int userid)
+        {
+            var user = GetById(userid).Result;
+            if (user == null) throw new NotFoundException("code", "用户无法找到，请重新登录!");
+
+            var roles = new List<SysRole>();
+            var permissions = new List<string>();
+            if (!string.IsNullOrEmpty(user.Roleid))
+            {
+                var ids = user.Roleid.Split(',').Select(id => int.Parse(id)).ToList();
+                foreach (var id in ids)
+                {
+                    var role = _unitOfWork.RoleRepository.GetById(id);
+                    if (role == null) continue;
+
+                    roles.Add(role);
+                }
+                permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
+            }
+
+            var dept = _unitOfWork.DeptRepository.GetById(user.Deptid);
+
+
+            var dto = new AccountInfoDto
+            {
+                Name = user.Name,
+                Role = user.Account, // todo??
+                Roles = roles.Select(it => it.Tips).ToList(),
+                Profile = new AccountProfileDto
+                {
+                    Dept = dept.Fullname,
+                    Deptid = dept.Id,
+                    Account = user.Account,
+                    Sex = user.Sex,
+                    Avatar = user.Avatar,
+                    Birthday = user.Birthday,
+                    Version = user.Version,
+                    CreateBy = user.CreateBy,
+                    CreateTime = user.CreateTime,
+                    Email = user.Email,
+                    Id = user.Id,
+                    ModifyBy = user.ModifyBy,
+                    ModifyTime = user.ModifyTime,
+                    Name = user.Name,
+                    Password = user.Password,
+                    Phone = user.Phone,
+                    Roleid = user.Roleid,
+                    Roles = roles.Select(it => it.Name).ToList(),
+                    Salt = user.Salt,
+                    Status = user.Status ?? (int)AccountStatus.InActive
+                },
+                Permissions = permissions
+            };
+
+            return dto;
+        }
+
+        public async Task<SysUser> GetById(int id)
         {
             var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
-            var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry =>
-            {
-                return await GetByIdFromDb(id);
-            });
+            var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry => await GetByIdFromDb(id));
 
             return user;
         }
 
-        public void Add(User user)
+        public SysUser GetByAccountName(string account)
+        {
+            var user = _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefault(it => it.Account == account);
+
+            return user;
+        }
+
+        public void Add(SysUser user)
         {
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
@@ -90,7 +156,7 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
-        public void Update(User user)
+        public void Update(SysUser user)
         {
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
@@ -98,27 +164,19 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
-            var user = _unitOfWork.UserRepository.GetById(id);
-            user.IsDeleted = true;
+            _unitOfWork.UserRepository.DeleteById(id);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{id}");
         }
 
-        private async Task<User> GetByIdFromDb(int id)
+        private async Task<SysUser> GetByIdFromDb(int id)
         {
             var user = await _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefaultAsync(it => it.Id == id);
 
-            if (user == null)
-            {
-                throw new NotFoundException("user.NotFound", "user doesn't not found!");
-            }
-
             return user;
         }
-
-
     }
 }

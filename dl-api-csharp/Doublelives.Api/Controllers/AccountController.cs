@@ -4,6 +4,7 @@ using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
 using Doublelives.Api.Validators.Account;
+using Doublelives.Domain.Sys.Dto;
 using Doublelives.Infrastructure.Validations;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -36,7 +37,7 @@ namespace Doublelives.Api.Controllers
 
             (var valid, var token) = _userService.Login(request.UserName, request.Password);
 
-            if (!valid) return NotFound();
+            if (!valid) return NotFound("用户名或密码错误，请检查");
 
             var viewModel = new LoginViewModel(token);
 
@@ -47,11 +48,13 @@ namespace Doublelives.Api.Controllers
         [HttpGet("info")]
         public IActionResult Info()
         {
-            //if (WorkContext.CurrentUser == null) return Unauthorized();
-            //var response = _mapper.Map<AccountViewModel>(WorkContext.CurrentUser);
-            //return Ok(response);
-            var model = MockResponseHelper.GetMockModel<AccountData>("info");
-            return Ok(model);
+            // todo: delete mock
+            //var model = MockResponseHelper.GetMockModel<AccountData>("info");
+            //return Ok(model);
+            var result = _userService.GetInfo(WorkContext.CurrentUser.Id);
+            var info =  _mapper.Map<AccountInfoDto>(result);
+
+            return Ok(info);
         }
 
         /// <summary>更新密码</summary>

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Doublelives.Api.Models.Account
 {
-    public class AccountData
+    public class AccountInfoViewModel
     {
         public List<string> Permissions { get; set; }
 
         /// <summary>
         /// 账户基本信息
         /// </summary>
-        public AccountProfile Profile { get; set; }
+        public AccountProfileViewModel Profile { get; set; }
 
         /// <summary>
         /// 用于显示的用户名
@@ -30,9 +30,9 @@ namespace Doublelives.Api.Models.Account
     }
 
     /// <summary>
-    /// 账户的信息
+    /// 账户信息
     /// </summary>
-    public class AccountProfile
+    public class AccountProfileViewModel
     {
         /// <summary>
         /// 头像
@@ -56,7 +56,7 @@ namespace Doublelives.Api.Models.Account
         /// </summary>
         public string Name { get; set; }
 
-        public DateTimeOffset Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         /// <summary>
         /// 性别 1男 2女
@@ -92,14 +92,14 @@ namespace Doublelives.Api.Models.Account
         /// </summary>
         public int Id { get; set; }
 
-        public DateTimeOffset CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 创建人的id
         /// </summary>
         public string CreateBy { get; set; }
 
-        public DateTimeOffset ModifyTime { get; set; }
+        public DateTime ModifyTime { get; set; }
 
         /// <summary>
         /// 修改者的id

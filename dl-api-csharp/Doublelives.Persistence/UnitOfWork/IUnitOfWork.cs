@@ -1,5 +1,7 @@
 ﻿using Doublelives.Domain.Pictures;
+using Doublelives.Domain.Sys;
 using Doublelives.Domain.Users;
+using Doublelives.Persistence.Repositories;
 
 namespace Doublelives.Persistence
 {
@@ -7,7 +9,13 @@ namespace Doublelives.Persistence
     {
         IRepository<Picture> PictureRepository { get; }
 
-        IRepository<User> UserRepository { get; }
+        IRepository<SysUser> UserRepository { get; }
+
+        IRepository<SysRole> RoleRepository { get; }
+
+        IRepository<SysDept> DeptRepository { get; }
+
+        IMenuRepository MenuRepository { get; }
 
         void Commit();
     }

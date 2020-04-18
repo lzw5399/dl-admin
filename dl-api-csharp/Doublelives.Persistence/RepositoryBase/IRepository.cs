@@ -15,6 +15,8 @@ namespace Doublelives.Persistence
 
         void Delete(TEntity entity);
 
+        void DeleteById(int id);
+
         Task<TEntity> GetByIdAsync(object id);
 
         Task InsertAsync(TEntity entity);

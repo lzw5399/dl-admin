@@ -39,6 +39,14 @@ namespace Doublelives.Persistence
             Entities.Remove(entity);
         }
 
+        public virtual void DeleteById(int id)
+        {
+            var obj = Entities.Find(id);
+            if (obj == null) return;
+
+            Entities.Remove(obj);
+        }
+
         public virtual async Task<TEntity> GetByIdAsync(object id)
         {
             return await Entities.FindAsync(id);

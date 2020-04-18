@@ -48,8 +48,8 @@ namespace Doublelives.Api.Middlewares
                     Id = user.Id,
                     Email = user.Email,
                     Name = user.Name,
-                    Role = user.Role,
-                    Language = user.LanguageCode
+                    //Role = user.Role,
+                    //Language = user.LanguageCode
                 };
             }
             catch (Exception)

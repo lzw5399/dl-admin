@@ -1,4 +1,6 @@
-﻿using Doublelives.Domain.Users;
+﻿using Doublelives.Domain.Sys;
+using Doublelives.Domain.Sys.Dto;
+using Doublelives.Domain.Users;
 using System.Threading.Tasks;
 
 namespace Doublelives.Service.Users
@@ -9,12 +11,14 @@ namespace Doublelives.Service.Users
 
         string GenerateToken(int id);
 
-        Task<User> GetById(int id);
+        Task<SysUser> GetById(int id);
 
-        void Add(User user);
+        void Add(SysUser user);
 
-        void Update(User user);
+        void Update(SysUser user);
 
-        void Delete(string id);
+        void Delete(int id);
+
+        AccountInfoDto GetInfo(int userid);
     }
 }
