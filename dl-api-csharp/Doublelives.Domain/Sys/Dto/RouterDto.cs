@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Doublelives.Api.Models.Menu
+namespace Doublelives.Domain.Sys.Dto
 {
-    public partial class ListFouRouterViewModel
+    public class RouterDto
     {
-        public List<ListFouRouterViewModel> Children { get; set; }
+        public List<RouterDto> Children { get; set; }
 
         public string Component { get; set; }
 
@@ -15,7 +14,7 @@ namespace Doublelives.Api.Models.Menu
 
         public int Id { get; set; }
 
-        public Meta Meta { get; set; }
+        public MetaDto Meta { get; set; }
 
         public string Name { get; set; }
 
@@ -26,7 +25,7 @@ namespace Doublelives.Api.Models.Menu
         public string Path { get; set; }
     }
 
-    public partial class Meta
+    public class MetaDto
     {
         public string Icon { get; set; }
 
