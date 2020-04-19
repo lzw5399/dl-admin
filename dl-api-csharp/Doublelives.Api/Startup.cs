@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Doublelives.Api.AutoMapper;
 using Doublelives.Api.Middlewares;
-using Doublelives.Api.Swagger;
 using Doublelives.Core;
 using Doublelives.Core.Filters;
 using Doublelives.Shared.ConfigModels;
@@ -48,7 +47,32 @@ namespace Doublelives.Api
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "swagger.xml");
                 c.IncludeXmlComments(filePath);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "doublelives admin", Version = "v1.0" });
-                c.OperationFilter<SwaggerAddHeaderParameter>();
+
+                // 主页右上角显示Anthorize的图标
+                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+                {
+                    Name = ApiHeaders.TOKEN,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "请输入token"
+                });
+                // 使用上面的规则，保护api(api上会显示Anthorize图标)
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Id = JwtBearerDefaults.AuthenticationScheme,
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
 
             services.Configure<TencentCosOptions>(Configuration.GetSection("tencentCos"));
@@ -86,14 +110,14 @@ namespace Doublelives.Api
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = it =>
-                         {
-                             if (!string.IsNullOrEmpty(it.HttpContext.Request.Headers[ApiHeaders.TOKEN]))
-                             {
-                                 it.Token = it.HttpContext.Request.Headers[ApiHeaders.TOKEN];
-                             }
+                        {
+                            if (!string.IsNullOrEmpty(it.HttpContext.Request.Headers[ApiHeaders.TOKEN]))
+                            {
+                                it.Token = it.HttpContext.Request.Headers[ApiHeaders.TOKEN];
+                            }
 
-                             return Task.CompletedTask;
-                         }
+                            return Task.CompletedTask;
+                        }
                     };
                 });
 
