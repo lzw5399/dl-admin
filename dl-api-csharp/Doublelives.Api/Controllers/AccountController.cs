@@ -1,6 +1,5 @@
 using AutoMapper;
 using Doublelives.Api.Infrastructure;
-using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
 using Doublelives.Api.Validators.Account;
@@ -55,7 +54,6 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>注销</summary>
-        [AllowAnonymous]
         [HttpPost("logout")]
         public IActionResult Logout()
         {
@@ -64,7 +62,6 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>更新密码</summary>
-        [AllowAnonymous]
         [HttpPost("updatePwd")]
         public IActionResult UpdatePassword(AccountUpdatePasswordRequest request)
         {

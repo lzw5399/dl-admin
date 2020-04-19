@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Doublelives.Api.AutoMapper;
 using Doublelives.Api.Middlewares;
+using Doublelives.Api.Swagger;
 using Doublelives.Core;
 using Doublelives.Core.Filters;
 using Doublelives.Shared.ConfigModels;
@@ -58,21 +59,10 @@ namespace Doublelives.Api
                     In = ParameterLocation.Header,
                     Description = "请输入token"
                 });
-                // 使用上面的规则，保护api(api上会显示Anthorize图标)
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Id = JwtBearerDefaults.AuthenticationScheme,
-                                Type = ReferenceType.SecurityScheme
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
+
+                // 下面这个filter实现了c.AddSecurityRequirement的功能
+                // 并且实现了 忽略给AllowAnonymousAttribute方法显示锁
+                c.OperationFilter<AuthOperationFilter>();
             });
 
             services.Configure<TencentCosOptions>(Configuration.GetSection("tencentCos"));
