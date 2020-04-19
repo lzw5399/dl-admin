@@ -8,7 +8,7 @@ namespace Doublelives.Domain.Sys
 
         public string Component { get; set; }
 
-        public sbyte? Hidden { get; set; }
+        public bool Hidden { get; set; }
 
         public string Icon { get; set; }
 

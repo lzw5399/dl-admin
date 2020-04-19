@@ -1,6 +1,7 @@
 ﻿using Doublelives.Cos;
 using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
+using Doublelives.Service.Menus;
 using Doublelives.Service.Pictures;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -28,6 +29,7 @@ namespace Doublelives.Core
             services.AddScoped<ITencentCosService, TencentCosService>();
             services.AddScoped<IPictureService, PictureService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMenuService, MenuService>();
         }
 
         private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)

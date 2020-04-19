@@ -84,7 +84,7 @@ namespace Doublelives.Service.Users
             var permissions = new List<string>();
             if (!string.IsNullOrEmpty(user.Roleid))
             {
-                var ids = user.Roleid.Split(',').Select(id => int.Parse(id)).ToList();
+                var ids = user.Roleid.Split(',').Select(id => long.Parse(id)).ToList();
                 foreach (var id in ids)
                 {
                     var role = _unitOfWork.RoleRepository.GetById(id);

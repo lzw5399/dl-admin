@@ -14,8 +14,37 @@ namespace Doublelives.Persistence.Repositories
             _context = context;
         }
 
+        public List<SysMenu> GetTopLevelMenusByRoleIds(List<long> roleIds)
+        {
+            var menus = _context.Set<SysRelation>()
+                .Where(it => roleIds.Contains(it.Roleid))
+                .Join(
+                _context.Set<SysMenu>().Where(
+                    menu => (menu.Status == (int)MenuStatus.Active && menu.Ismenu == 1 &&
+                            menu.Levels == (int)MenuLevel.Top)),
+                relation => relation.Menuid,
+                menu => menu.Id,
+                (relation, menu) => menu)
+                .ToList();
 
-        public List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
+            return menus;
+        }
+
+        public List<SysMenu> GetSubMenusByParentCode(string pcode)
+        {
+            var menus =
+                _context
+                .Set<SysMenu>()
+                .Where(menu => (
+                    menu.Status == (int)MenuStatus.Active &&
+                    menu.Ismenu == 1 &&
+                    menu.Pcode == pcode))
+                .ToList();
+
+            return menus;
+        }
+
+        public List<string> GetPermissionsByRoleIds(List<long> roleIds, bool activeOnly = true)
         {
             List<string> permissions;
             if (activeOnly)

@@ -12,15 +12,15 @@ namespace Doublelives.Domain.Sys.Dto
 
         public bool Hidden { get; set; }
 
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public MetaDto Meta { get; set; }
 
         public string Name { get; set; }
 
-        public int Num { get; set; }
+        public long Num { get; set; }
 
-        public int ParentId { get; set; }
+        public long ParentId { get; set; }
 
         public string Path { get; set; }
     }
