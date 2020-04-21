@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doublelives.Migrations.Migrations
 {
     [DbContext(typeof(DlAdminDbContext))]
-    [Migration("20200418190427_emm")]
-    partial class emm
+    [Migration("20200420061023_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -763,7 +763,7 @@ namespace Doublelives.Migrations.Migrations
                         .HasColumnType("datetime")
                         .HasComment("创建时间/注册时间");
 
-                    b.Property<sbyte?>("Hidden")
+                    b.Property<sbyte>("Hidden")
                         .HasColumnName("hidden")
                         .HasColumnType("tinyint(4)")
                         .HasComment("是否隐藏");

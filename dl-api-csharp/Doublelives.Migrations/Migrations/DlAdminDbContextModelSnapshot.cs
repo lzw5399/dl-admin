@@ -761,7 +761,7 @@ namespace Doublelives.Migrations.Migrations
                         .HasColumnType("datetime")
                         .HasComment("创建时间/注册时间");
 
-                    b.Property<sbyte?>("Hidden")
+                    b.Property<sbyte>("Hidden")
                         .HasColumnName("hidden")
                         .HasColumnType("tinyint(4)")
                         .HasComment("是否隐藏");

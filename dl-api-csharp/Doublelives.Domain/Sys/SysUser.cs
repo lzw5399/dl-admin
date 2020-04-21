@@ -1,4 +1,5 @@
 ﻿using Doublelives.Domain.Infrastructure;
+using Doublelives.Shared.Enum;
 using System;
 
 namespace Doublelives.Domain.Sys
@@ -25,9 +26,9 @@ namespace Doublelives.Domain.Sys
 
         public string Salt { get; set; }
 
-        public int? Sex { get; set; }
+        public Gender? Sex { get; set; }
 
-        public int? Status { get; set; }
+        public AccountStatus? Status { get; set; }
 
         public long? Version { get; set; }
     }

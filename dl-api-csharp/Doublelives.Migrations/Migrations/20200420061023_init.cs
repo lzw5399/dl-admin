@@ -12,7 +12,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "cms_article",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -41,7 +42,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "cms_banner",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -67,7 +69,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "cms_channel",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -89,7 +92,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "cms_contacts",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -117,7 +121,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "message",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -148,7 +153,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "message_sender",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -173,7 +179,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_cfg",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -198,7 +205,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_dept",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -229,7 +237,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_dict",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -255,7 +264,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_file_info",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -277,8 +287,7 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_login_log",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    id = table.Column<int>(type: "int(11)", nullable: false),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间"),
                     ip = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8")
@@ -304,7 +313,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_menu",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -315,7 +325,7 @@ namespace Doublelives.Migrations.Migrations
                     component = table.Column<string>(type: "varchar(64)", nullable: true, comment: "页面组件")
                         .Annotation("MySql:CharSet", "utf8")
                         .Annotation("MySql:Collation", "utf8_general_ci"),
-                    hidden = table.Column<sbyte>(type: "tinyint(4)", nullable: true, comment: "是否隐藏"),
+                    hidden = table.Column<sbyte>(type: "tinyint(4)", nullable: false, comment: "是否隐藏"),
                     icon = table.Column<string>(type: "varchar(32)", nullable: true, comment: "图标")
                         .Annotation("MySql:CharSet", "utf8")
                         .Annotation("MySql:Collation", "utf8_general_ci"),
@@ -350,7 +360,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_notice",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -373,7 +384,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_operation_log",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     classname = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8")
                         .Annotation("MySql:Collation", "utf8_general_ci"),
@@ -405,9 +417,10 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_relation",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
-                    menuid = table.Column<long>(type: "bigint(20)", nullable: true),
-                    roleid = table.Column<long>(type: "bigint(20)", nullable: true)
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    menuid = table.Column<long>(type: "bigint(20)", nullable: false),
+                    roleid = table.Column<long>(type: "bigint(20)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -419,7 +432,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_role",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -445,7 +459,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_task",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -485,7 +500,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_task_log",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     exec_at = table.Column<DateTime>(type: "datetime", nullable: true, comment: "执行时间"),
                     exec_success = table.Column<int>(type: "int(11)", nullable: true, comment: "执行结果（成功:1、失败:0)"),
                     id_task = table.Column<long>(type: "bigint(20)", nullable: true),
@@ -506,7 +522,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "sys_user",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),
@@ -551,7 +568,8 @@ namespace Doublelives.Migrations.Migrations
                 name: "message_template",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20)", nullable: false),
+                    id = table.Column<long>(type: "bigint(20)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     create_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "创建时间/注册时间"),
                     create_by = table.Column<long>(type: "bigint(20)", nullable: true, comment: "创建人"),
                     modify_time = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后更新时间"),

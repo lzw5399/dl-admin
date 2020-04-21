@@ -24,7 +24,7 @@ namespace Doublelives.Service.Mappers
                     Dept = dept.Fullname,
                     Deptid = dept.Id,
                     Account = user.Account,
-                    Sex = user.Sex,
+                    Sex = (int)user.Sex,
                     Avatar = user.Avatar,
                     Birthday = user.Birthday,
                     Version = user.Version,
@@ -40,7 +40,7 @@ namespace Doublelives.Service.Mappers
                     Roleid = user.Roleid,
                     Roles = roles.Select(it => it.Name).ToList(),
                     Salt = user.Salt,
-                    Status = user.Status ?? (int)AccountStatus.InActive
+                    Status = (int)(user.Status ?? AccountStatus.InActive)
                 },
                 Permissions = permissions
             };
