@@ -14,15 +14,15 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.Menuid)
                 .HasColumnName("menuid")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.Roleid)
                 .HasColumnName("roleid")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
         }
     }
 }

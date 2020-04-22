@@ -14,7 +14,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.Classname)
                 .HasColumnName("classname")
@@ -59,7 +59,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Userid)
                 .HasColumnName("userid")
-                .HasColumnType("int(11)");
+                .HasColumnType("INTEGER");
         }
     }
 }

@@ -14,11 +14,11 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.CreateBy)
                 .HasColumnName("create_by")
-                .HasColumnType("bigint(20)")
+                .HasColumnType("INTEGER")
                 .HasComment("创建人");
 
             builder.Property(e => e.CreateTime)
@@ -28,7 +28,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.ModifyBy)
                 .HasColumnName("modify_by")
-                .HasColumnType("bigint(20)")
+                .HasColumnType("INTEGER")
                 .HasComment("最后更新人");
 
             builder.Property(e => e.ModifyTime)

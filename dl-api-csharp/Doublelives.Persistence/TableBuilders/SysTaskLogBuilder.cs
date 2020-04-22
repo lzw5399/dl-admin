@@ -14,7 +14,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.ExecAt)
                 .HasColumnName("exec_at")
@@ -23,12 +23,12 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.ExecSuccess)
                 .HasColumnName("exec_success")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("执行结果（成功:1、失败:0)");
 
             builder.Property(e => e.IdTask)
                 .HasColumnName("id_task")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.JobException)
                 .HasColumnName("job_exception")

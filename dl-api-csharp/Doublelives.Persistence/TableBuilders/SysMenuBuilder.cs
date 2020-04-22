@@ -18,7 +18,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("bigint(20)");
+                .HasColumnType("INTEGER");
 
             builder.Property(e => e.Code)
                 .IsRequired()
@@ -37,7 +37,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.CreateBy)
                 .HasColumnName("create_by")
-                .HasColumnType("bigint(20)")
+                .HasColumnType("INTEGER")
                 .HasComment("创建人");
 
             builder.Property(e => e.CreateTime)
@@ -59,22 +59,22 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Ismenu)
                 .HasColumnName("ismenu")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("是否是菜单1:菜单,0:按钮");
 
             builder.Property(e => e.Isopen)
                 .HasColumnName("isopen")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("是否默认打开1:是,0:否");
 
             builder.Property(e => e.Levels)
                 .HasColumnName("levels")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("级别");
 
             builder.Property(e => e.ModifyBy)
                 .HasColumnName("modify_by")
-                .HasColumnType("bigint(20)")
+                .HasColumnType("INTEGER")
                 .HasComment("最后更新人");
 
             builder.Property(e => e.ModifyTime)
@@ -92,7 +92,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Num)
                 .HasColumnName("num")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("顺序");
 
             builder.Property(e => e.Pcode)
@@ -112,7 +112,7 @@ namespace Doublelives.Persistence.TableBuilders
 
             builder.Property(e => e.Status)
                 .HasColumnName("status")
-                .HasColumnType("int(11)")
+                .HasColumnType("INTEGER")
                 .HasComment("状态1:启用,0:禁用");
 
             builder.Property(e => e.Tips)

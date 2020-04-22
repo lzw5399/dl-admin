@@ -9,7 +9,7 @@ namespace Doublelives.Domain.Sys
 
         public int? ExecSuccess { get; set; }
 
-        public long? IdTask { get; set; }
+        public int? IdTask { get; set; }
 
         public string JobException { get; set; }
 
