@@ -1,8 +1,8 @@
-﻿using Doublelives.Cos;
-using Doublelives.Infrastructure.Cache;
+﻿using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
 using Doublelives.Service.Menus;
 using Doublelives.Service.Pictures;
+using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.EntityFrameworkCore;

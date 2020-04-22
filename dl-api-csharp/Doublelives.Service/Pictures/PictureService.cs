@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Doublelives.Cos;
 using Doublelives.Domain.Pictures;
+using Doublelives.Service.TencentCos;
 using Microsoft.AspNetCore.Http;
 
 namespace Doublelives.Service.Pictures
