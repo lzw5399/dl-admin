@@ -18,6 +18,7 @@ using Doublelives.Infrastructure.Exceptions;
 using System.Collections.Generic;
 using Doublelives.Service.Mappers;
 using Doublelives.Infrastructure.Extensions;
+using Doublelives.Shared.Constants;
 
 namespace Doublelives.Service.Users
 {
@@ -26,7 +27,6 @@ namespace Doublelives.Service.Users
         private readonly IUnitOfWork _unitOfWork;
         private readonly JwtOptions _jwtConfig;
         private readonly ICacheManager _cacheManager;
-        private const string USER_CACHE_PREFIX = "user";
 
         public UserService(
             IUnitOfWork unitOfWork,
@@ -102,7 +102,7 @@ namespace Doublelives.Service.Users
 
         public async Task<SysUser> GetById(long id)
         {
-            var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
+            var cacheKey = CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry => await GetByIdFromDb(id));
 
             return user;
@@ -120,7 +120,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, user.Id));
         }
 
         public void Update(SysUser user)
@@ -128,7 +128,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, user.Id));
         }
 
         public void Delete(long id)
@@ -136,7 +136,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.DeleteById(id);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{id}");
+            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id));
         }
 
         private async Task<SysUser> GetByIdFromDb(long id)

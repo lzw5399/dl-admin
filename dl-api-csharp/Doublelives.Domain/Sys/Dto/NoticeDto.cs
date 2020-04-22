@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace Doublelives.Api.Models.Notice
+namespace Doublelives.Domain.Sys.Dto
 {
-    public class NoticeViewModel
+    public class NoticeDto
     {
-        /// <summary>
-        /// 内容
-        /// </summary>
         public string Content { get; set; }
+
+        public string Title { get; set; }
+
+        public int? Type { get; set; }
 
         public int? CreateBy { get; set; }
 
@@ -18,9 +19,5 @@ namespace Doublelives.Api.Models.Notice
         public int? ModifyBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
-
-        public string Title { get; set; }
-
-        public int? Type { get; set; }
     }
 }

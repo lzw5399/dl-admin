@@ -58,7 +58,6 @@ namespace Doublelives.Api.Controllers
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            // api端针对logout没有什么需要做的
             return Ok("注销成功");
         }
 
@@ -67,9 +66,6 @@ namespace Doublelives.Api.Controllers
         public IActionResult UpdatePassword(AccountUpdatePasswordRequest request)
         {
             return Ok();
-            // var token = _userService.GenerateToken(request);
-            //
-            // return Ok(token);
         }
     }
 }

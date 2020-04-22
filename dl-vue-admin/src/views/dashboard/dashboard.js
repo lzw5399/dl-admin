@@ -166,10 +166,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'name'
-
-    ])
+    ...mapGetters(['name'])
   },
   created() {
     this.fetchData()
