@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doublelives.Shared", "Doubl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doublelives.Infrastructure", "Doublelives.Infrastructure\Doublelives.Infrastructure.csproj", "{A50AC59D-8513-4563-83AD-3081526B3722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doublelives.Query", "Doublelives.Query\Doublelives.Query.csproj", "{BAFE542D-B370-4DB9-BADA-CFC453C748B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doublelives.Query", "Doublelives.Query\Doublelives.Query.csproj", "{BAFE542D-B370-4DB9-BADA-CFC453C748B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

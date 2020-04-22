@@ -42,12 +42,11 @@ namespace Doublelives.Core
                 options =>
                 {
                     options
-                        .UseMySql(
+                        .UseSqlite(
                             configuration.GetConnectionString("dl"),
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
-                                it.EnableRetryOnFailure();
                             });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Doublelives.Api.Models.Notice
 {
     public class NoticeViewModel
     {
+        /// <summary>
+        /// 内容
+        /// </summary>
         public string Content { get; set; }
 
         public int CreateBy { get; set; }

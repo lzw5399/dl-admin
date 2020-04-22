@@ -6,9 +6,9 @@ namespace Doublelives.Domain.Sys
     {
         public string Fullname { get; set; }
 
-        public long? Num { get; set; }
+        public int? Num { get; set; }
 
-        public long? Pid { get; set; }
+        public int? Pid { get; set; }
 
         public string Pids { get; set; }
 
@@ -16,6 +16,6 @@ namespace Doublelives.Domain.Sys
 
         public string Tips { get; set; }
 
-        public long? Version { get; set; }
+        public int? Version { get; set; }
     }
 }
