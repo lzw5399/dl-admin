@@ -33,8 +33,6 @@ namespace Doublelives.Api.Controllers
             var routers = _mapper.Map<List<RouterViewModel>>(list);
 
             return Ok(routers);
-            //var model = MockResponseHelper.GetMockModel<List<RouterViewModel>>("listForRouter");
-            //return Ok(model);
         }
     }
 }
