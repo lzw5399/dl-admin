@@ -9,13 +9,13 @@
 ## 技术选型
 - 核心框架：ASP.NET Core 3.1
 - 数据访问层：EntityFramework Core 3
-- 数据库：MySQL
+- 数据库：SQLite(master分支) & MySQL(mysql-version分支)
 - 缓存：Redis
 - 前端：基于vue-element-admin
 
 ## 路线图
 - [ ] 部门管理
-- [ ] 用户管理
+- [x] 用户管理
 - [ ] 角色管理
 - [ ] 菜单管理：配置菜单功能
 - [ ] 权限分配：为指定的角色配置特定的功能菜单
