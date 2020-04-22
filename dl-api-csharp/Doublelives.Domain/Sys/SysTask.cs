@@ -5,13 +5,13 @@ namespace Doublelives.Domain.Sys
 {
     public class SysTask : AuditableEntityBase
     {
-        public sbyte? Concurrent { get; set; }
+        public bool? Concurrent { get; set; }
 
         public string Cron { get; set; }
 
         public string Data { get; set; }
 
-        public sbyte? Disabled { get; set; }
+        public bool? Disabled { get; set; }
 
         public DateTime? ExecAt { get; set; }
 

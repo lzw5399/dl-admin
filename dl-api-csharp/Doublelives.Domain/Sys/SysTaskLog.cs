@@ -7,7 +7,7 @@ namespace Doublelives.Domain.Sys
     {
         public DateTime? ExecAt { get; set; }
 
-        public int? ExecSuccess { get; set; }
+        public bool? ExecSuccess { get; set; }
 
         public int? IdTask { get; set; }
 

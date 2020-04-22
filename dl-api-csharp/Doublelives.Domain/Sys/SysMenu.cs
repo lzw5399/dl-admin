@@ -1,4 +1,5 @@
 ﻿using Doublelives.Domain.Infrastructure;
+using Doublelives.Shared.Enum;
 
 namespace Doublelives.Domain.Sys
 {
@@ -12,9 +13,9 @@ namespace Doublelives.Domain.Sys
 
         public string Icon { get; set; }
 
-        public int Ismenu { get; set; }
+        public bool Ismenu { get; set; }
 
-        public int? Isopen { get; set; }
+        public bool? Isopen { get; set; }
 
         public int Levels { get; set; }
 
@@ -26,7 +27,7 @@ namespace Doublelives.Domain.Sys
 
         public string Pcodes { get; set; }
 
-        public int Status { get; set; }
+        public MenuStatus Status { get; set; }
 
         public string Tips { get; set; }
 

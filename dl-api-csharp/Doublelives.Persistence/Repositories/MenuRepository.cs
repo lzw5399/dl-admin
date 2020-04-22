@@ -20,7 +20,7 @@ namespace Doublelives.Persistence.Repositories
                 .Where(it => roleIds.Contains(it.Roleid))
                 .Join(
                 _context.Set<SysMenu>().Where(
-                    menu => (menu.Status == (int)MenuStatus.Active && menu.Ismenu == 1 &&
+                    menu => (menu.Status == MenuStatus.Active && menu.Ismenu &&
                             menu.Levels == (int)MenuLevel.Top)),
                 relation => relation.Menuid,
                 menu => menu.Id,
@@ -36,8 +36,8 @@ namespace Doublelives.Persistence.Repositories
                 _context
                 .Set<SysMenu>()
                 .Where(menu => (
-                    menu.Status == (int)MenuStatus.Active &&
-                    menu.Ismenu == 1 &&
+                    menu.Status == MenuStatus.Active &&
+                    menu.Ismenu &&
                     menu.Pcode == pcode))
                 .ToList();
 
@@ -53,7 +53,7 @@ namespace Doublelives.Persistence.Repositories
                     .Where(it => roleIds.Contains(it.Roleid))
                     .Join(
                     _context.Set<SysMenu>().Where(
-                        menu => (menu.Status == (int)MenuStatus.Active)),
+                        menu => (menu.Status == MenuStatus.Active)),
                     relation => relation.Menuid,
                     menu => menu.Id,
                     (relation, menu) => menu.Url)
