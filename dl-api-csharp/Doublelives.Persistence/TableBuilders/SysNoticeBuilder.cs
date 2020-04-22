@@ -10,47 +10,27 @@ namespace Doublelives.Persistence.TableBuilders
         {
             builder.ToTable("sys_notice");
 
-            builder.HasComment("通知");
-
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasColumnType("INTEGER");
+                .ValueGeneratedNever();
 
             builder.Property(e => e.Content)
                 .HasColumnName("content")
-                .HasColumnType("varchar(255)")
-                .HasCharSet("utf8")
-                .HasCollation("utf8_general_ci");
+                .HasColumnType("text(255)");
 
-            builder.Property(e => e.CreateBy)
-                .HasColumnName("create_by")
-                .HasColumnType("INTEGER")
-                .HasComment("创建人");
+            builder.Property(e => e.CreateBy).HasColumnName("create_by");
 
-            builder.Property(e => e.CreateTime)
-                .HasColumnName("create_time")
-                .HasColumnType("datetime")
-                .HasComment("创建时间/注册时间");
+            builder.Property(e => e.CreateTime).HasColumnName("create_time");
 
-            builder.Property(e => e.ModifyBy)
-                .HasColumnName("modify_by")
-                .HasColumnType("INTEGER")
-                .HasComment("最后更新人");
+            builder.Property(e => e.ModifyBy).HasColumnName("modify_by");
 
-            builder.Property(e => e.ModifyTime)
-                .HasColumnName("modify_time")
-                .HasColumnType("datetime")
-                .HasComment("最后更新时间");
+            builder.Property(e => e.ModifyTime).HasColumnName("modify_time");
 
             builder.Property(e => e.Title)
                 .HasColumnName("title")
-                .HasColumnType("varchar(255)")
-                .HasCharSet("utf8")
-                .HasCollation("utf8_general_ci");
+                .HasColumnType("text(255)");
 
-            builder.Property(e => e.Type)
-                .HasColumnName("type")
-                .HasColumnType("INTEGER");
+            builder.Property(e => e.Type).HasColumnName("type");
         }
     }
 }

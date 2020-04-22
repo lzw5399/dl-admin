@@ -20,7 +20,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
@@ -45,8 +44,6 @@ namespace Doublelives.Api
 
             services.AddSwaggerGen(c =>
             {
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "swagger.xml");
-                c.IncludeXmlComments(filePath);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "doublelives admin", Version = "v1.0" });
 
                 // 主页右上角显示Anthorize的图标
@@ -63,6 +60,13 @@ namespace Doublelives.Api
                 // 下面这个filter实现了c.AddSecurityRequirement的功能
                 // 并且实现了 忽略给AllowAnonymousAttribute方法显示锁
                 c.OperationFilter<AuthOperationFilter>();
+
+                // 包含api项目的comment
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "swagger.xml"));
+                // 如果需要包含其他项目的comment，在具体项目的PropertyGroup下添加如下
+                //<GenerateDocumentationFile>true</GenerateDocumentationFile>
+                //<NoWarn>$(NoWarn);1591</NoWarn>
+                // 然后配置includec.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "项目的名称"));
             });
 
             services.Configure<TencentCosOptions>(Configuration.GetSection("tencentCos"));
