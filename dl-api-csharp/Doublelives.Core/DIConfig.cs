@@ -5,11 +5,14 @@ using Doublelives.Service.Pictures;
 using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
 
 namespace Doublelives.Core
 {
@@ -38,18 +41,26 @@ namespace Doublelives.Core
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
         {
+            var conn = SqliteConn(configuration.GetConnectionString("dl"));
             services.AddDbContext<DlAdminDbContext>(
                 options =>
                 {
                     options
-                        .UseSqlite(
-                            configuration.GetConnectionString("dl"),
+                        .UseSqlite(conn,
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
                             });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+
+        private static string SqliteConn(string originConn)
+        {
+            var builder = new SqliteConnectionStringBuilder(originConn);
+            builder.DataSource = Path.Combine(AppContext.BaseDirectory, "SqliteDatabase", builder.DataSource);
+
+            return builder.ToString();
         }
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Album;
 using Doublelives.Domain.Pictures;
 using Doublelives.Service.Pictures;

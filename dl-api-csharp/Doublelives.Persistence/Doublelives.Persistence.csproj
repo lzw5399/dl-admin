@@ -23,4 +23,16 @@
     <ProjectReference Include="..\Doublelives.Domain\Doublelives.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SqliteDatabase\dl-admin-sqlite.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SqliteDatabase\dl-admin-sqlite.db-shm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SqliteDatabase\dl-admin-sqlite.db-wal">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

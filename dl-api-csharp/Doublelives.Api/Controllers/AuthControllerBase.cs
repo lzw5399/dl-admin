@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace Doublelives.Api.Infrastructure
+namespace Doublelives.Api.Controllers
 {
     [Authorize]
     [ApiController]

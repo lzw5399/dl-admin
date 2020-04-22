@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Users;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;

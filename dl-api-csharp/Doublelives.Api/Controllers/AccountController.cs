@@ -1,5 +1,4 @@
 using AutoMapper;
-using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
 using Doublelives.Api.Validators.Account;

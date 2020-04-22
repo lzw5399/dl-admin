@@ -1,5 +1,4 @@
-﻿using Doublelives.Api.Infrastructure;
-using Doublelives.Api.MockResponse;
+﻿using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Notice;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
