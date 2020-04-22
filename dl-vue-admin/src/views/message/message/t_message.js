@@ -7,10 +7,10 @@ export default {
       formTitle: '添加历史消息',
       isAdd: true,
       form: {
-        tplCode:'',
-        content:'',
-        receiver:'',
-        type:'',
+        tplCode: '',
+        content: '',
+        receiver: '',
+        type: '',
         id: ''
       },
       listQuery: {
@@ -44,11 +44,10 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      let queryData = this.listQuery
-      if(this.rangeDate){
+      const queryData = this.listQuery
+      if (this.rangeDate) {
         queryData['startDate'] = this.rangeDate[0]
         queryData['endDate'] = this.rangeDate[1]
-
       }
       getList(queryData).then(response => {
         this.list = response.data.records
@@ -85,19 +84,19 @@ export default {
       this.listQuery.limit = limit
       this.fetchData()
     },
-    clear(){
+    clear() {
       this.$confirm('确认清楚所有历史消息?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-         clear().then(response => {
-           this.fetchData()
-           this.$message({
-             type: 'success',
-             message: '清楚成功!'
-           });
-         })
+        clear().then(response => {
+          this.fetchData()
+          this.$message({
+            type: 'success',
+            message: '清楚成功!'
+          })
+        })
       })
     }
 

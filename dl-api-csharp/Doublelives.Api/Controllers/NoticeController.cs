@@ -13,7 +13,7 @@ namespace Doublelives.Api.Controllers
         }
 
         [HttpGet("list")]
-        public ActionResult<NoticeViewModel> List()
+        public IActionResult List()
         {
             var model = MockResponseHelper.GetMockModel<NoticeViewModel>("noticelist");
 

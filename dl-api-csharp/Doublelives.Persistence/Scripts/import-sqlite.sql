@@ -412,7 +412,7 @@ INSERT INTO "sys_menu" VALUES (56, '2019-06-10 21:26:52', 1, '2019-06-10 21:26:5
 INSERT INTO "sys_menu" VALUES (57, '2019-06-10 21:27:34', 1, '2019-06-10 21:27:34', 1, 'msg', 'views/message/message/index', 0, 'message', 1, NULL, 2, '历史消息', 1, 'messageMgr', '[0],[messageMgr],', 1, NULL, '/history');
 INSERT INTO "sys_menu" VALUES (58, '2019-06-10 21:27:56', 1, '2019-06-10 21:27:56', 1, 'msgTpl', 'views/message/template/index', 0, 'template', 1, NULL, 2, '消息模板', 2, 'messageMgr', '[0],[messageMgr],', 1, NULL, '/template');
 INSERT INTO "sys_menu" VALUES (59, '2019-06-10 21:28:21', 1, '2019-06-10 21:28:21', 1, 'msgSender', 'views/message/sender/index', 0, 'sender', 1, NULL, 2, '消息发送者', 3, 'messageMgr', '[0],[messageMgr],', 1, NULL, '/sender');
-INSERT INTO "sys_menu" VALUES (60, '2019-06-10 21:28:21', 1, '2019-06-10 21:28:21', 1, 'msgClear', NULL, 0, NULL, 1, NULL, 2, '清空历史消息', 3, 'messageMgr', '[0],[messageMgr],', 1, NULL, NULL);
+INSERT INTO "sys_menu" VALUES (60, '2019-06-10 21:28:21', 1, '2019-06-10 21:28:21', 1, 'msgClear', NULL, 0, NULL, 1, NULL, 2, '清空历史消息', 3, 'messageMgr', '[0],[messageMgr],', 0, NULL, NULL);
 INSERT INTO "sys_menu" VALUES (61, '2019-07-31 22:04:30', 1, '2019-07-31 22:04:30', 1, 'msgTplEdit', NULL, 0, NULL, 0, NULL, 3, '编辑消息模板', 1, 'msgTpl', '[0],[messageMgr],[msgTpl]', 1, NULL, NULL);
 INSERT INTO "sys_menu" VALUES (62, '2019-07-31 22:04:30', 1, '2019-07-31 22:04:30', 1, 'msgTplDelete', NULL, 0, NULL, 0, NULL, 3, '删除消息模板', 2, 'msgTpl', '[0],[messageMgr],[msgTpl]', 1, NULL, NULL);
 INSERT INTO "sys_menu" VALUES (63, '2019-07-31 22:04:30', 1, '2019-07-31 22:04:30', 1, 'msgSenderEdit', NULL, 0, NULL, 0, NULL, 3, '编辑消息发送器', 1, 'msgSender', '[0],[messageMgr],[msgSender]', 1, NULL, NULL);

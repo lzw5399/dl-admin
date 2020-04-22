@@ -30,7 +30,7 @@ namespace Doublelives.Api.Controllers
 
         /// <summary>获取所有的图片链接</summary>
         [HttpGet]
-        public ActionResult<IEnumerable<PicturesViewModel>> GetAll()
+        public IActionResult GetAll()
         {
             var pictures = _pictureService.GetAll();
 
