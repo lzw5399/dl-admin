@@ -1,5 +1,6 @@
 ﻿using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
+using Doublelives.Service.Depts;
 using Doublelives.Service.Menus;
 using Doublelives.Service.Notices;
 using Doublelives.Service.Pictures;
@@ -35,6 +36,7 @@ namespace Doublelives.Core
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<INoticeService, NoticeService>();
+            services.AddScoped<IDeptService, DeptService>();
         }
 
         private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)

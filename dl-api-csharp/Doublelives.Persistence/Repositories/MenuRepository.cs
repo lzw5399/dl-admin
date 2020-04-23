@@ -52,17 +52,15 @@ namespace Doublelives.Persistence.Repositories
                 permissions = _context.Set<SysRelation>()
                     .Where(it => roleIds.Contains(it.Roleid))
                     .Join(
-                    _context.Set<SysMenu>().Where(
-                        menu => (menu.Status == MenuStatus.Active)),
+                    _context.Set<SysMenu>().Where(menu => menu.Status == MenuStatus.Active),
                     relation => relation.Menuid,
                     menu => menu.Id,
                     (relation, menu) => menu.Url)
                     .ToList();
-                //var qw = from r in _context.Set<SysRelation>()
-                //         join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
-                //         where roleIds.Contains(r.Roleid) && m.Status == (int)MenuStatus.Active
-                //         select m.Url;
-                //var rr = qw.ToList();
+                //permissions = (from r in _context.Set<SysRelation>()
+                //               join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
+                //               where roleIds.Contains(r.Roleid) && m.Status == MenuStatus.Active
+                //               select m.Url).ToList();
             }
             else
             {

@@ -1,13 +1,10 @@
-﻿using Doublelives.Domain.Sys;
-using Doublelives.Domain.Sys.Dto;
+﻿using Doublelives.Domain.Sys.Dto;
 using Doublelives.Infrastructure.Exceptions;
 using Doublelives.Persistence;
 using Doublelives.Service.Mappers;
 using Doublelives.Service.Users;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Doublelives.Service.Menus
 {
@@ -22,6 +19,7 @@ namespace Doublelives.Service.Menus
             _userService = userService;
         }
 
+        /// <summary>获取当前用户拥有的角色,所对应的权限路由</summary>
         public List<RouterDto> GetMenuRouterList(long userid)
         {
             var user = _userService.GetById(userid).Result;

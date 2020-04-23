@@ -102,7 +102,7 @@ namespace Doublelives.Service.Users
 
         public async Task<SysUser> GetById(long id)
         {
-            var cacheKey = CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
+            var cacheKey = GetUserCacheKey(id);
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry => await GetByIdFromDb(id));
 
             return user;
@@ -120,7 +120,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, user.Id));
+            _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
         public void Update(SysUser user)
@@ -128,7 +128,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, user.Id));
+            _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
         public void Delete(long id)
@@ -136,7 +136,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.DeleteById(id);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove(CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id));
+            _cacheManager.Remove(GetUserCacheKey(id));
         }
 
         private async Task<SysUser> GetByIdFromDb(long id)
@@ -145,5 +145,7 @@ namespace Doublelives.Service.Users
 
             return user;
         }
+
+        private string GetUserCacheKey(long id) => CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
     }
 }

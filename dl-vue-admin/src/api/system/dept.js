@@ -2,21 +2,21 @@ import request from '@/utils/request'
 
 export function tree() {
   return request({
-    url: '/dept/tree',
-    method: 'get',
+    url: 'api/dept/tree',
+    method: 'get'
   })
 }
 
 export function list() {
   return request({
-    url: '/dept/list',
-    method: 'get',
+    url: 'api/dept/list',
+    method: 'get'
   })
 }
 
 export function save(params) {
   return request({
-    url: '/dept',
+    url: 'api/dept',
     method: 'post',
     params: params
   })
@@ -24,7 +24,7 @@ export function save(params) {
 
 export function del(id) {
   return request({
-    url: '/dept',
+    url: 'api/dept',
     method: 'delete',
     params: {
       id: id
