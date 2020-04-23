@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  dl-vue-admin:
+    image: lzw5399/dl-vue-admin:latest
+    container_name: dl-vue-admin
+    ports:
+      - "8095:80"
+    depends_on:
+      - dl-api
+    restart:
+      on-failure
+  dl-api:
+    image: lzw5399/dl-api:latest
+    container_name: dl-api
+    ports:
+      - "8096:80"
+    restart:
+      on-failure
