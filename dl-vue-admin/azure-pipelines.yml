@@ -55,7 +55,7 @@ steps:
       inline: |
         # stop container
         containers=$(docker ps -q --filter name=$(applicationName))
-        if test -n "$containers"; 
+        if test -n "$containers";
         then
         docker stop $(docker ps -q --filter name=$(applicationName)) >> /dev/null 2>&1
         rc=$?
@@ -67,7 +67,7 @@ steps:
         fi
         # remove container
         containers1=$(docker ps -q -a --filter name=$(applicationName))
-        if test -n "$containers1"; 
+        if test -n "$containers1";
         then
         docker rm $(docker ps -q -a --filter name=$(applicationName)) >> /dev/null 2>&1
         rc=$?
@@ -79,7 +79,7 @@ steps:
         fi
         # remove image
         containers2=$(docker images | grep $(applicationName) | awk '{print $3}')
-        if test -n "$containers2"; 
+        if test -n "$containers2";
         then
         docker rmi $(docker images | grep $(applicationName) | awk '{print $3}') >> /dev/null 2>&1
         rc=$?
