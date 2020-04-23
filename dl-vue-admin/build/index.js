@@ -3,6 +3,7 @@ const chalk = require('chalk')
 const config = require('../vue.config.js')
 const rawArgv = process.argv.slice(2)
 const args = rawArgv.join(' ')
+console.log('server ewewewewewew ' + args)
 
 if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
   const report = rawArgv.includes('--report')
@@ -23,12 +24,11 @@ if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
     })
   )
 
-  app.listen(port, function () {
+  app.listen(port, function() {
     console.log(chalk.green(`> Preview at  http://localhost:${port}${publicPath}`))
     if (report) {
       console.log(chalk.green(`> Report at  http://localhost:${port}${publicPath}report.html`))
     }
-
   })
 } else {
   run(`vue-cli-service build ${args}`)
