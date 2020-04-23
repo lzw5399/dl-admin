@@ -1,12 +1,9 @@
 ## 状态
+| 应用 | 状态 |
+|-|-|
+|Vue|[![Build Status](https://dev.azure.com/Zhiwen-Lin/Codepie/_apis/build/status/dl-admin-vue?branchName=master)](https://dev.azure.com/Zhiwen-Lin/Codepie/_build/latest?definitionId=25&branchName=master)|
+|API|[![Build Status](https://dev.azure.com/Zhiwen-Lin/Codepie/_apis/build/status/dl-admin-api?branchName=master)](https://dev.azure.com/Zhiwen-Lin/Codepie/_build/latest?definitionId=24&branchName=master)|
 
-Vue:
-
-[![Build Status](https://dev.azure.com/Zhiwen-Lin/Codepie/_apis/build/status/dl-admin-vue?branchName=master)](https://dev.azure.com/Zhiwen-Lin/Codepie/_build/latest?definitionId=25&branchName=master)
-
-API: 
-
-[![Build Status](https://dev.azure.com/Zhiwen-Lin/Codepie/_apis/build/status/dl-admin-api?branchName=master)](https://dev.azure.com/Zhiwen-Lin/Codepie/_build/latest?definitionId=24&branchName=master)
 ## 前言
 - gl-admin是一个基于[ASP.NET Core 3.1](https://dotnet.microsoft.com/apps/aspnet)和[Vue.js](https://cn.vuejs.org)的后台管理系统, 其中前台的实现基于[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)搭建的
 - 目标是具备后台管理类系统的通用的基础功能
