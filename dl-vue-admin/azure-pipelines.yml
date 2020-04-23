@@ -12,12 +12,16 @@ trigger:
       - README.md
 
 variables:
-  - group: echo
+  - group: docker_hub_username_pwd # 引用变量组
 
-variables:
-    applicationName: dl-vue-admin
-    imageName: "$(dockerid)/$(applicationName):latest"
-    workingDirectory: $(applicationName)
+  - name: applicationName
+    value: dl-vue-admin
+
+  - name: imageName
+    value: "$(dockerid)/$(applicationName):latest"
+
+  - name: workingDirectory
+    value: $(applicationName)
 
 steps:
   - task: Bash@3
