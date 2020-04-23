@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Notice;
 using Doublelives.Service.Notices;
 using Doublelives.Service.WorkContextAccess;
@@ -28,7 +27,6 @@ namespace Doublelives.Api.Controllers
         {
             var result = _noticeService.List(title);
             var list = _mapper.Map<List<NoticeViewModel>>(result);
-            //var model = MockResponseHelper.GetMockModel<List<NoticeViewModel>>("noticelist");
 
             return Ok(list);
         }
