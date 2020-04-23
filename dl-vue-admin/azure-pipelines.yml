@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 trigger:
   branches:
@@ -12,14 +12,17 @@ trigger:
       - README.md
 
 variables:
-  applicationName: dl-vue-admin
-  imageName: '$(dockerid)/$(applicationName):latest'
-  workingDirectory: $(applicationName)
+  - group: echo
+
+variables:
+    applicationName: dl-vue-admin
+    imageName: "$(dockerid)/$(applicationName):latest"
+    workingDirectory: $(applicationName)
 
 steps:
   - task: Bash@3
     inputs:
-      targetType: 'inline'
+      targetType: "inline"
       script: |
         echo hhh
         echo $(imageName)
@@ -29,13 +32,13 @@ steps:
       npm install
       npm run build:prod
     workingDirectory: $(workingDirectory)
-    displayName: 'npm install and build'
+    displayName: "npm install and build"
 
   - script: docker build -f Dockerfile -t $(imageName) .
     workingDirectory: $(workingDirectory)
-    displayName: 'Docker build'
+    displayName: "Docker build"
 
   - script: |
       docker login -u $(dockerid) -p $(password)
       docker push $(imageName)
-    displayName: 'Push docker image'
+    displayName: "Push docker image"
