@@ -7,113 +7,27 @@ trigger:
       - master
   paths:
     exclude:
-      - .dockerignore
+      - dl-api-csharp/*
       - .gitignore
       - README.md
 
 variables:
-  applicationName: album
-  tagName: '$(Build.BuildNumber)'
-  imageName: '$(dockerid)/$(applicationName):$(tagName)'
+  applicationName: dl-vue-admin
+  imageName: '$(dockerid)/$(applicationName):latest'
+  workingDirectory: $(applicationName)
 
 steps:
-  - powershell: |
-      sudo chmod 777 transform_settings.ps1
-      ./transform_settings.ps1
-      echo transform_successfully
-    displayName: 'Transform settings'
-    env:
-      AppId: $(AppId)
-      SecretId: $(SecretId)
-      SecretKey: $(SecretKey)
-      Bucket: $(Bucket)
-      Region: $(Region)
-      DurationSecond: $(DurationSecond)
-      BaseUrl: $(BaseUrl)
-      SentryClientKey: $(SentryClientKey)
-      Album: $(Album)
-      JwtKey: $(JwtKey)
-      Issuer: $(Issuer)
-      Audience: $(Audience)
-      ExpireMinutes: $(ExpireMinutes)
-      Redis: $(Redis)
+  - script: |
+      npm install
+      npm run build:prod
+    workingDirectory: $(workingDirectory)
+    displayName: 'npm install and build'
 
   - script: docker build -f Dockerfile -t $(imageName) .
+    workingDirectory: $(workingDirectory)
     displayName: 'Docker build'
 
   - script: |
       docker login -u $(dockerid) -p $(password)
       docker push $(imageName)
     displayName: 'Push docker image'
-
-  - task: SSH@0
-    displayName: 'Run shell inline on remote machine'
-    inputs:
-      sshEndpoint: 'tencent_centos'
-      runOptions: inline
-
-      inline: |
-        # stop container
-        containers=$(docker ps -q --filter name=$(applicationName))
-        if test -n "$containers";
-        then
-        docker stop $(docker ps -q --filter name=$(applicationName)) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to stop container...'
-         exit $rc;
-        fi
-        fi
-        # remove container
-        containers1=$(docker ps -q -a --filter name=$(applicationName))
-        if test -n "$containers1";
-        then
-        docker rm $(docker ps -q -a --filter name=$(applicationName)) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove container...'
-         exit $rc;
-        fi
-        fi
-        # remove image
-        containers2=$(docker images | grep $(applicationName) | awk '{print $3}')
-        if test -n "$containers2";
-        then
-        docker rmi $(docker images | grep $(applicationName) | awk '{print $3}') >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove image...'
-         exit $rc;
-        fi
-        fi
-        # pull newest image
-        docker pull $(imageName) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to pull container...'
-         exit $rc;
-        fi
-        # run image
-        docker run -d -p 8091:80 --name $(applicationName) $(imageName) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to run container...'
-         exit $rc;
-        fi
-        # remove useless images
-        danglings=$(docker images -f "dangling=true" -q)
-        if test -n "$danglings";
-        then
-        docker rmi $(docker images -f "dangling=true" -q) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove danglings container...'
-         exit $rc;
-        fi
-        fi
