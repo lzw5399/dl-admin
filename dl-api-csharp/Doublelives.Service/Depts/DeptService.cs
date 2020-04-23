@@ -23,6 +23,7 @@ namespace Doublelives.Service.Depts
             _cacheManager = cacheManager;
         }
 
+        /// <summary>获取所有的部门树</summary>
         public List<DeptDto> List()
         {
             var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(), async entry =>
@@ -33,18 +34,16 @@ namespace Doublelives.Service.Depts
                 if (!depts.Any()) return dtos;
 
                 var allDeptNodes = depts.Select(it => DeptMapper.ToDeptDto(it)).ToList();
-                var dictDepts = allDeptNodes.ToDictionary(x => x.Id);
                 // 遍历所有的node
-                foreach (var pair in dictDepts)
+                foreach (var deptNode in allDeptNodes)
                 {
-                    var currentDept = pair.Value;
-                    var parentDept = allDeptNodes.FirstOrDefault(x => x.Id == currentDept.Pid);
-                    // 如果当前节点的父节点不为空，说明不是顶层节点
+                    var parentDept = allDeptNodes.FirstOrDefault(x => x.Id == deptNode.Pid);
+                    // 如果当前节点的父节点不为空,说明不是顶层节点
                     if (parentDept != null)
-                        parentDept.Children.Add(currentDept);
-                    // 为空， 说明当前节点为顶层节点
+                        parentDept.Children.Add(deptNode);
+                    // 为空,说明当前节点为顶层节点
                     else
-                        dtos.Add(currentDept);
+                        dtos.Add(deptNode);
                 }
 
                 return dtos;
