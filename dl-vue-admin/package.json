@@ -3,7 +3,6 @@
   "version": "4.1.0",
   "description": "A web-flash Admin with Element UI & axios & iconfont & permission control & lint",
   "author": "enilu<enilut@qq.com>",
-  "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",

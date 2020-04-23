@@ -3,8 +3,8 @@ const chalk = require('chalk')
 const config = require('../vue.config.js')
 const rawArgv = process.argv.slice(2)
 const args = rawArgv.join(' ')
-console.log('server ewewewewewew ' + args)
 
+// 为preview准备的脚本
 if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
   const report = rawArgv.includes('--report')
 
