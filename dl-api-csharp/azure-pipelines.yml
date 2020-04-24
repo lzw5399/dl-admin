@@ -24,7 +24,7 @@ variables:
 steps:
   - powershell: |
       sudo chmod 777 transform_settings.ps1
-      ./transform_settings.ps1
+      ./$(workingDirectory)/transform_settings.ps1
       echo transform_successfully
     env:
       cos_appId: $(cos_appId)
