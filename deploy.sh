@@ -1,3 +1,6 @@
+# 进入docker-compose.yml文件的文件夹，$1代表外部传入的参数
+cd $1
+
 # pull newest image
 sudo docker-compose pull >> /dev/null 2>&1
 if [[ $? != 0 ]]; then
