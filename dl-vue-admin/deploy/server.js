@@ -3,6 +3,7 @@ const serveStatic = require('serve-static')
 const app = express()
 
 app.disable('x-powered-by')
+app.disable('Cache-Control')
 
 app.use(require('connect-history-api-fallback')())
 
