@@ -6,7 +6,7 @@ namespace Doublelives.Api.Models
         {
             Code = 20000;
             Success = true;
-            Msg = "³É¹¦";
+            Msg = "success";
         }
 
         public int Code { get; set; }

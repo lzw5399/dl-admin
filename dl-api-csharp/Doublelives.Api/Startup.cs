@@ -46,7 +46,7 @@ namespace Doublelives.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "doublelives admin", Version = "v1.0" });
 
-                // 主页右上角显示Anthorize的图标
+                // 主页右上角显示Authorize的图标
                 c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
                 {
                     Name = ApiHeaders.TOKEN,
@@ -66,7 +66,7 @@ namespace Doublelives.Api
                 // 如果需要包含其他项目的comment，在具体项目的PropertyGroup下添加如下
                 //<GenerateDocumentationFile>true</GenerateDocumentationFile>
                 //<NoWarn>$(NoWarn);1591</NoWarn>
-                // 然后配置includec.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "项目的名称"));
+                // 然后配置c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "项目的名称"));
             });
 
             services.Configure<TencentCosOptions>(Configuration.GetSection("tencentCos"));
