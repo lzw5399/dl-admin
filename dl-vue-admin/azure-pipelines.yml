@@ -37,16 +37,14 @@ steps:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: dist
+      SourceFolder: dl-vue-admin/dist
       TargetFolder: '$(build.artifactstagingdirectory)'
-    workingDirectory: $(workingDirectory)
     displayName: 'Copy dist'
 
   - task: CopyFiles@2
     inputs:
-      Contents: Dockerfile
+      Contents: dl-vue-admin/Dockerfile
       TargetFolder: '$(build.artifactstagingdirectory)'
-    workingDirectory: $(workingDirectory)
     displayName: 'Copy Dockerfile'
 
   - task: PublishBuildArtifacts@1
