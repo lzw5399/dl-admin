@@ -43,6 +43,12 @@ steps:
 
   - task: CopyFiles@2
     inputs:
+      SourceFolder: dl-vue-admin/deploy
+      TargetFolder: '$(build.artifactstagingdirectory)/deploy'
+    displayName: 'Copy deploy/server.js'
+
+  - task: CopyFiles@2
+    inputs:
       SourceFolder: dl-vue-admin
       Contents: Dockerfile
       TargetFolder: '$(build.artifactstagingdirectory)'
