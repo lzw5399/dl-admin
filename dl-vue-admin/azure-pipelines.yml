@@ -58,6 +58,12 @@ steps:
       TargetFolder: '$(build.artifactstagingdirectory)'
     displayName: 'Copy docker-compose.yml'
 
+  - task: CopyFiles@2
+    inputs:
+      Contents: deploy.sh
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    displayName: 'Copy deploy.sh'
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
