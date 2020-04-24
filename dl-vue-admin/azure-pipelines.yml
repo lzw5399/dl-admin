@@ -43,7 +43,8 @@ steps:
 
   - task: CopyFiles@2
     inputs:
-      Contents: dl-vue-admin/Dockerfile
+      SourceFolder: dl-vue-admin
+      Contents: Dockerfile
       TargetFolder: '$(build.artifactstagingdirectory)'
     displayName: 'Copy Dockerfile'
 
