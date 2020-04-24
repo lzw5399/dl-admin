@@ -17,9 +17,6 @@ variables:
   - name: applicationName
     value: dl-vue-admin
 
-  - name: imageName
-    value: "$(dockerid)/$(applicationName):latest"
-
   - name: workingDirectory
     value: $(applicationName)
 
@@ -37,33 +34,31 @@ steps:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: dl-vue-admin/dist
+      SourceFolder: $(workingDirectory)/dist
       TargetFolder: '$(build.artifactstagingdirectory)/dist'
     displayName: 'Copy dist'
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: dl-vue-admin/deploy
+      SourceFolder: $(workingDirectory)/deploy
       TargetFolder: '$(build.artifactstagingdirectory)/deploy'
     displayName: 'Copy deploy/server.js'
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: dl-vue-admin
+      SourceFolder: $(workingDirectory)
       Contents: Dockerfile
       TargetFolder: '$(build.artifactstagingdirectory)'
     displayName: 'Copy Dockerfile'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(workingDirectory)
+      Contents: docker-compose.yml
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    displayName: 'Copy docker-compose.yml'
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
     displayName: 'Publish temp files'
-
-  # - script: docker build -f Dockerfile -t $(imageName) .
-  #   workingDirectory: $(workingDirectory)
-  #   displayName: "Docker build "
-
-  # - script: |
-  #     docker login -u $(dockerid) -p $(password)
-  #     docker push $(imageName)
-  #   displayName: "Push docker image"
