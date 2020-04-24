@@ -22,10 +22,11 @@ variables:
     value: Release
 
 steps:
-  - powershell: |
-      sudo chmod 777 transform_settings.ps1
-      ./$(workingDirectory)/transform_settings.ps1
-      echo transform_successfully
+  - task: PowerShell@2
+    inputs:
+      targetType: filePath
+      filePath: ./transform_settings.ps1
+      workingDirectory: $(workingDirectory)
     env:
       cos_appId: $(cos_appId)
       cos_secretId: $(cos_secretId)
