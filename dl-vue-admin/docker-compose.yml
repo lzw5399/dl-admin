@@ -9,4 +9,3 @@ services:
       - "8097:80"
     restart:
       on-failure
-      on-failure
