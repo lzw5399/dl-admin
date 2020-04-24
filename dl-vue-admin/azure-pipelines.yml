@@ -24,25 +24,41 @@ variables:
     value: $(applicationName)
 
 steps:
-  - task: Bash@3
-    inputs:
-      targetType: "inline"
-      script: |
-        echo hhh
-        echo $(imageName)
-        echo $(applicationName)
-
   - script: |
       npm install
       npm run build:prod
     workingDirectory: $(workingDirectory)
-    displayName: "npm install and build"
-
-  - script: docker build -f Dockerfile -t $(imageName) .
-    workingDirectory: $(workingDirectory)
-    displayName: "Docker build"
+    displayName: "npm install"
 
   - script: |
-      docker login -u $(dockerid) -p $(password)
-      docker push $(imageName)
-    displayName: "Push docker image"
+      npm run build:prod
+    workingDirectory: $(workingDirectory)
+    displayName: "npm build for prod"
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: dist
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    workingDirectory: $(workingDirectory)
+    displayName: 'Copy dist'
+
+  - task: CopyFiles@2
+    inputs:
+      Contents: Dockerfile
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    workingDirectory: $(workingDirectory)
+    displayName: 'Copy Dockerfile'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+    displayName: 'Publish temp files'
+
+  # - script: docker build -f Dockerfile -t $(imageName) .
+  #   workingDirectory: $(workingDirectory)
+  #   displayName: "Docker build"
+
+  # - script: |
+  #     docker login -u $(dockerid) -p $(password)
+  #     docker push $(imageName)
+  #   displayName: "Push docker image"

@@ -1,5 +1,6 @@
 version: '3.4'
 
+# 包含了前后端应用
 services:
   dl-vue-admin:
     image: lzw5399/dl-vue-admin:latest
