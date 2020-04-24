@@ -13,7 +13,7 @@ trigger:
       - README.md
 
 variables:
-  - group: docker_hub_username_pwd # 引用变量组
+  - group: dl-api-config # 引用配置的变量组
 
   - name: workingDirectory
     value: dl-api-csharp
