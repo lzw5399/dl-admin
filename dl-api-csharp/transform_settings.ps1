@@ -1,4 +1,4 @@
-$settings = get-content "dl-api-csharp/Doublelives.Api/appsettings.json" | convertfrom-json;
+$settings = get-content "Doublelives.Api/appsettings.json" | convertfrom-json;
 $settings.tencentCos.appId = $env:cos_appId;
 $settings.tencentCos.secretId = $env:cos_secretId;
 $settings.tencentCos.secretKey = $env:cos_secretKey;
@@ -15,4 +15,4 @@ $settings.jwt.expireMinutes = $env:jwt_expireMinutes;
 $settings.cache.enable = $env:cache_enable;
 $settings.cache.redisconn = $env:cache_redisconn;
 $settings.cache.defaultExpireMinutes = $env:cache_defaultExpireMinutes;
-set-content "dl-api-csharp/Doublelives.Api/appsettings.json" ($settings | convertto-json);
+set-content "Doublelives.Api/appsettings.json" ($settings | convertto-json);
