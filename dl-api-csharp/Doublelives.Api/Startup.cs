@@ -80,6 +80,7 @@ namespace Doublelives.Api
                 builder.AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
+                    .SetPreflightMaxAge(TimeSpan.FromDays(20))
                     .WithOrigins(Configuration["cors:httpOrigin"], Configuration["cors:httpsOrigin"]);
             }));
 
