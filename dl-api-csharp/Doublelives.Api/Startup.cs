@@ -81,11 +81,10 @@ namespace Doublelives.Api
             services.AddCors(options => options.AddPolicy("AllowCORS", builder =>
             {
                 builder.AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .WithOrigins("http://123.207.67.80:8097")
-                .WithOrigins("https://admin.doublilives.cn")
-                .SetPreflightMaxAge(TimeSpan.FromDays(1));
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithOrigins("http://123.207.67.80:8097")
+                    .WithOrigins("https://admin.doublilives.cn");
             }));
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
