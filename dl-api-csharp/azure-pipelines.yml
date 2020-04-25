@@ -44,6 +44,8 @@ steps:
       cache_enable: $(cache_enable)
       cache_redisconn: $(cache_redisconn)
       cache_defaultExpireMinutes: $(cache_defaultExpireMinutes)
+      cors_httpsOrigin: $(cors_httpsOrigin)
+      cors_httpOrigin: $(cors_httpOrigin)
     displayName: 'transform settings'
 
   - task: DotNetCoreCLI@2
