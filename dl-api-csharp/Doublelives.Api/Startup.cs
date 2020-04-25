@@ -75,14 +75,13 @@ namespace Doublelives.Api
 
             services.AddAutoMapper(c => { c.AddProfile(new ViewModelProfile()); }, typeof(Startup));
 
-            // services.AddCors(options => options.AddPolicy("AllowCORS", builder =>
-            // {
-            //     builder.AllowAnyMethod()
-            //         .AllowAnyHeader()
-            //         .AllowCredentials()
-            //         .SetPreflightMaxAge(TimeSpan.FromSeconds(1728000))
-            //         .WithOrigins(Configuration["cors:httpOrigin"], Configuration["cors:httpsOrigin"], "http://admin.doublelives.cn");
-            // }));
+            services.AddCors(options => options.AddPolicy("AllowCORS", builder =>
+            {
+                builder.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .SetPreflightMaxAge(TimeSpan.FromSeconds(1728000));
+            }));
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services
@@ -127,7 +126,7 @@ namespace Doublelives.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            //app.UseCors("AllowCORS");
+            app.UseCors("AllowCORS");
 
             app.UseRouting();
             app.UseAuthentication();
