@@ -81,7 +81,7 @@ namespace Doublelives.Api
                     .AllowAnyHeader()
                     .AllowCredentials()
                     .SetPreflightMaxAge(TimeSpan.FromSeconds(1728000))
-                    .WithOrigins(Configuration["cors:httpOrigin"], Configuration["cors:httpsOrigin"]);
+                    .WithOrigins(Configuration["cors:httpOrigin"], Configuration["cors:httpsOrigin"], "http://admin.doublelives.cn");
             }));
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
