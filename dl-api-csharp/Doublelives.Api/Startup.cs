@@ -78,12 +78,13 @@ namespace Doublelives.Api
                 c.AddProfile(new ViewModelProfile());
             }, typeof(Startup));
 
-            services.AddCors(options => options.AddPolicy("AllowAll", builder =>
+            services.AddCors(options => options.AddPolicy("AllowCORS", builder =>
             {
                 builder.AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowAnyOrigin()
+                .WithOrigins("http://123.207.67.80:8097")
+                .WithOrigins("https://admin.doublilives.cn")
                 .SetPreflightMaxAge(TimeSpan.FromDays(1));
             }));
 
@@ -133,7 +134,7 @@ namespace Doublelives.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseCors("AllowAll");
+            app.UseCors("AllowCORS");
 
             app.UseRouting();
             app.UseAuthentication();
