@@ -44,7 +44,7 @@ namespace Doublelives.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "doublelives admin", Version = "v1.0" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "doublelives admin", Version = "v1.0"});
 
                 // 主页右上角显示Authorize的图标
                 c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
@@ -73,18 +73,14 @@ namespace Doublelives.Api
             services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
             services.Configure<CacheOptions>(Configuration.GetSection("cache"));
 
-            services.AddAutoMapper(c =>
-            {
-                c.AddProfile(new ViewModelProfile());
-            }, typeof(Startup));
+            services.AddAutoMapper(c => { c.AddProfile(new ViewModelProfile()); }, typeof(Startup));
 
             services.AddCors(options => options.AddPolicy("AllowCORS", builder =>
             {
                 builder.AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins("http://123.207.67.80:8097")
-                    .WithOrigins("https://admin.doublilives.cn");
+                    .WithOrigins(Configuration["cors:httpOrigin"], Configuration["cors:httpsOrigin"]);
             }));
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -92,13 +88,13 @@ namespace Doublelives.Api
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
+                    var key = Encoding.UTF8.GetBytes(Configuration["jwt:key"]);
                     options.TokenValidationParameters.ValidateIssuer = true;
                     options.TokenValidationParameters.ValidateAudience = true;
                     options.TokenValidationParameters.ValidateIssuerSigningKey = true;
                     options.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(key);
-                    options.TokenValidationParameters.ValidAudience = Configuration["Jwt:Audience"];
-                    options.TokenValidationParameters.ValidIssuer = Configuration["Jwt:Issuer"];
+                    options.TokenValidationParameters.ValidAudience = Configuration["jwt:audience"];
+                    options.TokenValidationParameters.ValidIssuer = Configuration["jwt:issuer"];
                     options.TokenValidationParameters.NameClaimType = JwtClaimTypes.Name;
                     options.TokenValidationParameters.RoleClaimType = JwtClaimTypes.Role;
                     options.Events = new JwtBearerEvents
@@ -116,10 +112,7 @@ namespace Doublelives.Api
                 });
 
             services
-                .AddControllers(options =>
-                {
-                    options.Filters.Add(typeof(GlobalExceptionFilter));
-                })
+                .AddControllers(options => { options.Filters.Add(typeof(GlobalExceptionFilter)); })
                 .AddNewtonsoftJson(options =>
                 {
                     // 配置string转enum
@@ -153,14 +146,11 @@ namespace Doublelives.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "doublelives admin");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "dl admin");
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

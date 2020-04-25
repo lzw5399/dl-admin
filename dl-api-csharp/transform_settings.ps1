@@ -15,4 +15,6 @@ $settings.jwt.expireMinutes = $env:jwt_expireMinutes;
 $settings.cache.enable = $env:cache_enable;
 $settings.cache.redisconn = $env:cache_redisconn;
 $settings.cache.defaultExpireMinutes = $env:cache_defaultExpireMinutes;
+$settings.cors.httpOrigin = $env:cors_httpOrigin;
+$settings.cors.httpsOrigin = $env:cors_httpsOrigin;
 set-content "Doublelives.Api/appsettings.json" ($settings | convertto-json);
