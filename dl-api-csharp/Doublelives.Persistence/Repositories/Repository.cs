@@ -1,6 +1,11 @@
 ﻿using Doublelives.Domain.Infrastructure;
+using Doublelives.Infrastructure.Extensions;
+using Doublelives.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Doublelives.Persistence
@@ -55,6 +60,78 @@ namespace Doublelives.Persistence
         public virtual async Task InsertAsync(TEntity entity)
         {
             await Entities.AddAsync(entity);
+        }
+
+        public PagedModel<TEntity> Paged<TProperty>(
+            int pageNumber,
+            int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression,
+            Expression<Func<TEntity, TProperty>> orderByExpression,
+            bool ascending = false)
+        {
+            var total = Entities.Count();
+            if (total == 0) return new PagedModel<TEntity>() { PageSize = pageSize };
+
+            if (pageNumber <= 0) pageNumber = 1;
+            if (pageSize <= 0) pageSize = 10;
+
+            var query = Entities.Where(whereExpression);
+            query = ascending ? query.OrderBy(orderByExpression) : query.OrderByDescending(orderByExpression);
+            var data = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArray();
+
+            return new PagedModel<TEntity>()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = total,
+                Data = data,
+                Ascending = ascending,
+                Sort = orderByExpression.GetMemberName()
+            };
+        }
+
+        public async Task<PagedModel<TEntity>> PagedAsync<TProperty>(
+            int pageNumber,
+            int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression,
+            Expression<Func<TEntity, TProperty>> orderByExpression,
+            bool ascending = false)
+        {
+            var total = await Entities.CountAsync();
+            if (total == 0) return new PagedModel<TEntity>() { PageSize = pageSize };
+
+            if (pageNumber <= 0) pageNumber = 1;
+            if (pageSize <= 0) pageSize = 10;
+
+            var query = Entities.Where(whereExpression);
+            query = ascending ? query.OrderBy(orderByExpression) : query.OrderByDescending(orderByExpression);
+            var data = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+
+            return new PagedModel<TEntity>()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = total,
+                Data = data,
+                Ascending = ascending,
+                Sort = orderByExpression.GetMemberName()
+            };
+        }
+
+        public IEnumerable<TEntity> GetByIds(int[] ids)
+        {
+            return Entities.Where(it => ids.Contains(it.Id)).ToList();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetByIdsAsync(int[] ids)
+        {
+            return await Entities.Where(it => ids.Contains(it.Id)).ToListAsync();
         }
     }
 }

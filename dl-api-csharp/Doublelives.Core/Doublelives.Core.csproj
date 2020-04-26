@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Doublelives.Infrastructure\Doublelives.Infrastructure.csproj" />
     <ProjectReference Include="..\Doublelives.Persistence\Doublelives.Persistence.csproj" />
-    <ProjectReference Include="..\Doublelives.Query\Doublelives.Query.csproj" />
     <ProjectReference Include="..\Doublelives.Service\Doublelives.Service.csproj" />
   </ItemGroup>
 

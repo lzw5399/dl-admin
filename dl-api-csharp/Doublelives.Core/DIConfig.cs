@@ -4,6 +4,7 @@ using Doublelives.Service.Depts;
 using Doublelives.Service.Menus;
 using Doublelives.Service.Notices;
 using Doublelives.Service.Pictures;
+using Doublelives.Service.Roles;
 using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -37,6 +38,7 @@ namespace Doublelives.Core
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<INoticeService, NoticeService>();
             services.AddScoped<IDeptService, DeptService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
 
         private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)

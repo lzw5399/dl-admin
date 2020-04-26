@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Doublelives.Domain\Doublelives.Domain.csproj" />
+    <ProjectReference Include="..\Doublelives.Infrastructure\Doublelives.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

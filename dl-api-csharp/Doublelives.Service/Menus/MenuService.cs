@@ -20,14 +20,14 @@ namespace Doublelives.Service.Menus
         }
 
         /// <summary>获取当前用户拥有的角色,所对应的权限路由</summary>
-        public List<RouterDto> GetMenuRouterList(long userid)
+        public List<RouterDto> GetMenuRouterList(int userid)
         {
             var user = _userService.GetById(userid).Result;
             if (user == null) throw new UserNotFoundException();
 
             if (string.IsNullOrEmpty(user.Roleid)) return new List<RouterDto>();
 
-            var ids = user.Roleid.Split(',').Select(id => long.Parse(id)).ToList();
+            var ids = user.Roleid.Split(',').Select(id => int.Parse(id)).ToList();
             var topMenus = _unitOfWork.MenuRepository.GetTopLevelMenusByRoleIds(ids);
 
             var dtos = new List<RouterDto>();

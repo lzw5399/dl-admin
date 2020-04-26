@@ -7,7 +7,7 @@ import router from '@/router'
 // create an axios instance
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  //withCredentials: true, // true: send cookies when cross-domain requests
+  // withCredentials: true, // true: send cookies when cross-domain requests
   // timeout: 25000, // request timeout,
   headers: {
     'Content-Type': 'application/json'
@@ -40,6 +40,7 @@ instance.interceptors.response.use(
     }
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
+      debugger
       Message({
         message: res.msg || 'error',
         type: 'error',

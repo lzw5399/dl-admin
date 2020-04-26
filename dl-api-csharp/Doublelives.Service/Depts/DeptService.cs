@@ -1,4 +1,5 @@
-﻿using Doublelives.Domain.Sys.Dto;
+﻿using Doublelives.Domain.Sys;
+using Doublelives.Domain.Sys.Dto;
 using Doublelives.Infrastructure.Cache;
 using Doublelives.Infrastructure.Helpers;
 using Doublelives.Persistence;
@@ -52,6 +53,23 @@ namespace Doublelives.Service.Depts
             return result;
         }
 
-        private string GetDeptCacheKey() => CacheHelper.ToCacheKey(CacheKeyPrefix.DEPT_CACHE_PREFIX, "all");
+        public SysDept GetById(int id)
+        {
+            var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(id), async entry =>
+            {
+                return await _unitOfWork.DeptRepository.GetByIdAsync(id);
+            }).Result;
+
+            return result;
+        }
+
+        private string GetDeptCacheKey(int? id = null)
+        {
+            // 代表所有的
+            if (!id.HasValue) return CacheHelper.ToCacheKey(CacheKeyPrefix.DEPT_CACHE_PREFIX, "all");
+
+            //value代表id, 单独某个
+            return CacheHelper.ToCacheKey(CacheKeyPrefix.DEPT_CACHE_PREFIX, id);
+        }
     }
 }

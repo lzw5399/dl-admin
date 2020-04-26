@@ -1,6 +1,8 @@
 ﻿using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
+using Doublelives.Infrastructure.Extensions;
 using Doublelives.Shared.Enum;
+using Doublelives.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,17 +37,49 @@ namespace Doublelives.Service.Mappers
                     ModifyBy = user.ModifyBy,
                     ModifyTime = user.ModifyTime,
                     Name = user.Name,
-                    Password = user.Password,
                     Phone = user.Phone,
                     Roleid = user.Roleid,
                     Roles = roles.Select(it => it.Name).ToList(),
-                    Salt = user.Salt,
-                    Status = (int)(user.Status ?? AccountStatus.InActive)
+                    Status = (int)(user.Status ?? AccountStatus.InActive),
+                    DeptName = dept.Simplename,
+                    RoleName = string.Join(',', roles.Select(it => it.Name)),
                 },
                 Permissions = permissions
             };
 
             return dto;
+        }
+
+        public static PagedModel<AccountProfileDto> ToAccountProfileDto(PagedModel<SysUser> pagedModel)
+        {
+            var model = new PagedModel<AccountProfileDto>
+            {
+                Ascending = pagedModel.Ascending,
+                PageNumber = pagedModel.PageNumber,
+                PageSize = pagedModel.PageSize,
+                Sort = pagedModel.Sort,
+                TotalCount = pagedModel.TotalCount,
+                Data = pagedModel.Data.Select(it => new AccountProfileDto
+                {
+                    Id = it.Id,
+                    Account = it.Account,
+                    Avatar = it.Avatar,
+                    Birthday = it.Birthday,
+                    Email = it.Email,
+                    Name = it.Name,
+                    Phone = it.Phone,
+                    ModifyBy = it.ModifyBy,
+                    ModifyTime = it.ModifyTime,
+                    CreateBy = it.CreateBy,
+                    CreateTime = it.CreateTime,
+                    Sex = (int)it.Sex,
+                    Version = it.Version,
+                    Status = (int)(it.Status ?? AccountStatus.InActive),
+                    Deptid = it.Deptid.Value(),
+                    Roleid = it.Roleid
+                }).ToList()
+            };
+            return model;
         }
     }
 }

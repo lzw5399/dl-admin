@@ -7,6 +7,6 @@ namespace Doublelives.Service.Menus
 {
     public interface IMenuService
     {
-        List<RouterDto> GetMenuRouterList(long userid);
+        List<RouterDto> GetMenuRouterList(int userid);
     }
 }

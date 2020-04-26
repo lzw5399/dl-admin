@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Doublelives.Shared.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace Doublelives.Domain.Sys.Dto
@@ -49,7 +50,7 @@ namespace Doublelives.Domain.Sys.Dto
         /// <summary>
         /// 部门id
         /// </summary>
-        public long Deptid { get; set; }
+        public int Deptid { get; set; }
 
         /// <summary>
         /// 账号状态 1激活 2停用
@@ -59,26 +60,26 @@ namespace Doublelives.Domain.Sys.Dto
         /// <summary>
         /// 修改的版本
         /// </summary>
-        public long? Version { get; set; }
+        public int? Version { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime? CreateTime { get; set; }
 
         /// <summary>
         /// 创建人的id
         /// </summary>
-        public long? CreateBy { get; set; }
+        public int? CreateBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
 
         /// <summary>
         /// 修改者的id
         /// </summary>
-        public long? ModifyBy { get; set; }
+        public int? ModifyBy { get; set; }
 
         /// <summary>
         /// 部门名
@@ -89,5 +90,13 @@ namespace Doublelives.Domain.Sys.Dto
         /// 角色名的数据 e.g.["超级管理员", "网站管理员"]
         /// </summary>
         public List<string> Roles { get; set; }
+
+        public string DeptName { get; set; }
+
+        public string RoleName { get; set; }
+
+        public string StatusName => Status == (int)AccountStatus.Active ? "启用" : "禁用";
+
+        public string SexName => Sex.HasValue ? (Sex.Value == (int)Gender.Male ? "男" : "女") : string.Empty;
     }
 }

@@ -27,16 +27,10 @@ namespace Doublelives.Api.Controllers
         [HttpGet("list")]
         public IActionResult List()
         {
-            Stopwatch sw1 = new Stopwatch();
-            sw1.Start();
             var dtos = _deptService.List();
-            sw1.Stop();
-            Stopwatch sw2 = new Stopwatch();
-            sw2.Start();
             var model = _mapper.Map<List<DeptViewModel>>(dtos);
-            sw2.Stop();
 
-            return Ok(sw1.ElapsedMilliseconds + "|" + sw2.ElapsedMilliseconds);
+            return Ok(model);
         }
     }
 }

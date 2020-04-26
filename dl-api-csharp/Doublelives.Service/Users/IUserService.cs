@@ -1,6 +1,6 @@
 ﻿using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
-using Doublelives.Domain.Users;
+using Doublelives.Shared.Models;
 using System.Threading.Tasks;
 
 namespace Doublelives.Service.Users
@@ -20,5 +20,7 @@ namespace Doublelives.Service.Users
         void Delete(long id);
 
         AccountInfoDto GetInfo(long userid);
+
+        PagedModel<AccountProfileDto> GetPagedList(UserSearchDto userSearchDto);
     }
 }

@@ -14,7 +14,7 @@ namespace Doublelives.Persistence.Repositories
             _context = context;
         }
 
-        public List<SysMenu> GetTopLevelMenusByRoleIds(List<long> roleIds)
+        public List<SysMenu> GetTopLevelMenusByRoleIds(List<int> roleIds)
         {
             var menus = _context.Set<SysRelation>()
                 .Where(it => roleIds.Contains(it.Roleid))
@@ -44,7 +44,7 @@ namespace Doublelives.Persistence.Repositories
             return menus;
         }
 
-        public List<string> GetPermissionsByRoleIds(List<long> roleIds, bool activeOnly = true)
+        public List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
         {
             List<string> permissions;
             if (activeOnly)
