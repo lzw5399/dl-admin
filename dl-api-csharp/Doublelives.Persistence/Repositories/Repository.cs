@@ -69,13 +69,14 @@ namespace Doublelives.Persistence
             Expression<Func<TEntity, TProperty>> orderByExpression,
             bool ascending = false)
         {
-            var total = Entities.Count();
+            var query = Entities.Where(whereExpression);
+
+            var total = query.Count();
             if (total == 0) return new PagedModel<TEntity>() { PageSize = pageSize };
 
             if (pageNumber <= 0) pageNumber = 1;
             if (pageSize <= 0) pageSize = 10;
 
-            var query = Entities.Where(whereExpression);
             query = ascending ? query.OrderBy(orderByExpression) : query.OrderByDescending(orderByExpression);
             var data = query
                 .Skip((pageNumber - 1) * pageSize)
