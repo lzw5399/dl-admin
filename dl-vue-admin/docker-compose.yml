@@ -6,6 +6,6 @@ services:
     image: lzw5399/dl-vue-admin:latest
     container_name: dl-vue-admin
     ports:
-      - "8097:80"
+      - "8097:8090"
     restart:
       on-failure

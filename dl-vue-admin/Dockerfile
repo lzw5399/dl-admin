@@ -14,6 +14,6 @@ RUN npm install express --save
 
 RUN npm install connect-history-api-fallback --save
 
-EXPOSE 80
+EXPOSE 8090
 
 ENTRYPOINT ["node", "server.js"]
