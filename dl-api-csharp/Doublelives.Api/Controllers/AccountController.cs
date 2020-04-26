@@ -54,6 +54,7 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>注销</summary>
+        [AllowAnonymous]
         [HttpPost("logout")]
         public IActionResult Logout()
         {
