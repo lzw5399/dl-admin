@@ -5,6 +5,7 @@ using Doublelives.Service.Menus;
 using Doublelives.Service.Notices;
 using Doublelives.Service.Pictures;
 using Doublelives.Service.Roles;
+using Doublelives.Service.Tasks;
 using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
@@ -39,6 +40,7 @@ namespace Doublelives.Core
             services.AddScoped<INoticeService, NoticeService>();
             services.AddScoped<IDeptService, DeptService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITaskService, TaskService>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)

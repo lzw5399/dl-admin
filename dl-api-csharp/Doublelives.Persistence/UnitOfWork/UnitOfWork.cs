@@ -18,6 +18,7 @@ namespace Doublelives.Persistence
             DeptRepository = new Repository<SysDept>(albumDbContext);
             NoticeRepository = new Repository<SysNotice>(albumDbContext);
             MenuRepository = new MenuRepository(albumDbContext);
+            TaskLogRepository = new Repository<SysTaskLog>(albumDbContext);
         }
 
         public IRepository<Picture> PictureRepository { get; private set; }
@@ -29,6 +30,8 @@ namespace Doublelives.Persistence
         public IRepository<SysDept> DeptRepository { get; private set; }
 
         public IRepository<SysNotice> NoticeRepository { get; private set; }
+
+        public IRepository<SysTaskLog> TaskLogRepository { get; private set; }
 
         public IMenuRepository MenuRepository { get; private set; }
 
