@@ -59,5 +59,14 @@ namespace Doublelives.Api.Controllers
 
             return Ok("");
         }
+
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        [HttpPost]
+        public IActionResult Add(UserUpdateRequest request)
+        {
+            return Ok();
+        }
     }
 }
