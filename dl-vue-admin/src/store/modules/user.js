@@ -84,6 +84,7 @@ const actions = {
         removeToken()
         resetRouter()
         resolve()
+        localStorage.removeItem('showedNotice')
       }).catch(error => {
         reject(error)
       })
