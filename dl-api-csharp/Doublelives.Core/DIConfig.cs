@@ -8,12 +8,13 @@ using Doublelives.Service.Roles;
 using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 using System;
 using System.IO;
 
@@ -24,7 +25,6 @@ namespace Doublelives.Core
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
             ConfigureServices(services, configuration);
-            ConfigureQueries(services, configuration);
             ConfigurePersistence(services, configuration);
             ConfigureDistributedCache(services, configuration);
             ConfigureWorkContext(services);
@@ -41,32 +41,20 @@ namespace Doublelives.Core
             services.AddScoped<IRoleService, RoleService>();
         }
 
-        private static void ConfigureQueries(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
         {
-            var conn = SqliteConn(configuration.GetConnectionString("dl"));
             services.AddDbContext<DlAdminDbContext>(
                 options =>
                 {
                     options
-                        .UseSqlite(conn,
+                        .UseMySql(configuration.GetConnectionString("dl"),
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
+                                it.ServerVersion(new ServerVersion(new Version(8, 0, 19), ServerType.MySql));
                             });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-        }
-
-        private static string SqliteConn(string originConn)
-        {
-            var builder = new SqliteConnectionStringBuilder(originConn);
-            builder.DataSource = Path.Combine(AppContext.BaseDirectory, "SqliteDatabase", builder.DataSource);
-
-            return builder.ToString();
         }
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)

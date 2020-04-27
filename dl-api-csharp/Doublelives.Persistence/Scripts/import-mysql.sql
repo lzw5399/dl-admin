@@ -119,8 +119,8 @@ INSERT INTO `sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `mod
 -- ----------------------------
 -- Records of sys_login_log
 -- ----------------------------
-INSERT INTO `sys_login_log` (`id`, `logname`, `userid`, `create_time`, `succeed`, `message`, `ip`) VALUES ('71', '登录日志', '1', '2019-05-10 13:17:43', '成功', null, '127.0.0.1');
-INSERT INTO `sys_login_log` (`id`, `logname`, `userid`, `create_time`, `succeed`, `message`, `ip`) VALUES ('72', '登录日志', '1', '2019-05-12 13:36:56', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` (`id`, `logname`, `userid`, `create_time`, `succeed`, `message`, `ip`) VALUES ('71', '登录日志', '1', '2019-05-10 13:17:43', '1', null, '127.0.0.1');
+INSERT INTO `sys_login_log` (`id`, `logname`, `userid`, `create_time`, `succeed`, `message`, `ip`) VALUES ('72', '登录日志', '1', '2019-05-12 13:36:56', '1', null, '127.0.0.1');
 
 -- ----------------------------
 -- Records of sys_menu
@@ -204,10 +204,10 @@ INSERT INTO `sys_notice` (`id`, `title`, `type`, `content`, `create_time`, `crea
 -- ----------------------------
 -- Records of sys_operation_log
 -- ----------------------------
-INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('1', '业务日志', '添加参数', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-05-10 13:22:49', '成功', '参数名称=system.app.name');
-INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('2', '业务日志', '修改参数', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-06-10 13:31:09', '成功', '参数名称=system.app.name');
-INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('3', '业务日志', '编辑文章', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-07-10 13:22:49', '成功', '参数名称=system.app.name');
-INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('4', '业务日志', '编辑栏目', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-08-10 13:31:09', '成功', '参数名称=system.app.name');
+INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('1', '业务日志', '添加参数', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-05-10 13:22:49', '1', '参数名称=system.app.name');
+INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('2', '业务日志', '修改参数', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-06-10 13:31:09', '1', '参数名称=system.app.name');
+INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('3', '业务日志', '编辑文章', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-07-10 13:22:49', '1', '参数名称=system.app.name');
+INSERT INTO `sys_operation_log` (`id`, `logtype`, `logname`, `userid`, `classname`, `method`, `create_time`, `succeed`, `message`) VALUES ('4', '业务日志', '编辑栏目', '1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', 'upload', '2019-08-10 13:31:09', '1', '参数名称=system.app.name');
 
 -- ----------------------------
 -- Records of sys_relation

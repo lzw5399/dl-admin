@@ -1,4 +1,5 @@
 ﻿using Doublelives.Domain.Infrastructure;
+using Doublelives.Shared.Enum;
 
 namespace Doublelives.Domain.Messages
 {
@@ -8,10 +9,10 @@ namespace Doublelives.Domain.Messages
 
         public string Receiver { get; set; }
 
-        public string State { get; set; }
+        public MessageStatus State { get; set; }
 
         public string TplCode { get; set; }
 
-        public string Type { get; set; }
+        public MessageType Type { get; set; }
     }
 }

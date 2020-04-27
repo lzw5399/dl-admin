@@ -1,4 +1,5 @@
 ﻿using Doublelives.Domain.Infrastructure;
+using Doublelives.Shared.Enum;
 
 namespace Doublelives.Domain.Messages
 {
@@ -14,7 +15,7 @@ namespace Doublelives.Domain.Messages
 
         public string Title { get; set; }
 
-        public string Type { get; set; }
+        public MessageType Type { get; set; }
 
         public virtual MessageSender IdMessageSenderNavigation { get; set; }
     }

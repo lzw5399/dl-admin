@@ -8,15 +8,20 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<SysRelation> builder)
         {
-            builder.ToTable("sys_relation");
+            builder
+                .HasComment("角色和菜单的多对多中间表")
+                .ToTable("sys_relation");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
-            builder.Property(e => e.Menuid).HasColumnName("menuid");
+            builder.Property(e => e.Menuid)
+                .HasColumnName("menuid");
 
-            builder.Property(e => e.Roleid).HasColumnName("roleid");
+            builder.Property(e => e.Roleid)
+                .HasColumnName("roleid");
         }
     }
 }
