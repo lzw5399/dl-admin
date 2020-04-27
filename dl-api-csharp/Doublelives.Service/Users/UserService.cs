@@ -187,7 +187,7 @@ namespace Doublelives.Service.Users
             user.Deptid = request.Deptid;
             user.Birthday = request.Birthday;
             user.Status = request.Status;
-            user.Version = user.Version.HasValue ? user.Version.Value + 1 : 1;
+            user.Version = user.Version + 1 ?? 1;
             user.ModifyBy = request.ModifyBy;
             user.ModifyTime = DateTime.Now;
             _unitOfWork.UserRepository.Update(user);
