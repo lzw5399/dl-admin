@@ -8,29 +8,43 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<SysNotice> builder)
         {
-            builder.ToTable("sys_notice");
+            builder
+                .HasComment("欢迎弹窗")
+                .ToTable("sys_notice");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
             builder.Property(e => e.Content)
-                .HasColumnName("content")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasComment("内容")
+                .HasColumnName("content");
 
-            builder.Property(e => e.CreateBy).HasColumnName("create_by");
+            builder.Property(e => e.CreateBy)
+                .HasComment("创建者")
+                .HasColumnName("create_by");
 
-            builder.Property(e => e.CreateTime).HasColumnName("create_time");
+            builder.Property(e => e.CreateTime)
+                .HasComment("创建时间")
+                .HasColumnName("create_time");
 
-            builder.Property(e => e.ModifyBy).HasColumnName("modify_by");
+            builder.Property(e => e.ModifyBy)
+                .HasComment("最后修改者")
+                .HasColumnName("modify_by");
 
-            builder.Property(e => e.ModifyTime).HasColumnName("modify_time");
+            builder.Property(e => e.ModifyTime)
+                .HasComment("最后修改时间")
+                .HasColumnName("modify_time");
 
             builder.Property(e => e.Title)
-                .HasColumnName("title")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasComment("标题")
+                .HasColumnName("title");
 
-            builder.Property(e => e.Type).HasColumnName("type");
+            builder.Property(e => e.Type)
+                .HasColumnName("type");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Doublelives.Domain.Sys
 
         public string Message { get; set; }
 
-        public string Succeed { get; set; }
+        public bool Succeed { get; set; }
 
         public int? Userid { get; set; }
     }

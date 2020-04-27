@@ -8,31 +8,45 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<MessageSender> builder)
         {
-            builder.ToTable("message_sender");
+            builder
+                .HasComment("消息发送者")
+                .ToTable("message_sender");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
             builder.Property(e => e.ClassName)
-                .HasColumnName("class_name")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("发送类")
+                .HasColumnName("class_name");
 
-            builder.Property(e => e.CreateBy).HasColumnName("create_by");
+            builder.Property(e => e.CreateBy)
+                .HasComment("创建者")
+                .HasColumnName("create_by");
 
-            builder.Property(e => e.CreateTime).HasColumnName("create_time");
+            builder.Property(e => e.CreateTime)
+                .HasComment("创建时间")
+                .HasColumnName("create_time");
 
-            builder.Property(e => e.ModifyBy).HasColumnName("modify_by");
+            builder.Property(e => e.ModifyBy)
+                .HasComment("最后修改者")
+                .HasColumnName("modify_by");
 
-            builder.Property(e => e.ModifyTime).HasColumnName("modify_time");
+            builder.Property(e => e.ModifyTime)
+                .HasComment("最后修改时间")
+                .HasColumnName("modify_time");
 
             builder.Property(e => e.Name)
-                .HasColumnName("name")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("名称")
+                .HasColumnName("name");
 
             builder.Property(e => e.TplCode)
-                .HasColumnName("tpl_code")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("运营商模板编号")
+                .HasColumnName("tpl_code");
         }
     }
 }

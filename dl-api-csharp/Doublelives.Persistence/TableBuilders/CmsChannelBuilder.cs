@@ -8,27 +8,40 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<CmsChannel> builder)
         {
-            builder.ToTable("cms_channel");
-
+            builder
+                .HasComment("文章栏目")
+                .ToTable("cms_channel");
+            
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
             builder.Property(e => e.Code)
-                .HasColumnName("code")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("编码")
+                .HasColumnName("code");
 
-            builder.Property(e => e.CreateBy).HasColumnName("create_by");
+            builder.Property(e => e.CreateBy)
+                .HasComment("创建者")
+                .HasColumnName("create_by");
 
-            builder.Property(e => e.CreateTime).HasColumnName("create_time");
+            builder.Property(e => e.CreateTime)
+                .HasComment("创建时间")
+                .HasColumnName("create_time");
 
-            builder.Property(e => e.ModifyBy).HasColumnName("modify_by");
+            builder.Property(e => e.ModifyBy)
+                .HasComment("最后修改者")
+                .HasColumnName("modify_by");
 
-            builder.Property(e => e.ModifyTime).HasColumnName("modify_time");
+            builder.Property(e => e.ModifyTime)
+                .HasComment("最后修改时间")
+                .HasColumnName("modify_time");
 
             builder.Property(e => e.Name)
-                .HasColumnName("name")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("名称")
+                .HasColumnName("name");
         }
     }
 

@@ -8,35 +8,50 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<CmsContacts> builder)
         {
-            builder.ToTable("cms_contacts");
+            builder
+                .HasComment("邀约信息")
+                .ToTable("cms_contacts");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
-            builder.Property(e => e.CreateBy).HasColumnName("create_by");
+            builder.Property(e => e.CreateBy)
+                .HasComment("创建者")
+                .HasColumnName("create_by");
 
-            builder.Property(e => e.CreateTime).HasColumnName("create_time");
+            builder.Property(e => e.CreateTime)
+                .HasComment("创建时间")
+                .HasColumnName("create_time");
 
             builder.Property(e => e.Email)
-                .HasColumnName("email")
-                .HasColumnType("text(32)");
+                .HasMaxLength(32)
+                .HasComment("邮箱")
+                .HasColumnName("email");
 
             builder.Property(e => e.Mobile)
-                .HasColumnName("mobile")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("联系电话")
+                .HasColumnName("mobile");
 
-            builder.Property(e => e.ModifyBy).HasColumnName("modify_by");
+            builder.Property(e => e.ModifyBy)
+                .HasComment("最后修改者")
+                .HasColumnName("modify_by");
 
-            builder.Property(e => e.ModifyTime).HasColumnName("modify_time");
+            builder.Property(e => e.ModifyTime)
+                .HasComment("最后修改时间")
+                .HasColumnName("modify_time");
 
             builder.Property(e => e.Remark)
-                .HasColumnName("remark")
-                .HasColumnType("text(128)");
+                .HasMaxLength(128)
+                .HasComment("备注")
+                .HasColumnName("remark");
 
             builder.Property(e => e.UserName)
-                .HasColumnName("user_name")
-                .HasColumnType("text(64)");
+                .HasMaxLength(64)
+                .HasComment("邀约人名称")
+                .HasColumnName("user_name");
         }
     }
 }

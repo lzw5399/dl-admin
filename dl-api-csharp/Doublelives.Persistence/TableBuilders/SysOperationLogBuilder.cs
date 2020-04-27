@@ -8,37 +8,46 @@ namespace Doublelives.Persistence.TableBuilders
     {
         public void Configure(EntityTypeBuilder<SysOperationLog> builder)
         {
-            builder.ToTable("sys_operation_log");
+            builder
+                .HasComment("操作日志")
+                .ToTable("sys_operation_log");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
-                .ValueGeneratedNever();
+                .HasComment("主键")
+                .ValueGeneratedOnAdd();
 
             builder.Property(e => e.Classname)
-                .HasColumnName("classname")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasComment("操作类名")
+                .HasColumnName("classname");
 
-            builder.Property(e => e.CreateTime).HasColumnName("create_time");
+            builder.Property(e => e.CreateTime)
+                .HasComment("创建时间")
+                .HasColumnName("create_time");
 
             builder.Property(e => e.Logname)
-                .HasColumnName("logname")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasColumnName("logname");
 
             builder.Property(e => e.Logtype)
-                .HasColumnName("logtype")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasColumnName("logtype");
 
-            builder.Property(e => e.Message).HasColumnName("message");
+            builder.Property(e => e.Message)
+                .HasComment("详细信息")
+                .HasColumnName("message");
 
             builder.Property(e => e.Method)
-                .HasColumnName("method")
-                .HasColumnType("text(255)");
+                .HasMaxLength(255)
+                .HasComment("方法名")
+                .HasColumnName("method");
 
             builder.Property(e => e.Succeed)
-                .HasColumnName("succeed")
-                .HasColumnType("text(255)");
+                .HasColumnName("succeed");
 
-            builder.Property(e => e.Userid).HasColumnName("userid");
+            builder.Property(e => e.Userid)
+                .HasColumnName("userid");
         }
     }
 }
