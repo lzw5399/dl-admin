@@ -5,10 +5,19 @@ namespace Doublelives.Persistence.Repositories
 {
     public interface IMenuRepository : IRepository<SysMenu>
     {
-        List<string> GetPermissionsByRoleIds(List<long> roleIds, bool activeOnly = true);
+        /// <summary>
+        /// 根据roleids获取去重后的权限url
+        /// </summary>
+        List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true);
 
-        List<SysMenu> GetTopLevelMenusByRoleIds(List<long> roleIds);
+        /// <summary>
+        /// 根据roleids获取最顶层的菜单
+        /// </summary>
+        List<SysMenu> GetTopLevelMenusByRoleIds(List<int> roleIds);
 
+        /// <summary>
+        /// 根据topmenu.Code获取它的下级菜单
+        /// </summary>
         List<SysMenu> GetSubMenusByParentCode(string id);
     }
 }

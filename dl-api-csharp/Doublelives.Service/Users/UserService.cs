@@ -18,6 +18,12 @@ using Doublelives.Infrastructure.Exceptions;
 using System.Collections.Generic;
 using Doublelives.Service.Mappers;
 using Doublelives.Infrastructure.Extensions;
+using Doublelives.Shared.Constants;
+using System.Linq.Expressions;
+using Doublelives.Shared.Enum;
+using Doublelives.Shared.Models;
+using Doublelives.Service.Depts;
+using Doublelives.Service.Roles;
 
 namespace Doublelives.Service.Users
 {
@@ -26,16 +32,21 @@ namespace Doublelives.Service.Users
         private readonly IUnitOfWork _unitOfWork;
         private readonly JwtOptions _jwtConfig;
         private readonly ICacheManager _cacheManager;
-        private const string USER_CACHE_PREFIX = "user";
+        private readonly IDeptService _deptService;
+        private readonly IRoleService _roleService;
 
         public UserService(
             IUnitOfWork unitOfWork,
             IOptions<JwtOptions> jwtOptions,
-            ICacheManager cacheManager)
+            ICacheManager cacheManager,
+            IDeptService deptService,
+            IRoleService roleService)
         {
             _unitOfWork = unitOfWork;
             _jwtConfig = jwtOptions.Value;
             _cacheManager = cacheManager;
+            _deptService = deptService;
+            _roleService = roleService;
         }
 
         public (bool, string) Login(string account, string pwd)
@@ -84,10 +95,10 @@ namespace Doublelives.Service.Users
             var permissions = new List<string>();
             if (!string.IsNullOrEmpty(user.Roleid))
             {
-                var ids = user.Roleid.Split(',').Select(id => long.Parse(id)).ToList();
+                var ids = SplitId(user.Roleid);
                 foreach (var id in ids)
                 {
-                    var role = _unitOfWork.RoleRepository.GetById(id);
+                    var role = _roleService.GetById(id);
                     if (role == null) continue;
 
                     roles.Add(role);
@@ -95,14 +106,54 @@ namespace Doublelives.Service.Users
                 permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
             }
 
-            var dept = _unitOfWork.DeptRepository.GetById(user.Deptid.Value());
+            var dept = _deptService.GetById(user.Deptid.Value());
 
             return UserMapper.ToAccountInfoDto(user, dept, roles, permissions);
         }
 
+        public PagedModel<AccountProfileDto> GetPagedList(UserSearchDto criteria)
+        {
+            Expression<Func<SysUser, bool>> condition = it => it.Status == AccountStatus.Active;
+
+            if (!string.IsNullOrWhiteSpace(criteria.Account))
+            {
+                condition = condition.And(it => it.Account.Contains(criteria.Account));
+            }
+
+            if (!string.IsNullOrWhiteSpace(criteria.Name))
+            {
+                condition = condition.And(it => it.Name.Contains(criteria.Name));
+            }
+
+            var result = _unitOfWork.UserRepository.Paged(
+                criteria.Page,
+                criteria.Limit,
+                condition,
+                it => it.Id,
+                true);
+
+            var dto = UserMapper.ToAccountProfileDto(result);
+
+            if (dto.Count <= 0) return dto;
+
+            foreach (var item in dto.Data)
+            {
+                var dept = _deptService.GetById(item.Deptid);
+                var roleIds = SplitId(item.Roleid);
+                var roles = _roleService.GetListByIds(roleIds);
+
+                // mapping
+                item.Dept = dept?.Fullname;
+                item.DeptName = dept?.Simplename;
+                item.RoleName = string.Join(',', roles.Select(it => it.Name));
+            }
+
+            return dto;
+        }
+
         public async Task<SysUser> GetById(long id)
         {
-            var cacheKey = $"{USER_CACHE_PREFIX}_{id}";
+            var cacheKey = GetUserCacheKey(id);
             var user = await _cacheManager.GetOrCreateAsync(cacheKey, async entry => await GetByIdFromDb(id));
 
             return user;
@@ -120,15 +171,29 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.Insert(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+            _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
-        public void Update(SysUser user)
+        public void Update(UserUpdateDto request)
         {
+            var user = GetById(request.Id).Result;
+            if (user == null) throw new NotFoundException();
+
+            user.Account = request.Account;
+            user.Sex = request.Sex;
+            user.Phone = request.Phone;
+            user.Name = request.Name;
+            user.Email = request.Email;
+            user.Deptid = request.Deptid;
+            user.Birthday = request.Birthday;
+            user.Status = request.Status;
+            user.Version = user.Version + 1 ?? 1;
+            user.ModifyBy = request.ModifyBy;
+            user.ModifyTime = DateTime.Now;
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{user.Id}");
+            _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
         public void Delete(long id)
@@ -136,7 +201,7 @@ namespace Doublelives.Service.Users
             _unitOfWork.UserRepository.DeleteById(id);
             _unitOfWork.Commit();
 
-            _cacheManager.Remove($"{USER_CACHE_PREFIX}_{id}");
+            _cacheManager.Remove(GetUserCacheKey(id));
         }
 
         private async Task<SysUser> GetByIdFromDb(long id)
@@ -145,5 +210,12 @@ namespace Doublelives.Service.Users
 
             return user;
         }
+
+        private List<int> SplitId(string ids)
+        {
+            return ids.TrimEnd(',').Split(',').Select(id => int.Parse(id)).ToList();
+        }
+
+        private string GetUserCacheKey(long id) => CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
     }
 }

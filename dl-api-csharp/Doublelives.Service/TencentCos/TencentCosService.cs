@@ -11,7 +11,7 @@ using Doublelives.Domain.Pictures;
 using COSXML.Auth;
 using System.Drawing;
 
-namespace Doublelives.Cos
+namespace Doublelives.Service.TencentCos
 {
     public class TencentCosService : ITencentCosService
     {

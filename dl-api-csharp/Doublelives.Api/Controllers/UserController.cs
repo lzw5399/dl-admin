@@ -1,11 +1,14 @@
-﻿using System;
-using AutoMapper;
-using Doublelives.Api.Infrastructure;
+﻿using AutoMapper;
+using Doublelives.Api.Mappers;
+using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Users;
+using Doublelives.Api.Models.Users.Requests;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
 
 namespace Doublelives.Api.Controllers
 {
@@ -24,25 +27,37 @@ namespace Doublelives.Api.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>获取token</summary>
-        /// <param name="id">若id为空，则使用默认的一个id</param>
-        [AllowAnonymous]
-        [HttpGet("getToken")]
-        public IActionResult GetToken(int id)
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        [HttpGet("list")]
+        public IActionResult List([FromQuery]UserListSearchRequest request)
         {
-            id = id == 0 ? 1 : id;
-            var token = _userService.GenerateToken(id);
+            var result = _userService.GetPagedList(UserMapper.ToUserSearchDto(request));
 
-            return Ok(token);
+            var viewModel = new UserPagedListViewModel
+            {
+                Current = result.PageNumber,
+                Pages = result.PageCount,
+                Size = result.PageSize,
+                Sort = result.Sort,
+                Total = result.TotalCount,
+                Records = _mapper.Map<List<AccountProfileViewModel>>(result.Data)
+            };
+
+            return Ok(viewModel);
         }
 
-        /// <summary>使用获得的token</summary>
-        [HttpGet("useToken")]
-        public IActionResult UseToken()
+        /// <summary>
+        /// 更新用户信息
+        /// </summary>
+        [HttpPut]
+        public IActionResult ModifyUser(UserUpdateRequest request)
         {
-            var response = _mapper.Map<UserViewModel>(WorkContext.CurrentUser);
+            // todo model validate
+            _userService.Update(UserMapper.ToUserUpdateDto(request, WorkContext.CurrentUser));
 
-            return Ok(response);
+            return Ok("");
         }
     }
 }

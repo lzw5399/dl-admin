@@ -1,4 +1,3 @@
-using Doublelives.Shared.Enum;
 using System;
 using System.Collections.Generic;
 
@@ -43,13 +42,6 @@ namespace Doublelives.Api.Models.Account
         /// 登录账户名(username)
         /// </summary>
         public string Account { get; set; }
-
-        public string Password { get; set; }
-
-        /// <summary>
-        /// 盐值
-        /// </summary>
-        public string Salt { get; set; }
 
         /// <summary>
         /// 用于显示的用户名
@@ -115,5 +107,13 @@ namespace Doublelives.Api.Models.Account
         /// 角色名的数据 e.g.["超级管理员", "网站管理员"]
         /// </summary>
         public List<string> Roles { get; set; }
+
+        public string DeptName { get; set; }
+
+        public string SexName { get; set; }
+
+        public string RoleName { get; set; }
+
+        public string StatusName { get; set; }
     }
 }

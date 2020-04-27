@@ -7,7 +7,7 @@ import router from '@/router'
 // create an axios instance
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  withCredentials: true, // send cookies when cross-domain requests
+  // withCredentials: true, // true: send cookies when cross-domain requests
   // timeout: 25000, // request timeout,
   headers: {
     'Content-Type': 'application/json'
@@ -66,7 +66,6 @@ instance.interceptors.response.use(
     }
   },
   error => {
-    debugger
     if (error.response.status === 401) {
       store.dispatch('user/logout').then(() => {
         router.replace({

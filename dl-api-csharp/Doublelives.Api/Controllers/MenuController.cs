@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Doublelives.Api.Infrastructure;
-using Doublelives.Api.MockResponse;
 using Doublelives.Api.Models.Menu;
 using Doublelives.Service.Menus;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
 
 namespace Doublelives.Api.Controllers
@@ -33,8 +30,6 @@ namespace Doublelives.Api.Controllers
             var routers = _mapper.Map<List<RouterViewModel>>(list);
 
             return Ok(routers);
-            //var model = MockResponseHelper.GetMockModel<List<RouterViewModel>>("listForRouter");
-            //return Ok(model);
         }
     }
 }

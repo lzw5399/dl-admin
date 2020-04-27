@@ -11,7 +11,7 @@
           <el-col :span="12">
             <div class="card-panel-text">{{ $t('dashboard.document') }}</div>
             <div class="card-panel-num">
-              <a href="http://enilu.gitee.io/web-flash" target="_blank">Document</a>
+              <a href="#" target="_blank">Document</a>
             </div>
           </el-col>
         </el-card>
@@ -62,23 +62,23 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-collapse class="section">
-          <el-collapse-item title="2019双11All in cloud低至一折" name="1">
-            <div><a href="https://www.aliyun.com/1111/2019/home?userCode=alts44ap" target="_blank">点击查看详情</a></div>
+          <el-collapse-item title="完善防控 各地千方百计复工达产" name="1">
+            <div><a href="#" target="_blank">点击查看详情</a></div>
           </el-collapse-item>
-          <el-collapse-item title="主机爆款限时优惠" name="2">
-            <div><a href="https://www.aliyun.com/acts/hotsale?userCode=alts44ap" target="_blank">点击查看详情</a> </div>
+          <el-collapse-item title="车企营业：超跑厂里缝口罩 造F1赛车的做呼吸机" name="2">
+            <div><a href="#" target="_blank">点击查看详情</a> </div>
           </el-collapse-item>
-          <el-collapse-item title="企业级云服务器五折优惠" name="3">
-            <div><a href="https://promotion.aliyun.com/ntms/act/enterprise-discount.html?userCode=alts44ap" target="_blank">点击查看详情</a> </div>
+          <el-collapse-item title="iOS被曝严重安全漏洞 5亿部苹果手机有潜在风险" name="3">
+            <div><a href="#" target="_blank">点击查看详情</a> </div>
           </el-collapse-item>
-          <el-collapse-item title="全民云计算云主机低至4折" name="4">
-            <div><a href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=alts44ap" target="_blank">点击查看详情</a> </div>
+          <el-collapse-item title="电子商务促消费升级 每天快递量超2亿件" name="4">
+            <div><a href="#" target="_blank">点击查看详情</a> </div>
           </el-collapse-item>
-          <el-collapse-item title="商标注册服务低至8折" name="5">
-            <div><a href="https://tm.aliyun.com/?userCode=alts44ap" target="_blank">点击查看详情</a> </div>
+          <el-collapse-item title="十年禁捕，长江保护分秒必争" name="5">
+            <div><a href="#" target="_blank">点击查看详情</a> </div>
           </el-collapse-item>
-          <el-collapse-item title="云短信产品低至8折" name="6">
-            <div><a href="https://www.aliyun.com/acts/alicomcloud/new-discount?userCode=alts44ap" target="_blank">点击查看详情</a> </div>
+          <el-collapse-item title="台积电挑战业界巅峰：即将研发1nm工艺" name="6">
+            <div><a href="#" target="_blank">点击查看详情</a> </div>
           </el-collapse-item>
 
         </el-collapse>

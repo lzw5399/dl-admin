@@ -14,13 +14,13 @@ namespace Doublelives.Persistence.Repositories
             _context = context;
         }
 
-        public List<SysMenu> GetTopLevelMenusByRoleIds(List<long> roleIds)
+        public List<SysMenu> GetTopLevelMenusByRoleIds(List<int> roleIds)
         {
             var menus = _context.Set<SysRelation>()
                 .Where(it => roleIds.Contains(it.Roleid))
                 .Join(
                 _context.Set<SysMenu>().Where(
-                    menu => (menu.Status == (int)MenuStatus.Active && menu.Ismenu == 1 &&
+                    menu => (menu.Status == MenuStatus.Active && menu.Ismenu &&
                             menu.Levels == (int)MenuLevel.Top)),
                 relation => relation.Menuid,
                 menu => menu.Id,
@@ -36,15 +36,15 @@ namespace Doublelives.Persistence.Repositories
                 _context
                 .Set<SysMenu>()
                 .Where(menu => (
-                    menu.Status == (int)MenuStatus.Active &&
-                    menu.Ismenu == 1 &&
+                    menu.Status == MenuStatus.Active &&
+                    menu.Ismenu &&
                     menu.Pcode == pcode))
                 .ToList();
 
             return menus;
         }
 
-        public List<string> GetPermissionsByRoleIds(List<long> roleIds, bool activeOnly = true)
+        public List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
         {
             List<string> permissions;
             if (activeOnly)
@@ -52,17 +52,15 @@ namespace Doublelives.Persistence.Repositories
                 permissions = _context.Set<SysRelation>()
                     .Where(it => roleIds.Contains(it.Roleid))
                     .Join(
-                    _context.Set<SysMenu>().Where(
-                        menu => (menu.Status == (int)MenuStatus.Active)),
+                    _context.Set<SysMenu>().Where(menu => menu.Status == MenuStatus.Active),
                     relation => relation.Menuid,
                     menu => menu.Id,
                     (relation, menu) => menu.Url)
                     .ToList();
-                //var qw = from r in _context.Set<SysRelation>()
-                //         join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
-                //         where roleIds.Contains(r.Roleid) && m.Status == (int)MenuStatus.Active
-                //         select m.Url;
-                //var rr = qw.ToList();
+                //permissions = (from r in _context.Set<SysRelation>()
+                //               join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
+                //               where roleIds.Contains(r.Roleid) && m.Status == MenuStatus.Active
+                //               select m.Url).ToList();
             }
             else
             {

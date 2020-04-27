@@ -166,10 +166,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'name'
-
-    ])
+    ...mapGetters(['name'])
   },
   created() {
     this.fetchData()
@@ -177,6 +174,10 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
+      const alreadyShowedNotice = localStorage.getItem('showedNotice')
+      if (alreadyShowedNotice) {
+        return
+      }
       const self = this
       getList(self.listQuery).then(response => {
         for (var i = 0; i < response.data.length; i++) {
@@ -188,6 +189,7 @@ export default {
           })
         }
         self.listLoading = false
+        localStorage.setItem('showedNotice', true)
       })
     }
   }

@@ -1,4 +1,4 @@
-import { deleteUser, getList, saveUser, remove, setRole, changeStatus } from '@/api/system/user'
+import { deleteUser, getList, updateUser, addUser, remove, setRole, changeStatus } from '@/api/system/user'
 import { list as deptList } from '@/api/system/dept'
 import { parseTime } from '@/utils/index'
 import { roleTreeListByIdUser } from '@/api/system/role'
@@ -154,7 +154,7 @@ export default {
       this.formVisible = true
       this.isAdd = true
     },
-    changeUserStatus(record){
+    changeUserStatus(record) {
       changeStatus(record.id).then(response => {
         this.$message({
           message: '提交成功',
@@ -182,15 +182,15 @@ export default {
           if (this.validPasswd()) {
             var form = self.form
             if (form.status === true) {
-              //启用
+              // 启用
               form.status = 1
             } else {
-              //冻结
+              // 冻结
               form.status = 2
             }
             form.birthday = parseTime(form.birthday, '{y}-{m}-{d}')
             form.createtime = parseTime(form.createtime)
-            saveUser(form).then(response => {
+            updateUser(form).then(response => {
               this.$message({
                 message: '提交成功',
                 type: 'success'
@@ -246,10 +246,10 @@ export default {
               type: 'success'
             })
             this.fetchData()
-          }).catch( err=>{
+          }).catch(err => {
             this.$notify.error({
               title: '错误',
-              message:err,
+              message: err
             })
           })
         }).catch(() => {

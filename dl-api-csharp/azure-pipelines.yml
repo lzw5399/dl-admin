@@ -7,113 +7,96 @@ trigger:
       - master
   paths:
     exclude:
+      - dl-vue-admin/*
       - .dockerignore
       - .gitignore
       - README.md
 
 variables:
-  applicationName: album
-  tagName: '$(Build.BuildNumber)'
-  imageName: '$(dockerid)/$(applicationName):$(tagName)'
+  - group: dl-api-config # 引用配置的变量组
+
+  - name: workingDirectory
+    value: dl-api-csharp
+
+  - name: buildConfiguration
+    value: Release
 
 steps:
-  - powershell: |
-      sudo chmod 777 transform_settings.ps1
-      ./transform_settings.ps1
-      echo transform_successfully
-    displayName: 'Transform settings'
-    env:
-      AppId: $(AppId)
-      SecretId: $(SecretId)
-      SecretKey: $(SecretKey)
-      Bucket: $(Bucket)
-      Region: $(Region)
-      DurationSecond: $(DurationSecond)
-      BaseUrl: $(BaseUrl)
-      SentryClientKey: $(SentryClientKey)
-      Album: $(Album)
-      JwtKey: $(JwtKey)
-      Issuer: $(Issuer)
-      Audience: $(Audience)
-      ExpireMinutes: $(ExpireMinutes)
-      Redis: $(Redis)
-
-  - script: docker build -f Dockerfile -t $(imageName) .
-    displayName: 'Docker build'
-
-  - script: |
-      docker login -u $(dockerid) -p $(password)
-      docker push $(imageName)
-    displayName: 'Push docker image'
-
-  - task: SSH@0
-    displayName: 'Run shell inline on remote machine'
+  - task: PowerShell@2
     inputs:
-      sshEndpoint: 'tencent_centos'
-      runOptions: inline
+      targetType: filePath
+      filePath: $(workingDirectory)/transform_settings.ps1
+      workingDirectory: $(workingDirectory)
+    env:
+      cos_appId: $(cos_appId)
+      cos_secretId: $(cos_secretId)
+      cos_secretKey: $(cos_secretKey)
+      cos_bucket: $(cos_bucket)
+      cos_region: $(cos_region)
+      cos_durationSecond: $(cos_durationSecond)
+      cos_baseUrl: $(cos_baseUrl)
+      sentryClientKey: $(sentryClientKey)
+      conn_dl: $(conn_dl)
+      jwt_key: $(jwt_key)
+      jwt_issuer: $(jwt_issuer)
+      jwt_audience: $(jwt_audience)
+      jwt_expireMinutes: $(jwt_expireMinutes)
+      cache_enable: $(cache_enable)
+      cache_redisconn: $(cache_redisconn)
+      cache_defaultExpireMinutes: $(cache_defaultExpireMinutes)
+      cors_httpsOrigin: $(cors_httpsOrigin)
+      cors_httpOrigin: $(cors_httpOrigin)
+    displayName: 'transform settings'
 
-      inline: |
-        # stop container
-        containers=$(docker ps -q --filter name=$(applicationName))
-        if test -n "$containers"; 
-        then
-        docker stop $(docker ps -q --filter name=$(applicationName)) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to stop container...'
-         exit $rc;
-        fi
-        fi
-        # remove container
-        containers1=$(docker ps -q -a --filter name=$(applicationName))
-        if test -n "$containers1"; 
-        then
-        docker rm $(docker ps -q -a --filter name=$(applicationName)) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove container...'
-         exit $rc;
-        fi
-        fi
-        # remove image
-        containers2=$(docker images | grep $(applicationName) | awk '{print $3}')
-        if test -n "$containers2"; 
-        then
-        docker rmi $(docker images | grep $(applicationName) | awk '{print $3}') >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove image...'
-         exit $rc;
-        fi
-        fi
-        # pull newest image
-        docker pull $(imageName) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to pull container...'
-         exit $rc;
-        fi
-        # run image
-        docker run -d -p 8091:80 --name $(applicationName) $(imageName) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to run container...'
-         exit $rc;
-        fi
-        # remove useless images
-        danglings=$(docker images -f "dangling=true" -q)
-        if test -n "$danglings";
-        then
-        docker rmi $(docker images -f "dangling=true" -q) >> /dev/null 2>&1
-        rc=$?
-        if [[ $rc != 0 ]];
-        then
-         echo 'failed to remove danglings container...'
-         exit $rc;
-        fi
-        fi
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
+    displayName: 'dotnet restore'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+    displayName: 'dotnet build'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: publish
+      projects: '**/Doublelives.Api.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+      zipAfterPublish: false
+      modifyOutputPath: false
+    displayName: 'dotnet publish'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(workingDirectory)/Doublelives.Api/bin/$(buildConfiguration)/netcoreapp3.1/publish'
+      TargetFolder: '$(build.artifactstagingdirectory)/publish'
+    displayName: 'Copy publish folder'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(workingDirectory)'
+      Contents: Dockerfile
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    displayName: 'Copy Dockerfile'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(workingDirectory)'
+      Contents: docker-compose.yml
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    displayName: 'Copy docker-compose.yml'
+
+  - task: CopyFiles@2
+    inputs:
+      Contents: deploy.sh
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    displayName: 'Copy deploy.sh'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+    displayName: 'Publish temp files'

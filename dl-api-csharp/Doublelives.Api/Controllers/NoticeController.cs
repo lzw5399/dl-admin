@@ -1,24 +1,34 @@
-﻿using Doublelives.Api.Infrastructure;
-using Doublelives.Api.MockResponse;
+﻿using AutoMapper;
 using Doublelives.Api.Models.Notice;
+using Doublelives.Service.Notices;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Doublelives.Api.Controllers
 {
     public class NoticeController : AuthControllerBase
     {
-        public NoticeController(IWorkContextAccessor workContextAccessor)
+        private readonly INoticeService _noticeService;
+        private readonly IMapper _mapper;
+
+        public NoticeController(
+            IWorkContextAccessor workContextAccessor,
+            INoticeService noticeService,
+            IMapper mapper)
             : base(workContextAccessor)
         {
+            _noticeService = noticeService;
+            _mapper = mapper;
         }
 
         [HttpGet("list")]
-        public IActionResult List()
+        public IActionResult List(string title)
         {
-            var model = MockResponseHelper.GetMockModel<NoticeViewModel>("noticelist");
+            var result = _noticeService.List(title);
+            var list = _mapper.Map<List<NoticeViewModel>>(result);
 
-            return Ok(model);
+            return Ok(list);
         }
     }
 }

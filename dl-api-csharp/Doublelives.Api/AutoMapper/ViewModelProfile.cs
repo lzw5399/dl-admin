@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Album;
+using Doublelives.Api.Models.Dept;
 using Doublelives.Api.Models.Menu;
+using Doublelives.Api.Models.Notice;
 using Doublelives.Api.Models.Users;
 using Doublelives.Domain.Pictures;
 using Doublelives.Domain.Sys.Dto;
@@ -27,6 +29,12 @@ namespace Doublelives.Api.AutoMapper
             // menu router
             CreateMap<RouterDto, RouterViewModel>();
             CreateMap<MetaDto, MetaViewModel>();
+
+            // notice
+            CreateMap<NoticeDto, NoticeViewModel>();
+
+            // dept
+            CreateMap<DeptDto, DeptViewModel>();
         }
     }
 }

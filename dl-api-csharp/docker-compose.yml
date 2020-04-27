@@ -1,0 +1,11 @@
+version: '3.4'
+
+# 只包含后端应用
+services:
+  dl-api:
+    image: lzw5399/dl-api:latest
+    container_name: dl-api
+    ports:
+      - "8096:80"
+    restart:
+      on-failure

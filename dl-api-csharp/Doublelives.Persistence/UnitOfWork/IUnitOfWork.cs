@@ -15,6 +15,8 @@ namespace Doublelives.Persistence
 
         IRepository<SysDept> DeptRepository { get; }
 
+        IRepository<SysNotice> NoticeRepository { get; }
+
         IMenuRepository MenuRepository { get; }
 
         void Commit();

@@ -1,0 +1,11 @@
+version: '3.4'
+
+# 只包含了vue应用
+services:
+  dl-vue-admin:
+    image: lzw5399/dl-vue-admin:latest
+    container_name: dl-vue-admin
+    ports:
+      - "8097:8090"
+    restart:
+      on-failure

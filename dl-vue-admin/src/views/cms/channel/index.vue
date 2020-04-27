@@ -9,22 +9,29 @@
         </el-col>
       </el-row>
     </div>
-    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-              @current-change="handleCurrentChange">
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+      @current-change="handleCurrentChange"
+    >
 
       <el-table-column label="ID">
         <template slot-scope="scope">
-          {{scope.row.id}}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="名称">
         <template slot-scope="scope">
-          {{scope.row.name}}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
       <el-table-column label="编码">
         <template slot-scope="scope">
-          {{scope.row.code}}
+          {{ scope.row.code }}
         </template>
       </el-table-column>
     </el-table>
@@ -32,17 +39,18 @@
     <el-dialog
       :title="formTitle"
       :visible.sync="formVisible"
-      width="70%">
+      width="70%"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="名称" prop="name">
-              <el-input v-model="form.name" minlength=1></el-input>
+              <el-input v-model="form.name" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="编码" prop="code">
-              <el-input v-model="form.code"  minlength=1></el-input>
+              <el-input v-model="form.code" minlength="1" />
             </el-form-item>
           </el-col>
         </el-row>

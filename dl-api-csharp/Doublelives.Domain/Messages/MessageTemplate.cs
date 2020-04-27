@@ -10,7 +10,7 @@ namespace Doublelives.Domain.Messages
 
         public string Content { get; set; }
 
-        public long IdMessageSender { get; set; }
+        public int IdMessageSender { get; set; }
 
         public string Title { get; set; }
 

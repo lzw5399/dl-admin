@@ -1,5 +1,4 @@
 using AutoMapper;
-using Doublelives.Api.Infrastructure;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
 using Doublelives.Api.Validators.Account;
@@ -48,7 +47,6 @@ namespace Doublelives.Api.Controllers
         public IActionResult Info()
         {
             // todo kankan cache?
-
             var result = _userService.GetInfo(WorkContext.CurrentUser.Id);
             var info = _mapper.Map<AccountInfoDto>(result);
 
@@ -56,10 +54,10 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>注销</summary>
+        [AllowAnonymous]
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            // api端针对logout没有什么需要做的
             return Ok("注销成功");
         }
 
@@ -68,9 +66,6 @@ namespace Doublelives.Api.Controllers
         public IActionResult UpdatePassword(AccountUpdatePasswordRequest request)
         {
             return Ok();
-            // var token = _userService.GenerateToken(request);
-            //
-            // return Ok(token);
         }
     }
 }

@@ -14,436 +14,307 @@ namespace Doublelives.Migrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "3.1.3");
 
             modelBuilder.Entity("Doublelives.Domain.Cms.CmsArticle", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Author")
                         .HasColumnName("author")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("作者")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("text")
-                        .HasComment("内容")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long>("IdChannel")
+                    b.Property<int>("IdChannel")
                         .HasColumnName("id_channel")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("栏目id");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Img")
                         .HasColumnName("img")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("文章题图ID")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(128)")
-                        .HasComment("标题")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(128)");
 
                     b.HasKey("Id");
 
                     b.ToTable("cms_article");
-
-                    b.HasComment("文章");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Cms.CmsBanner", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("IdFile")
+                    b.Property<int?>("IdFile")
                         .HasColumnName("id_file")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("banner图id");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("标题")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("类型")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Url")
                         .HasColumnName("url")
-                        .HasColumnType("varchar(128)")
-                        .HasComment("点击banner跳转到url")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(128)");
 
                     b.HasKey("Id");
 
                     b.ToTable("cms_banner");
-
-                    b.HasComment("Banner");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Cms.CmsChannel", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Code")
                         .HasColumnName("code")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("编码")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("名称")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.HasKey("Id");
 
                     b.ToTable("cms_channel");
-
-                    b.HasComment("文章栏目");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Cms.CmsContacts", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnName("email")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("电子邮箱")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Mobile")
                         .HasColumnName("mobile")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("联系电话")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Remark")
                         .HasColumnName("remark")
-                        .HasColumnType("varchar(128)")
-                        .HasComment("备注")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(128)");
 
                     b.Property<string>("UserName")
                         .HasColumnName("user_name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("邀约人名称")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.HasKey("Id");
 
                     b.ToTable("cms_contacts");
-
-                    b.HasComment("邀约信息");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Messages.Message", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("text")
-                        .HasComment("消息内容")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Receiver")
                         .HasColumnName("receiver")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("接收者")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("State")
                         .HasColumnName("state")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("消息类型,0:初始,1:成功,2:失败")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("TplCode")
                         .HasColumnName("tpl_code")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("模板编码")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("消息类型,0:短信,1:邮件")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.HasKey("Id");
 
                     b.ToTable("message");
-
-                    b.HasComment("历史消息");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Messages.MessageSender", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClassName")
                         .HasColumnName("class_name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("发送类")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("名称")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("TplCode")
                         .HasColumnName("tpl_code")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("短信运营商模板编号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.HasKey("Id");
 
                     b.ToTable("message_sender");
-
-                    b.HasComment("消息发送者");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Messages.MessageTemplate", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Code")
                         .HasColumnName("code")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("编号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Cond")
                         .HasColumnName("cond")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("发送条件")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("text")
-                        .HasComment("内容")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long>("IdMessageSender")
+                    b.Property<int>("IdMessageSender")
                         .HasColumnName("id_message_sender")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("发送者id");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("标题")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("消息类型,0:短信,1:邮件")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.HasKey("Id");
 
@@ -451,399 +322,295 @@ namespace Doublelives.Migrations.Migrations
                         .HasName("FK942sadqk5x9kbrwil0psyek3n");
 
                     b.ToTable("message_template");
-
-                    b.HasComment("消息模板");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysCfg", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CfgDesc")
                         .HasColumnName("cfg_desc")
-                        .HasColumnType("text")
-                        .HasComment("备注")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CfgName")
                         .HasColumnName("cfg_name")
-                        .HasColumnType("varchar(256)")
-                        .HasComment("参数名")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(256)");
 
                     b.Property<string>("CfgValue")
                         .HasColumnName("cfg_value")
-                        .HasColumnType("varchar(512)")
-                        .HasComment("参数值")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(512)");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_cfg");
-
-                    b.HasComment("系统参数");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysDept", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Fullname")
                         .HasColumnName("fullname")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("Pid")
+                    b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Pids")
                         .HasColumnName("pids")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Simplename")
                         .HasColumnName("simplename")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_dept");
-
-                    b.HasComment("部门");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysDict", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
-                    b.Property<long?>("Pid")
+                    b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_dict");
-
-                    b.HasComment("字典");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysFileInfo", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("OriginalFileName")
                         .HasColumnName("original_file_name")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("RealFileName")
                         .HasColumnName("real_file_name")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_file_info");
-
-                    b.HasComment("文件");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysLoginLog", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Ip")
                         .HasColumnName("ip")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Logname")
                         .HasColumnName("logname")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Message")
                         .HasColumnName("message")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Succeed")
                         .HasColumnName("succeed")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Userid")
                         .HasColumnName("userid")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_login_log");
-
-                    b.HasComment("登录日志");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysMenu", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnName("code")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("编号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Component")
                         .HasColumnName("component")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("页面组件")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<sbyte>("Hidden")
+                    b.Property<bool>("Hidden")
                         .HasColumnName("hidden")
-                        .HasColumnType("tinyint(4)")
-                        .HasComment("是否隐藏");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Icon")
                         .HasColumnName("icon")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("图标")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
-                    b.Property<int>("Ismenu")
+                    b.Property<bool>("Ismenu")
                         .HasColumnName("ismenu")
-                        .HasColumnType("int(11)")
-                        .HasComment("是否是菜单1:菜单,0:按钮");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Isopen")
+                    b.Property<bool?>("Isopen")
                         .HasColumnName("isopen")
-                        .HasColumnType("int(11)")
-                        .HasComment("是否默认打开1:是,0:否");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Levels")
                         .HasColumnName("levels")
-                        .HasColumnType("int(11)")
-                        .HasComment("级别");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("名称")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<int>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int(11)")
-                        .HasComment("顺序");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Pcode")
                         .IsRequired()
                         .HasColumnName("pcode")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("父菜单编号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Pcodes")
                         .HasColumnName("pcodes")
-                        .HasColumnType("varchar(128)")
-                        .HasComment("递归父级菜单编号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(128)");
 
                     b.Property<int>("Status")
                         .HasColumnName("status")
-                        .HasColumnType("int(11)")
-                        .HasComment("状态1:启用,0:禁用");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("鼠标悬停提示信息")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Url")
                         .HasColumnName("url")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("链接标识")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.HasKey("Id");
 
@@ -852,450 +619,335 @@ namespace Doublelives.Migrations.Migrations
                         .HasName("UK_s37unj3gh67ujhk83lqva8i1t");
 
                     b.ToTable("sys_menu");
-
-                    b.HasComment("菜单");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysNotice", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_notice");
-
-                    b.HasComment("通知");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysOperationLog", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Classname")
                         .HasColumnName("classname")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Logname")
                         .HasColumnName("logname")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Logtype")
                         .HasColumnName("logtype")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Message")
                         .HasColumnName("message")
-                        .HasColumnType("text")
-                        .HasComment("详细信息")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Method")
                         .HasColumnName("method")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("Succeed")
                         .HasColumnName("succeed")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Userid")
                         .HasColumnName("userid")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_operation_log");
-
-                    b.HasComment("操作日志");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysRelation", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long>("Menuid")
+                    b.Property<int>("Menuid")
                         .HasColumnName("menuid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long>("Roleid")
+                    b.Property<int>("Roleid")
                         .HasColumnName("roleid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_relation");
-
-                    b.HasComment("菜单角色关系");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysRole", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("Deptid")
+                    b.Property<int?>("Deptid")
                         .HasColumnName("deptid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("Pid")
+                    b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_role");
-
-                    b.HasComment("角色");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysTask", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<sbyte?>("Concurrent")
+                    b.Property<bool?>("Concurrent")
                         .HasColumnName("concurrent")
-                        .HasColumnType("tinyint(4)")
-                        .HasComment("是否允许并发");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Cron")
                         .HasColumnName("cron")
-                        .HasColumnType("varchar(50)")
-                        .HasComment("定时规则")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(50)");
 
                     b.Property<string>("Data")
                         .HasColumnName("data")
-                        .HasColumnType("text")
-                        .HasComment("执行参数")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
-                    b.Property<sbyte?>("Disabled")
+                    b.Property<bool?>("Disabled")
                         .HasColumnName("disabled")
-                        .HasColumnType("tinyint(4)")
-                        .HasComment("是否禁用");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ExecAt")
                         .HasColumnName("exec_at")
-                        .HasColumnType("datetime")
-                        .HasComment("执行时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ExecResult")
                         .HasColumnName("exec_result")
-                        .HasColumnType("text")
-                        .HasComment("执行结果")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("JobClass")
                         .HasColumnName("job_class")
-                        .HasColumnType("varchar(255)")
-                        .HasComment("执行类")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<string>("JobGroup")
                         .HasColumnName("job_group")
-                        .HasColumnType("varchar(50)")
-                        .HasComment("任务组名")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(50)");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(50)")
-                        .HasComment("任务名")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(50)");
 
                     b.Property<string>("Note")
                         .HasColumnName("note")
-                        .HasColumnType("varchar(255)")
-                        .HasComment("任务说明")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_task");
-
-                    b.HasComment("定时任务");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysTaskLog", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ExecAt")
                         .HasColumnName("exec_at")
-                        .HasColumnType("datetime")
-                        .HasComment("执行时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("ExecSuccess")
+                    b.Property<bool?>("ExecSuccess")
                         .HasColumnName("exec_success")
-                        .HasColumnType("int(11)")
-                        .HasComment("执行结果（成功:1、失败:0)");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<long?>("IdTask")
+                    b.Property<int?>("IdTask")
                         .HasColumnName("id_task")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("JobException")
                         .HasColumnName("job_exception")
-                        .HasColumnType("varchar(500)")
-                        .HasComment("抛出异常")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(500)");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(50)")
-                        .HasComment("任务名")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_task_log");
-
-                    b.HasComment("定时任务日志");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Sys.SysUser", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Account")
                         .HasColumnName("account")
-                        .HasColumnType("varchar(32)")
-                        .HasComment("账户")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(32)");
 
                     b.Property<string>("Avatar")
                         .HasColumnName("avatar")
-                        .HasColumnType("varchar(255)")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(255)");
 
                     b.Property<DateTime?>("Birthday")
                         .HasColumnName("birthday")
-                        .HasColumnType("datetime");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("CreateBy")
+                    b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("创建人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime")
-                        .HasComment("创建时间/注册时间");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long?>("Deptid")
+                    b.Property<int?>("Deptid")
                         .HasColumnName("deptid")
-                        .HasColumnType("bigint(20)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
                         .HasColumnName("email")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("email")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
-                    b.Property<long?>("ModifyBy")
+                    b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("bigint(20)")
-                        .HasComment("最后更新人");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime")
-                        .HasComment("最后更新时间");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("姓名")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Password")
                         .HasColumnName("password")
-                        .HasColumnType("varchar(64)")
-                        .HasComment("密码")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(64)");
 
                     b.Property<string>("Phone")
                         .HasColumnName("phone")
-                        .HasColumnType("varchar(16)")
-                        .HasComment("手机号")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(16)");
 
                     b.Property<string>("Roleid")
                         .HasColumnName("roleid")
-                        .HasColumnType("varchar(128)")
-                        .HasComment("角色id列表，以逗号分隔")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(128)");
 
                     b.Property<string>("Salt")
                         .HasColumnName("salt")
-                        .HasColumnType("varchar(16)")
-                        .HasComment("密码盐")
-                        .HasAnnotation("MySql:CharSet", "utf8")
-                        .HasAnnotation("MySql:Collation", "utf8_general_ci");
+                        .HasColumnType("text(16)");
 
                     b.Property<int?>("Sex")
                         .HasColumnName("sex")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("Status")
                         .HasColumnName("status")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("sys_user");
-
-                    b.HasComment("账号");
                 });
 
             modelBuilder.Entity("Doublelives.Domain.Messages.MessageTemplate", b =>
@@ -1303,7 +955,6 @@ namespace Doublelives.Migrations.Migrations
                     b.HasOne("Doublelives.Domain.Messages.MessageSender", "IdMessageSenderNavigation")
                         .WithMany("MessageTemplate")
                         .HasForeignKey("IdMessageSender")
-                        .HasConstraintName("FK942sadqk5x9kbrwil0psyek3n")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

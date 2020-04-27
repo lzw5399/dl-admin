@@ -13,7 +13,7 @@ namespace Doublelives.Api.Models.Menu
 
         public bool Hidden { get; set; }
 
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         public MetaViewModel Meta { get; set; }
 
@@ -21,7 +21,7 @@ namespace Doublelives.Api.Models.Menu
 
         public long Num { get; set; }
 
-        public long ParentId { get; set; }
+        public string ParentId { get; set; }
 
         public string Path { get; set; }
     }

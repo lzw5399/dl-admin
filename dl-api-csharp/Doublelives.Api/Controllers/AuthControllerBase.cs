@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace Doublelives.Api.Infrastructure
+namespace Doublelives.Api.Controllers
 {
     [Authorize]
     [ApiController]
@@ -28,5 +28,15 @@ namespace Doublelives.Api.Infrastructure
 
             return base.Ok(response);
         }
+
+        //public new OkObjectResult Ok()
+        //{
+        //    var response = new ResponseBase
+        //    {
+        //        Data = string.Empty
+        //    };
+
+        //    return base.Ok(response);
+        //}
     }
 }

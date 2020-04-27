@@ -1,7 +1,7 @@
 ﻿using Doublelives.Domain.Pictures;
 using System.Collections.Generic;
 
-namespace Doublelives.Cos
+namespace Doublelives.Service.TencentCos
 {
     public interface ITencentCosService
     {
