@@ -174,8 +174,22 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
-        public void Update(SysUser user)
+        public void Update(UserUpdateDto request)
         {
+            var user = GetById(request.Id).Result;
+            if (user == null) throw new NotFoundException();
+
+            user.Account = request.Account;
+            user.Sex = request.Sex;
+            user.Phone = request.Phone;
+            user.Name = request.Name;
+            user.Email = request.Email;
+            user.Deptid = request.Deptid;
+            user.Birthday = request.Birthday;
+            user.Status = request.Status;
+            user.Version = user.Version.HasValue ? user.Version.Value + 1 : 1;
+            user.ModifyBy = request.ModifyBy;
+            user.ModifyTime = DateTime.Now;
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Commit();
 

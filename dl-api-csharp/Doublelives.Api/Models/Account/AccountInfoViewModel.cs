@@ -43,13 +43,6 @@ namespace Doublelives.Api.Models.Account
         /// </summary>
         public string Account { get; set; }
 
-        public string Password { get; set; }
-
-        /// <summary>
-        /// 盐值
-        /// </summary>
-        public string Salt { get; set; }
-
         /// <summary>
         /// 用于显示的用户名
         /// </summary>

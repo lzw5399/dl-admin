@@ -8,11 +8,19 @@ export function getList(params) {
   })
 }
 
-export function saveUser(params) {
+export function addUser(params) {
   return request({
     url: 'api/user',
     method: 'post',
-    params
+    data: params
+  })
+}
+
+export function updateUser(params) {
+  return request({
+    url: 'api/user',
+    method: 'put',
+    data: params
   })
 }
 

@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-row  :gutter="20">
+      <el-row :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.account" size="mini" placeholder="请输入帐号"></el-input>
+          <el-input v-model="listQuery.account" size="mini" placeholder="请输入帐号" />
         </el-col>
         <el-col :span="6">
-          <el-input v-model="listQuery.name" size="mini" placeholder="请输入姓名"></el-input>
+          <el-input v-model="listQuery.name" size="mini" placeholder="请输入姓名" />
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
@@ -16,70 +16,75 @@
       <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/mgr/add']">
-            {{$t('button.add') }}
+          <el-button v-permission="['/mgr/add']" type="success" size="mini" icon="el-icon-plus" @click.native="add">
+            {{ $t('button.add') }}
           </el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/mgr/edit']">
-            {{$t('button.edit') }}
+          <el-button v-permission="['/mgr/edit']" type="primary" size="mini" icon="el-icon-edit" @click.native="edit">
+            {{ $t('button.edit') }}
           </el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/mgr/delete']">
-            {{$t('button.delete') }}
+          <el-button v-permission="['/mgr/delete']" type="danger" size="mini" icon="el-icon-delete" @click.native="remove">
+            {{ $t('button.delete') }}
           </el-button>
           <el-button type="info" size="mini" icon="el-icon-role" @click.native="openRole">角色分配</el-button>
         </el-col>
       </el-row>
     </div>
 
-
-    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-    @current-change="handleCurrentChange">
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+      @current-change="handleCurrentChange"
+    >
 
       <el-table-column label="账号">
         <template slot-scope="scope">
-          {{scope.row.account}}
+          {{ scope.row.account }}
         </template>
       </el-table-column>
       <el-table-column label="姓名">
         <template slot-scope="scope">
-          {{scope.row.name}}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
       <el-table-column label="性别">
         <template slot-scope="scope">
-          {{scope.row.sexName}}
+          {{ scope.row.sexName }}
         </template>
       </el-table-column>
       <el-table-column label="角色">
         <template slot-scope="scope">
-          {{scope.row.roleName}}
+          {{ scope.row.roleName }}
         </template>
       </el-table-column>
       <el-table-column label="部门">
         <template slot-scope="scope">
-          {{scope.row.deptName}}
+          {{ scope.row.deptName }}
         </template>
       </el-table-column>
       <el-table-column label="邮箱">
         <template slot-scope="scope">
-          {{scope.row.email}}
+          {{ scope.row.email }}
         </template>
       </el-table-column>
       <el-table-column label="电话">
         <template slot-scope="scope">
-          {{scope.row.phone}}
+          {{ scope.row.phone }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间">
         <template slot-scope="scope">
-          {{scope.row.createTime}}
+          {{ scope.row.createTime }}
         </template>
       </el-table-column>
       <el-table-column label="状态">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.status==1" @change="changeUserStatus(scope.row)"></el-switch>
+          <el-switch v-model="scope.row.status==1" @change="changeUserStatus(scope.row)" />
         </template>
       </el-table-column>
-
 
     </el-table>
 
@@ -92,23 +97,24 @@
       @size-change="changeSize"
       @current-change="fetchPage"
       @prev-click="fetchPrev"
-      @next-click="fetchNext">
-    </el-pagination>
+      @next-click="fetchNext"
+    />
 
     <el-dialog
       :title="formTitle"
       :visible.sync="formVisible"
-      width="70%">
+      width="70%"
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="right">
         <el-row>
           <el-col :span="12">
             <el-form-item label="账户" prop="account">
-              <el-input v-model="form.account" minlength=1></el-input>
+              <el-input v-model="form.account" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="form.name"  minlength=1></el-input>
+              <el-input v-model="form.name" minlength="1" />
             </el-form-item>
           </el-col>
 
@@ -122,53 +128,52 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="邮箱" prop="email">
-              <el-input v-model="form.email"></el-input>
+              <el-input v-model="form.email" />
             </el-form-item>
           </el-col>
-          <el-col :span="12" v-show="isAdd">
+          <el-col v-show="isAdd" :span="12">
             <el-form-item label="密码" prop="password">
-              <el-input v-model="form.password"  type="password"></el-input>
+              <el-input v-model="form.password" type="password" />
             </el-form-item>
           </el-col>
-          <el-col :span="12" v-show="isAdd">
+          <el-col v-show="isAdd" :span="12">
             <el-form-item label="确认密码" prop="rePassword">
-              <el-input v-model="form.rePassword"  type="password"></el-input>
+              <el-input v-model="form.rePassword" type="password" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="电话" prop="phone">
-              <el-input v-model="form.phone"></el-input>
+              <el-input v-model="form.phone" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="所属部门" >
+            <el-form-item label="所属部门">
               <el-input
-                placeholder="请选择所属部门"
                 v-model="form.deptName"
+                placeholder="请选择所属部门"
                 readonly="readonly"
-                @click.native="deptTree.show  = !deptTree.show">
-              </el-input>
-              <el-tree v-if="deptTree.show"
-                       empty-text="暂无数据"
-                       :expand-on-click-node="false"
-                       :data="deptTree.data"
-                       :props="deptTree.defaultProps"
-                       @node-click="handleNodeClick"
-                       class="input-tree">
-              </el-tree>
+                @click.native="deptTree.show = !deptTree.show"
+              />
+              <el-tree
+                v-if="deptTree.show"
+                empty-text="暂无数据"
+                :expand-on-click-node="false"
+                :data="deptTree.data"
+                :props="deptTree.defaultProps"
+                class="input-tree"
+                @node-click="handleNodeClick"
+              />
 
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="是否启用" prop="status">
-              <el-switch v-model="form.status"></el-switch>
+              <el-switch v-model="form.status" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="出生日期">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;">
-
-                </el-date-picker>
+              <el-date-picker v-model="form.birthday" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -182,18 +187,19 @@
     <el-dialog
       title="角色分配"
       :visible.sync="roleDialog.visible"
-      width="25%">
+      width="25%"
+    >
       <el-form>
         <el-row>
           <el-col :span="12">
             <el-tree
-              :data="roleDialog.roles"
               ref="roleTree"
+              :data="roleDialog.roles"
               show-checkbox
               node-key="id"
               :default-checked-keys="roleDialog.checkedRoleKeys"
-              :props="roleDialog.defaultProps">
-            </el-tree>
+              :props="roleDialog.defaultProps"
+            />
 
           </el-col>
         </el-row>

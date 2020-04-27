@@ -3,6 +3,6 @@
     public enum AccountStatus
     {
         Active = 1,
-        InActive = 0
+        InActive = 2
     }
 }

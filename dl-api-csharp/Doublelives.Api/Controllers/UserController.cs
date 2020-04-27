@@ -8,6 +8,7 @@ using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 
 namespace Doublelives.Api.Controllers
 {
@@ -26,6 +27,9 @@ namespace Doublelives.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
         [HttpGet("list")]
         public IActionResult List([FromQuery]UserListSearchRequest request)
         {
@@ -42,6 +46,18 @@ namespace Doublelives.Api.Controllers
             };
 
             return Ok(viewModel);
+        }
+
+        /// <summary>
+        /// 更新用户信息
+        /// </summary>
+        [HttpPut]
+        public IActionResult ModifyUser(UserUpdateRequest request)
+        {
+            // todo model validate
+            _userService.Update(UserMapper.ToUserUpdateDto(request, WorkContext.CurrentUser));
+
+            return Ok("");
         }
     }
 }

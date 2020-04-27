@@ -15,7 +15,7 @@ namespace Doublelives.Service.Users
 
         void Add(SysUser user);
 
-        void Update(SysUser user);
+        void Update(UserUpdateDto dto);
 
         void Delete(long id);
 

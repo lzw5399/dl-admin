@@ -1,5 +1,7 @@
 ﻿using Doublelives.Api.Models.Users.Requests;
 using Doublelives.Domain.Sys.Dto;
+using Doublelives.Domain.Users.Dto;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,25 @@ namespace Doublelives.Api.Mappers
                 Name = request.Name?.Trim(),
                 Limit = request.Limit,
                 Page = request.Page
+            };
+
+            return dto;
+        }
+
+        public static UserUpdateDto ToUserUpdateDto(UserUpdateRequest request, CurrentUserDto currentUser)
+        {
+            var dto = new UserUpdateDto
+            {
+                Id = request.Id,
+                Account = request.Account.Trim(),
+                Name = request.Name.Trim(),
+                Deptid = request.Deptid,
+                Birthday = request.Birthday,
+                Email = request.Email,
+                Phone = request.Phone,
+                Sex = request.Sex,
+                Status = request.Status,
+                ModifyBy = currentUser.Id
             };
 
             return dto;

@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-row  :gutter="20">
+      <el-row :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.originalFileName" size="mini" placeholder="文件名"></el-input>
+          <el-input v-model="listQuery.originalFileName" size="mini" placeholder="文件名" />
         </el-col>
 
         <el-col :span="6">
@@ -15,23 +15,29 @@
 
     </div>
 
-
-    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-    @current-change="handleCurrentChange">
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+      @current-change="handleCurrentChange"
+    >
 
       <el-table-column label="ID">
         <template slot-scope="scope">
-          {{scope.row.id}}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="文件名">
         <template slot-scope="scope">
-          {{scope.row.originalFileName}}
+          {{ scope.row.originalFileName }}
         </template>
       </el-table-column>
       <el-table-column label="上传日期">
         <template slot-scope="scope">
-          {{scope.row.createTime}}
+          {{ scope.row.createTime }}
         </template>
       </el-table-column>
       <el-table-column labe="下载">
@@ -51,15 +57,13 @@
       @size-change="changeSize"
       @current-change="fetchPage"
       @prev-click="fetchPrev"
-      @next-click="fetchNext">
-    </el-pagination>
-
+      @next-click="fetchNext"
+    />
 
   </div>
 </template>
 
 <script src="./file.js"></script>
-
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";
