@@ -5,74 +5,77 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Doublelives.Migrations.Migrations
 {
     [DbContext(typeof(DlAdminDbContext))]
-    [Migration("20200427094206_reinit_mysql")]
-    partial class reinit_mysql
+    [Migration("20200427193723_init_pgsql2")]
+    partial class init_pgsql2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Doublelives.Domain.Cms.CmsArticle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Author")
                         .HasColumnName("author")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("作者")
                         .HasMaxLength(64);
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("内容")
                         .HasMaxLength(65535);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int>("IdChannel")
                         .HasColumnName("id_channel")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("栏目id");
 
                     b.Property<string>("Img")
                         .HasColumnName("img")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("文章题图id")
                         .HasMaxLength(64);
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(128) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(128)")
                         .HasComment("文章标题")
                         .HasMaxLength(128);
 
@@ -88,49 +91,50 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("IdFile")
                         .HasColumnName("id_file")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("banner图id");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("标题")
                         .HasMaxLength(64);
 
                     b.Property<string>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("类型")
                         .HasMaxLength(32);
 
                     b.Property<string>("Url")
                         .HasColumnName("url")
-                        .HasColumnType("varchar(128) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(128)")
                         .HasComment("点击banner跳转到url")
                         .HasMaxLength(128);
 
@@ -144,38 +148,39 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Code")
                         .HasColumnName("code")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("编码")
                         .HasMaxLength(64);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("名称")
                         .HasMaxLength(64);
 
@@ -191,50 +196,51 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<string>("Email")
                         .HasColumnName("email")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("邮箱")
                         .HasMaxLength(32);
 
                     b.Property<string>("Mobile")
                         .HasColumnName("mobile")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("联系电话")
                         .HasMaxLength(64);
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Remark")
                         .HasColumnName("remark")
-                        .HasColumnType("varchar(128) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(128)")
                         .HasComment("备注")
                         .HasMaxLength(128);
 
                     b.Property<string>("UserName")
                         .HasColumnName("user_name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("邀约人名称")
                         .HasMaxLength(64);
 
@@ -250,55 +256,56 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("消息内容")
                         .HasMaxLength(65535);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Receiver")
                         .HasColumnName("receiver")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("接收者")
                         .HasMaxLength(64);
 
                     b.Property<int>("State")
                         .HasColumnName("state")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("消息类型,0:初始,1:成功,2:失败");
 
                     b.Property<string>("TplCode")
                         .HasColumnName("tpl_code")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("模板编码")
                         .HasMaxLength(32);
 
                     b.Property<int>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("消息类型,0:短信,1:邮件");
 
                     b.HasKey("Id");
@@ -313,44 +320,45 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClassName")
                         .HasColumnName("class_name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("发送类")
                         .HasMaxLength(64);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("名称")
                         .HasMaxLength(64);
 
                     b.Property<string>("TplCode")
                         .HasColumnName("tpl_code")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("运营商模板编号")
                         .HasMaxLength(64);
 
@@ -366,61 +374,62 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Code")
                         .HasColumnName("code")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("编号")
                         .HasMaxLength(32);
 
                     b.Property<string>("Cond")
                         .HasColumnName("cond")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("发送条件")
                         .HasMaxLength(32);
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("内容")
                         .HasMaxLength(65535);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int>("IdMessageSender")
                         .HasColumnName("id_message_sender")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("发送者id");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("标题")
                         .HasMaxLength(64);
 
                     b.Property<int>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("消息类型,0:短信,1:邮件");
 
                     b.HasKey("Id");
@@ -438,45 +447,46 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CfgDesc")
                         .HasColumnName("cfg_desc")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("备注")
                         .HasMaxLength(65535);
 
                     b.Property<string>("CfgName")
                         .HasColumnName("cfg_name")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(256)")
                         .HasComment("参数名")
                         .HasMaxLength(256);
 
                     b.Property<string>("CfgValue")
                         .HasColumnName("cfg_value")
-                        .HasColumnType("varchar(512) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(512)")
                         .HasComment("参数值")
                         .HasMaxLength(512);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.HasKey("Id");
@@ -491,62 +501,63 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<string>("Fullname")
                         .HasColumnName("fullname")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("全称")
                         .HasMaxLength(255);
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<int?>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Pids")
                         .HasColumnName("pids")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("Simplename")
                         .HasColumnName("simplename")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("简称")
                         .HasMaxLength(255);
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -560,46 +571,47 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
@@ -614,38 +626,39 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("OriginalFileName")
                         .HasColumnName("original_file_name")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("实际名称")
                         .HasMaxLength(255);
 
                     b.Property<string>("RealFileName")
                         .HasColumnName("real_file_name")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("显示名称")
                         .HasMaxLength(255);
 
@@ -661,40 +674,41 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<string>("Ip")
                         .HasColumnName("ip")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("登录ip")
                         .HasMaxLength(255);
 
                     b.Property<string>("Logname")
                         .HasColumnName("logname")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("登陆者姓名")
                         .HasMaxLength(255);
 
                     b.Property<string>("Message")
                         .HasColumnName("message")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("消息")
                         .HasMaxLength(255);
 
                     b.Property<bool>("Succeed")
                         .HasColumnName("succeed")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否成功");
 
                     b.Property<int?>("Userid")
                         .HasColumnName("userid")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("用户id");
 
                     b.HasKey("Id");
@@ -709,107 +723,108 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnName("code")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("菜单编号")
                         .HasMaxLength(32);
 
                     b.Property<string>("Component")
                         .HasColumnName("component")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("菜单对应的组件")
                         .HasMaxLength(64);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<bool>("Hidden")
                         .HasColumnName("hidden")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否隐藏");
 
                     b.Property<string>("Icon")
                         .HasColumnName("icon")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("图标")
                         .HasMaxLength(32);
 
                     b.Property<bool>("Ismenu")
                         .HasColumnName("ismenu")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否是菜单1:菜单,0:按钮");
 
                     b.Property<bool?>("Isopen")
                         .HasColumnName("isopen")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否默认打开1:是,0:否");
 
                     b.Property<int>("Levels")
                         .HasColumnName("levels")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("层级");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("名称")
                         .HasMaxLength(64);
 
                     b.Property<int>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("顺序");
 
                     b.Property<string>("Pcode")
                         .IsRequired()
                         .HasColumnName("pcode")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("父菜单编号")
                         .HasMaxLength(64);
 
                     b.Property<string>("Pcodes")
                         .HasColumnName("pcodes")
-                        .HasColumnType("varchar(128) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(128)")
                         .HasComment("递归父级菜单编号")
                         .HasMaxLength(128);
 
                     b.Property<int>("Status")
                         .HasColumnName("status")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("状态1:启用,0:禁用");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("鼠标悬停提示信息")
                         .HasMaxLength(32);
 
                     b.Property<string>("Url")
                         .HasColumnName("url")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("链接")
                         .HasMaxLength(32);
 
@@ -829,44 +844,45 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Content")
                         .HasColumnName("content")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("内容")
                         .HasMaxLength(255);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Title")
                         .HasColumnName("title")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("标题")
                         .HasMaxLength(255);
 
                     b.Property<int?>("Type")
                         .HasColumnName("type")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -880,48 +896,49 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Classname")
                         .HasColumnName("classname")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("操作类名")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<string>("Logname")
                         .HasColumnName("logname")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("Logtype")
                         .HasColumnName("logtype")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("Message")
                         .HasColumnName("message")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("text")
                         .HasComment("详细信息");
 
                     b.Property<string>("Method")
                         .HasColumnName("method")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("方法名")
                         .HasMaxLength(255);
 
                     b.Property<bool>("Succeed")
                         .HasColumnName("succeed")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("boolean");
 
                     b.Property<int?>("Userid")
                         .HasColumnName("userid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -935,16 +952,17 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("Menuid")
                         .HasColumnName("menuid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Roleid")
                         .HasColumnName("roleid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -958,57 +976,58 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("Deptid")
                         .HasColumnName("deptid")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("部门id");
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("角色名")
                         .HasMaxLength(255);
 
                     b.Property<int?>("Num")
                         .HasColumnName("num")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("用于排序");
 
                     b.Property<int?>("Pid")
                         .HasColumnName("pid")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Tips")
                         .HasColumnName("tips")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasMaxLength(255);
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -1020,83 +1039,84 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<bool?>("Concurrent")
                         .HasColumnName("concurrent")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否允许并发");
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<string>("Cron")
                         .HasColumnName("cron")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(50)")
                         .HasComment("corn表达式")
                         .HasMaxLength(50);
 
                     b.Property<string>("Data")
                         .HasColumnName("data")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("执行参数")
                         .HasMaxLength(65535);
 
                     b.Property<bool?>("Disabled")
                         .HasColumnName("disabled")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否禁用");
 
                     b.Property<DateTime?>("ExecAt")
                         .HasColumnName("exec_at")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("上次执行时间");
 
                     b.Property<string>("ExecResult")
                         .HasColumnName("exec_result")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(65535)")
                         .HasComment("执行结果")
                         .HasMaxLength(65535);
 
                     b.Property<string>("JobClass")
                         .HasColumnName("job_class")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("执行类")
                         .HasMaxLength(255);
 
                     b.Property<string>("JobGroup")
                         .HasColumnName("job_group")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(50)")
                         .HasComment("任务组")
                         .HasMaxLength(50);
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(50)")
                         .HasComment("任务名")
                         .HasMaxLength(50);
 
                     b.Property<string>("Note")
                         .HasColumnName("note")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(50)")
                         .HasComment("任务说明")
                         .HasMaxLength(50);
 
@@ -1112,33 +1132,34 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime?>("ExecAt")
                         .HasColumnName("exec_at")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("执行时间");
 
                     b.Property<bool?>("ExecSuccess")
                         .HasColumnName("exec_success")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasComment("是否执行成功");
 
                     b.Property<int?>("IdTask")
                         .HasColumnName("id_task")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("任务id");
 
                     b.Property<string>("JobException")
                         .HasColumnName("job_exception")
-                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(500)")
                         .HasComment("异常日志")
                         .HasMaxLength(500);
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(50)")
                         .HasComment("任务名")
                         .HasMaxLength(50);
 
@@ -1154,100 +1175,101 @@ namespace Doublelives.Migrations.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("int")
-                        .HasComment("主键");
+                        .HasColumnType("integer")
+                        .HasComment("主键")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Account")
                         .HasColumnName("account")
-                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(32)")
                         .HasComment("登录账户")
                         .HasMaxLength(32);
 
                     b.Property<string>("Avatar")
                         .HasColumnName("avatar")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(255)")
                         .HasComment("头像")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("Birthday")
                         .HasColumnName("birthday")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("生日");
 
                     b.Property<int?>("CreateBy")
                         .HasColumnName("create_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("创建者");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnName("create_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("创建时间");
 
                     b.Property<int?>("Deptid")
                         .HasColumnName("deptid")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("部门id");
 
                     b.Property<string>("Email")
                         .HasColumnName("email")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("电子邮箱")
                         .HasMaxLength(64);
 
                     b.Property<int?>("ModifyBy")
                         .HasColumnName("modify_by")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("最后修改者");
 
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnName("modify_time")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("最后修改时间");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("显示的姓名")
                         .HasMaxLength(64);
 
                     b.Property<string>("Password")
                         .HasColumnName("password")
-                        .HasColumnType("varchar(64) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(64)")
                         .HasComment("加密后的密码")
                         .HasMaxLength(64);
 
                     b.Property<string>("Phone")
                         .HasColumnName("phone")
-                        .HasColumnType("varchar(16) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(16)")
                         .HasComment("联系电话")
                         .HasMaxLength(16);
 
                     b.Property<string>("Roleid")
                         .HasColumnName("roleid")
-                        .HasColumnType("varchar(128) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(128)")
                         .HasComment("角色id列表，以逗号分隔")
                         .HasMaxLength(128);
 
                     b.Property<string>("Salt")
                         .HasColumnName("salt")
-                        .HasColumnType("varchar(16) CHARACTER SET utf8mb4")
+                        .HasColumnType("character varying(16)")
                         .HasComment("密码盐")
                         .HasMaxLength(16);
 
                     b.Property<int?>("Sex")
                         .HasColumnName("sex")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("性别");
 
                     b.Property<int?>("Status")
                         .HasColumnName("status")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasComment("账户状态");
 
                     b.Property<int?>("Version")
                         .HasColumnName("version")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

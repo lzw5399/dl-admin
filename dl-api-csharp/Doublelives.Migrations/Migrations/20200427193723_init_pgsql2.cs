@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Doublelives.Migrations.Migrations
 {
-    public partial class reinit_mysql : Migration
+    public partial class init_pgsql2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -35,7 +35,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -55,7 +55,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -74,7 +74,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -95,7 +95,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -117,7 +117,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -137,7 +137,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -157,7 +157,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -181,7 +181,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -202,7 +202,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -221,7 +221,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     ip = table.Column<string>(maxLength: 255, nullable: true, comment: "登录ip"),
                     logname = table.Column<string>(maxLength: 255, nullable: true, comment: "登陆者姓名"),
@@ -240,7 +240,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -271,7 +271,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -291,7 +291,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     classname = table.Column<string>(maxLength: 255, nullable: true, comment: "操作类名"),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     logname = table.Column<string>(maxLength: 255, nullable: true),
@@ -312,7 +312,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     menuid = table.Column<int>(nullable: false),
                     roleid = table.Column<int>(nullable: false)
                 },
@@ -327,7 +327,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -349,7 +349,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -376,7 +376,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     exec_at = table.Column<DateTime>(nullable: true, comment: "执行时间"),
                     exec_success = table.Column<bool>(nullable: true, comment: "是否执行成功"),
                     id_task = table.Column<int>(nullable: true, comment: "任务id"),
@@ -394,7 +394,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -424,7 +424,7 @@ namespace Doublelives.Migrations.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),

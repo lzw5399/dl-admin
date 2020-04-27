@@ -17,7 +17,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Pomelo.EntityFrameworkCore.MySql.Storage;
 using System;
-using System.IO;
 
 namespace Doublelives.Core
 {
@@ -49,11 +48,10 @@ namespace Doublelives.Core
                 options =>
                 {
                     options
-                        .UseMySql(configuration.GetConnectionString("dl"),
+                        .UseNpgsql(configuration.GetConnectionString("dl"),
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
-                                it.ServerVersion(new ServerVersion(new Version(8, 0, 19), ServerType.MySql));
                             });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();

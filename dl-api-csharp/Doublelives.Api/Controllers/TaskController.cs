@@ -21,7 +21,8 @@ namespace Doublelives.Api.Controllers
         [HttpGet]
         public IActionResult WarmupDatabase()
         {
-            _taskService.WarmupDatabase();
+            _taskService.ImportDataFromJsonFile();
+            //_taskService.WarmupDatabase();
             return Ok();
         }
     }
