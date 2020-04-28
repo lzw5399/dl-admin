@@ -55,7 +55,7 @@ namespace Doublelives.Service.Tasks
             {
                 ExecAt = DateTime.Now,
                 ExecSuccess = true,
-                Name = "刷新mysql",
+                Name = "刷新",
                 IdTask = 1,
                 JobException = $"成功！执行时间:{sw.ElapsedMilliseconds}"
             });
