@@ -57,7 +57,7 @@ namespace Doublelives.Api.Controllers
             // todo model validate
             _userService.Update(UserMapper.ToUserUpdateDto(request, WorkContext.CurrentUser));
 
-            return Ok("");
+            return Ok("1");
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Doublelives.Api.Controllers
         [HttpPost]
         public IActionResult Add(UserUpdateRequest request)
         {
-            return Ok();
+            return Ok("1");
         }
     }
 }

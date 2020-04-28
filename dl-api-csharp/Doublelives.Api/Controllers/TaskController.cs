@@ -23,7 +23,7 @@ namespace Doublelives.Api.Controllers
         {
             _taskService.ImportDataFromJsonFile();
             //_taskService.WarmupDatabase();
-            return Ok();
+            return Ok("1");
         }
     }
 }

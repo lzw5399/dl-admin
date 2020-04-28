@@ -66,6 +66,7 @@ instance.interceptors.response.use(
     }
   },
   error => {
+    debugger
     if (error.response.status === 401) {
       store.dispatch('user/logout').then(() => {
         router.replace({

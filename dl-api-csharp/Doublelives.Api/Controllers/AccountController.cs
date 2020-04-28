@@ -65,7 +65,7 @@ namespace Doublelives.Api.Controllers
         [HttpPost("updatePwd")]
         public IActionResult UpdatePassword(AccountUpdatePasswordRequest request)
         {
-            return Ok();
+            return Ok("1");
         }
     }
 }
