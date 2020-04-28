@@ -44,8 +44,7 @@ namespace Doublelives.Core
             services.AddDbContext<DlAdminDbContext>(
                 options =>
                 {
-                    options
-                        .UseNpgsql(configuration.GetConnectionString("dl"),
+                    options.UseNpgsql(configuration.GetConnectionString("dl"),
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
