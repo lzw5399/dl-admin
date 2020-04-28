@@ -1,77 +1,105 @@
-﻿using Doublelives.Infrastructure.Extensions;
+﻿using CSRedis;
 using Doublelives.Shared.ConfigModels;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Doublelives.Infrastructure.Cache
 {
     public class CacheManager : ICacheManager
     {
-        private static readonly Dictionary<string, int> CacheKeyNTimes = new Dictionary<string, int>();
-        private static object _lockObj = new object();
         private readonly CacheOptions _cacheOptions;
-        private readonly IDistributedCache _cache;
+        private readonly CSRedisClient _redisClient;
 
-        public CacheManager(IOptions<CacheOptions> options, IDistributedCache cache)
+        public CacheManager(IOptions<CacheOptions> options, CSRedisClient client)
         {
             _cacheOptions = options.Value;
-            _cache = cache;
+            _redisClient = client;
         }
 
-        public async Task<T> GetOrCreateAsync<T>(string cacheKey, Func<DistributedCacheEntryOptions, Task<T>> factory)
+        /// <summary>
+        /// 获取或添加缓存
+        /// </summary>
+        /// <typeparam name="T">获取的结果类型</typeparam>
+        /// <param name="cacheKey">缓存key</param>
+        /// <param name="factory">若缓存没有命中，执行的获取数据的方法</param>
+        /// <returns></returns>
+        public async Task<T> GetOrCreateAsync<T>(string cacheKey, Func<CacheEntryOptions, Task<T>> factory)
         {
+            var entry = GetDefaultCacheEntryOptions();
+
             // 如果不启用cache直接请求
             if (!_cacheOptions.Enable)
-            {
-                return await factory(new DistributedCacheEntryOptions());
-            }
-
-            int cacheTime = _cacheOptions.DefaultExpireMinutes;
-            if (IsCacheTimeChanged(cacheKey, cacheTime))
-            {
-                Remove(cacheKey);
-            }
-            AddCacheKey(cacheKey, cacheTime);
-
-            return await _cache.GetOrCreateAsync(cacheKey, async entry =>
-            {
-                entry.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(cacheTime);
                 return await factory(entry);
-            });
+
+            if (string.IsNullOrEmpty(cacheKey))
+                throw new ArgumentNullException(nameof(cacheKey));
+
+            if (factory == null)
+                throw new ArgumentNullException(nameof(factory));
+
+            var value = _redisClient.Get<T>(cacheKey);
+
+            if (value != null)
+                return value;
+
+            value = await factory(entry);
+
+            if (value == null)
+                return default;
+
+            _redisClient.Set(cacheKey, value, entry.Expire);
+
+            return value;
         }
 
-        public void Remove(string cacheKey)
+        /// <summary>
+        /// 添加或更新
+        /// </summary>
+        /// <param name="cacheKey">缓存Key</param>
+        /// <param name="cacheValue">要缓存的对象</param>
+        public bool CreateOrUpdate<T>(string cacheKey, T cacheValue, CacheEntryOptions options = null)
         {
-            lock (_lockObj)
+            if (string.IsNullOrEmpty(cacheKey))
+                throw new ArgumentNullException(nameof(cacheKey));
+
+            if (cacheValue == null)
+                throw new ArgumentNullException(nameof(cacheValue));
+
+            options ??= GetDefaultCacheEntryOptions();
+
+            return _redisClient.Set(cacheKey, cacheValue, options.Expire);
+        }
+
+        /// <summary>根据key移除缓存</summary>
+        public bool Remove(string cacheKey)
+        {
+            return _redisClient.Del(cacheKey) > 0 ? true : false;
+        }
+
+        public bool Exist(string cacheKey)
+        {
+            return _redisClient.Exists(cacheKey);
+        }
+
+        /// <summary>清空缓存</summary>
+        public void Flushall()
+        {
+            var keys = _redisClient.Keys("*");
+
+            foreach (var key in keys)
             {
-                CacheKeyNTimes.Remove(cacheKey);
+                _redisClient.Del(key);
             }
-
-            _cache.Remove(cacheKey);
         }
 
-        private bool IsCacheTimeChanged(string cacheKey, int cacheTime)
+        private CacheEntryOptions GetDefaultCacheEntryOptions()
         {
-            if (!CacheKeyNTimes.ContainsKey(cacheKey)) return false;
-            var oldCacheTime = CacheKeyNTimes[cacheKey];
-
-            return oldCacheTime != cacheTime;
-        }
-
-        private static void AddCacheKey(string cachekey, int time = 1)
-        {
-            if (CacheKeyNTimes.ContainsKey(cachekey)) return;
-            lock (_lockObj)
+            return new CacheEntryOptions
             {
-                if (!CacheKeyNTimes.ContainsKey(cachekey))
-                {
-                    CacheKeyNTimes[cachekey] = time;
-                }
-            }
+                Expire = TimeSpan.FromMinutes(_cacheOptions.DefaultExpireMinutes)
+            };
         }
     }
 }

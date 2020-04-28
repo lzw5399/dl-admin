@@ -18,12 +18,21 @@ namespace Doublelives.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("warmup")]
         public IActionResult WarmupDatabase()
         {
             _taskService.ImportDataFromJsonFile();
             //_taskService.WarmupDatabase();
             return Ok("1");
+        }
+
+        [AllowAnonymous]
+        [HttpGet("flushallCache")]
+        public IActionResult FlushallCache()
+        {
+            _taskService.FlushallCache();
+
+            return Ok();
         }
     }
 }

@@ -15,11 +15,11 @@ namespace Doublelives.Service.Mappers
             {
                 Id = topMenu.Id,
                 ParentId = 0,
-                Component = topMenu.Component,
+                Component = !string.IsNullOrEmpty(topMenu.Component) ? topMenu.Component : string.Empty,
                 Hidden = topMenu.Hidden,
                 Name = topMenu.Name,
                 Num = topMenu.Num,
-                Path = topMenu.Url,
+                Path = !string.IsNullOrEmpty(topMenu.Url) ? topMenu.Url : string.Empty,
                 Meta = new MetaDto
                 {
                     Icon = topMenu.Icon,

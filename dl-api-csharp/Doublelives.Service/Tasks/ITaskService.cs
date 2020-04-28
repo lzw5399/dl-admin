@@ -7,5 +7,7 @@
         void ExportCurrentDbDataAsJsonFile();
 
         void ImportDataFromJsonFile();
+
+        void FlushallCache();
     }
 }

@@ -1,15 +1,22 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Doublelives.Infrastructure.Cache
 {
     public interface ICacheManager
     {
-        Task<T> GetOrCreateAsync<T>(string cacheKey, Func<DistributedCacheEntryOptions, Task<T>> factory);
+        Task<T> GetOrCreateAsync<T>(string cacheKey, Func<CacheEntryOptions, Task<T>> factory);
 
-        void Remove(string cacheKey);
+        bool CreateOrUpdate<T>(string cacheKey, T cacheValue, CacheEntryOptions options = null);
+
+        bool Remove(string cacheKey);
+
+        bool Exist(string cacheKey);
+
+        /// <summary>
+        /// 清空所有缓存
+        /// </summary>
+        void Flushall();
     }
 }

@@ -74,7 +74,7 @@ namespace Doublelives.Persistence.Repositories
                     .ToList();
             }
 
-            return permissions.Distinct().ToList();
+            return permissions.Where(it => !string.IsNullOrWhiteSpace(it)).Distinct().ToList();
         }
     }
 }

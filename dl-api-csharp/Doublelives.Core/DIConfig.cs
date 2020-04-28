@@ -1,4 +1,5 @@
-﻿using Doublelives.Infrastructure.Cache;
+﻿using CSRedis;
+using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
 using Doublelives.Service.Depts;
 using Doublelives.Service.Menus;
@@ -10,8 +11,6 @@ using Doublelives.Service.TencentCos;
 using Doublelives.Service.Users;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -48,6 +47,7 @@ namespace Doublelives.Core
                             it =>
                             {
                                 it.MigrationsAssembly("Doublelives.Migrations");
+                                it.EnableRetryOnFailure();
                             });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -55,8 +55,7 @@ namespace Doublelives.Core
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)
         {
-            var csredis = new CSRedis.CSRedisClient(configuration["cache:redisconn"]);
-            services.AddSingleton<IDistributedCache>(new CSRedisCache(csredis));
+            services.AddSingleton(new CSRedisClient(configuration["cache:redisconn"]));
             services.AddSingleton<ICacheManager, CacheManager>();
         }
 

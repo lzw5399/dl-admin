@@ -2,6 +2,7 @@
 using Doublelives.Domain.Infrastructure;
 using Doublelives.Domain.Messages;
 using Doublelives.Domain.Sys;
+using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
 using Newtonsoft.Json;
 using System;
@@ -17,12 +18,13 @@ namespace Doublelives.Service.Tasks
     {
         private readonly DlAdminDbContext _dbContext;
         private readonly IUnitOfWork _unitOfWork;
-        private List<string> list;
+        private readonly ICacheManager _cacheManager;
 
-        public TaskService(DlAdminDbContext dbContext, IUnitOfWork unitOfWork)
+        public TaskService(DlAdminDbContext dbContext, IUnitOfWork unitOfWork, ICacheManager cacheManager)
         {
             _dbContext = dbContext;
             _unitOfWork = unitOfWork;
+            _cacheManager = cacheManager;
         }
 
         public void WarmupDatabase()
@@ -125,6 +127,11 @@ namespace Doublelives.Service.Tasks
                 var mi = GetType().GetMethod("Read").MakeGenericMethod(type);
                 mi.Invoke(this, new object[] { item });
             }
+        }
+
+        public void FlushallCache()
+        {
+            _cacheManager.Flushall();
         }
 
         public void Read<T>(string fileName) where T: EntityBase
