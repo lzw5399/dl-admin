@@ -21,6 +21,6 @@ namespace Doublelives.Api.Models.Users.Requests
 
         public DateTime Birthday { get; set; }
 
-        public AccountStatus Status { get; set; }
+        public bool Status { get; set; }
     }
 }

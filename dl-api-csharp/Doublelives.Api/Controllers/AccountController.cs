@@ -48,7 +48,7 @@ namespace Doublelives.Api.Controllers
         {
             // todo kankan cache?
             var result = _userService.GetInfo(WorkContext.CurrentUser.Id);
-            var info = _mapper.Map<AccountInfoDto>(result);
+            var info = _mapper.Map<AccountInfoViewModel>(result);
 
             return Ok(info);
         }

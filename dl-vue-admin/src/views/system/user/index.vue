@@ -82,7 +82,7 @@
       </el-table-column>
       <el-table-column label="状态">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.status==1" @change="changeUserStatus(scope.row)" />
+          <el-switch v-model="scope.row.status" @change="changeUserStatus(scope.row)" />
         </template>
       </el-table-column>
 

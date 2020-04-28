@@ -40,7 +40,7 @@ namespace Doublelives.Service.Mappers
                     Phone = user.Phone,
                     Roleid = user.Roleid,
                     Roles = roles.Select(it => it.Name).ToList(),
-                    Status = (int)(user.Status ?? AccountStatus.InActive),
+                    Status = user.Status == AccountStatus.Active,
                     DeptName = dept.Simplename,
                     RoleName = string.Join(',', roles.Select(it => it.Name)),
                 },
@@ -74,7 +74,7 @@ namespace Doublelives.Service.Mappers
                     CreateTime = it.CreateTime,
                     Sex = (int)it.Sex,
                     Version = it.Version,
-                    Status = (int)(it.Status ?? AccountStatus.InActive),
+                    Status = it.Status == AccountStatus.Active,
                     Deptid = it.Deptid.Value(),
                     Roleid = it.Roleid
                 }).ToList()

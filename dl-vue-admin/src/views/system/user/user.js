@@ -2,6 +2,8 @@ import { deleteUser, getList, updateUser, addUser, remove, setRole, changeStatus
 import { list as deptList } from '@/api/system/dept'
 import { parseTime } from '@/utils/index'
 import { roleTreeListByIdUser } from '@/api/system/role'
+import _ from 'lodash'
+
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 
@@ -181,13 +183,13 @@ export default {
         if (valid) {
           if (this.validPasswd()) {
             var form = self.form
-            if (form.status === true) {
-              // 启用
-              form.status = 1
-            } else {
-              // 冻结
-              form.status = 2
-            }
+            // if (form.status === true) {
+            //   // 启用
+            //   form.status = 1
+            // } else {
+            //   // 冻结
+            //   form.status = 2
+            // }
             form.birthday = parseTime(form.birthday, '{y}-{m}-{d}')
             form.createtime = parseTime(form.createtime)
             updateUser(form).then(response => {
@@ -290,6 +292,5 @@ export default {
         })
       })
     }
-
   }
 }

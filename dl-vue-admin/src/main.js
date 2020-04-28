@@ -15,7 +15,6 @@ import i18n from './lang' // Internationalization
 import '@/icons' // icon
 import '@/permission' // permission control
 
-
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -26,7 +25,7 @@ import '@/permission' // permission control
  */
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, {   i18n: (key, value) => i18n.t(key, value) })
+Vue.use(ElementUI, { i18n: (key, value) => i18n.t(key, value) })
 
 Vue.component('v-chart', ECharts)
 Vue.config.productionTip = false

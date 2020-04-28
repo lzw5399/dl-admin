@@ -72,7 +72,7 @@ namespace Doublelives.Api.Models.Account
         /// <summary>
         /// 账号状态 1激活 2停用
         /// </summary>
-        public int Status { get; set; }
+        public bool Status { get; set; }
 
         /// <summary>
         /// 修改的版本

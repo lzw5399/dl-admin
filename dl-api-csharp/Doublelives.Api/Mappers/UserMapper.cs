@@ -1,6 +1,7 @@
 ﻿using Doublelives.Api.Models.Users.Requests;
 using Doublelives.Domain.Sys.Dto;
 using Doublelives.Domain.Users.Dto;
+using Doublelives.Shared.Enum;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace Doublelives.Api.Mappers
                 Email = request.Email,
                 Phone = request.Phone,
                 Sex = request.Sex,
-                Status = request.Status,
+                Status = request.Status ? AccountStatus.Active : AccountStatus.InActive,
                 ModifyBy = currentUser.Id
             };
 

@@ -55,7 +55,7 @@ namespace Doublelives.Domain.Sys.Dto
         /// <summary>
         /// 账号状态 1激活 2停用
         /// </summary>
-        public int Status { get; set; }
+        public bool Status { get; set; }
 
         /// <summary>
         /// 修改的版本
@@ -95,7 +95,7 @@ namespace Doublelives.Domain.Sys.Dto
 
         public string RoleName { get; set; }
 
-        public string StatusName => Status == (int)AccountStatus.Active ? "启用" : "禁用";
+        public string StatusName => Status ? "启用" : "禁用";
 
         public string SexName => Sex.HasValue ? (Sex.Value == (int)Gender.Male ? "男" : "女") : string.Empty;
     }
