@@ -113,7 +113,8 @@ namespace Doublelives.Service.Users
 
         public PagedModel<AccountProfileDto> GetPagedList(UserSearchDto criteria)
         {
-            Expression<Func<SysUser, bool>> condition = it => it.Status == AccountStatus.Active;
+            // 排除"应用系统"用户
+            Expression<Func<SysUser, bool>> condition = it => it.Id > 0;
 
             if (!string.IsNullOrWhiteSpace(criteria.Account))
             {
