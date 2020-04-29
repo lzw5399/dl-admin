@@ -6,6 +6,11 @@ namespace Doublelives.Shared.Models
 {
     public class PagedModel<T>
     {
+        public PagedModel()
+        {
+            Data = new T[0];
+        }
+
         public IReadOnlyList<T> Data { get; set; }
 
         /// <summary>

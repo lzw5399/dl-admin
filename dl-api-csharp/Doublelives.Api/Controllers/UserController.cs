@@ -28,7 +28,7 @@ namespace Doublelives.Api.Controllers
         }
 
         /// <summary>
-        /// 获取用户列表
+        /// 获取分页用户列表
         /// </summary>
         [HttpGet("list")]
         public IActionResult List([FromQuery]UserListSearchRequest request)

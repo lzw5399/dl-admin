@@ -1,4 +1,6 @@
 ﻿using Doublelives.Domain.Sys;
+using Doublelives.Domain.Sys.Dto;
+using Doublelives.Shared.Models;
 using System.Collections.Generic;
 
 namespace Doublelives.Service.Roles
@@ -18,6 +20,6 @@ namespace Doublelives.Service.Roles
         /// <summary>
         /// 获取所有的role
         /// </summary>
-        List<SysRole> List();
+        PagedModel<RoleProfileDto> GetPagedList(RoleSearchDto criteria);
     }
 }
