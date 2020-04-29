@@ -2,6 +2,7 @@
 using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
 using Doublelives.Service.Depts;
+using Doublelives.Service.Dicts;
 using Doublelives.Service.Menus;
 using Doublelives.Service.Notices;
 using Doublelives.Service.Pictures;
@@ -36,6 +37,7 @@ namespace Doublelives.Core
             services.AddScoped<IDeptService, DeptService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IDictService, DictService>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)

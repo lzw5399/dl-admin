@@ -28,15 +28,5 @@ namespace Doublelives.Api.Controllers
 
             return base.Ok(response);
         }
-
-        //public new OkObjectResult Ok()
-        //{
-        //    var response = new ResponseBase
-        //    {
-        //        Data = string.Empty
-        //    };
-
-        //    return base.Ok(response);
-        //}
     }
 }

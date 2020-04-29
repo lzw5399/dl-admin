@@ -18,7 +18,7 @@ namespace Doublelives.Service.Roles
         List<SysRole> GetListByIds(List<int> ids);
 
         /// <summary>
-        /// 获取所有的role
+        /// 获取分页的role
         /// </summary>
         PagedModel<RoleProfileDto> GetPagedList(RoleSearchDto criteria);
     }
