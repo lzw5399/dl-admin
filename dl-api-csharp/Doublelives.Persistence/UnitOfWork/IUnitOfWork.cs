@@ -19,6 +19,8 @@ namespace Doublelives.Persistence
 
         IRepository<SysTaskLog> TaskLogRepository { get; }
 
+        IRepository<SysDict> DictRepository { get; }
+
         IMenuRepository MenuRepository { get; }
 
         void Commit();

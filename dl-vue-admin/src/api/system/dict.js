@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: '/dict/list',
+    url: 'api/dict/list',
     method: 'get',
     params
   })
@@ -10,16 +10,15 @@ export function getList(params) {
 
 export function save(params) {
   return request({
-    url: '/dict',
+    url: 'api/dict',
     method: 'post',
     params
   })
 }
 
-
 export function update(params) {
   return request({
-    url: '/dict',
+    url: 'api/dict',
     method: 'put',
     params
   })
@@ -27,10 +26,10 @@ export function update(params) {
 
 export function remove(id) {
   return request({
-    url: '/dict',
+    url: 'api/dict',
     method: 'delete',
     params: {
-      id:id
+      id: id
     }
   })
 }

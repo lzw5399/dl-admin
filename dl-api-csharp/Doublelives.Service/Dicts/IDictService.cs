@@ -9,6 +9,6 @@ namespace Doublelives.Service.Dicts
         /// <summary>
         /// 获取分页数据
         /// </summary>
-        PagedModel<DictProfileDto> GetPagedList(DictSearchDto criteria);
+        PagedModel<DictDto> GetPagedList(DictSearchDto criteria);
     }
 }

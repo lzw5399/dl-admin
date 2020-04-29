@@ -2,7 +2,7 @@
 
 namespace Doublelives.Domain.Sys.Dto
 {
-    public class DictProfileDto
+    public class DictDto
     {
         public int Id { get; set; }
 

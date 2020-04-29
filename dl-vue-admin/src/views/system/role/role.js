@@ -201,10 +201,10 @@ export default {
               type: 'success'
             })
             this.fetchData()
-          }).catch( err=> {
+          }).catch(err => {
             this.$notify.error({
               title: '错误',
-              message:err,
+              message: err
             })
           })
         }).catch(() => {
@@ -221,7 +221,7 @@ export default {
       }
     },
     savePermissions() {
-      let checkedNodes =this.$refs.permissonTree.getCheckedNodes(false,true)
+      const checkedNodes = this.$refs.permissonTree.getCheckedNodes(false, true)
       let menuIds = ''
       for (var index in checkedNodes) {
         menuIds += checkedNodes[index].id + ','
