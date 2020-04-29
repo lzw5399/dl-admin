@@ -3,6 +3,7 @@ using Doublelives.Shared.ConfigModels;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Doublelives.Infrastructure.Cache
@@ -52,6 +53,41 @@ namespace Doublelives.Infrastructure.Cache
             _redisClient.Set(cacheKey, value, entry.Expire);
 
             return value;
+        }
+
+        /// <summary>
+        /// 整张表缓存的一个封装
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cacheKey"></param>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
+        public async Task<List<T>> GetOrCreatePagedListAsync<T>(string cacheKey, Criteria criteria)
+        {
+            //_redisClient.HMSet("sys_cfg",)
+
+            // mock的数据库数据
+            var mockedData = new List<Criteria>
+            {
+                new Criteria{ Id = 66, Name = "haha" },
+                new Criteria{ Id = 77, Name = "wewe" },
+                new Criteria{ Id = 88, Name = "rrrr" },
+            };
+            var mixed = new List<object>();
+            foreach (var t in mockedData)
+            {
+                mixed.Add(t.Id);
+                mixed.Add(t);
+            }
+
+            _redisClient.HMSet($"{typeof(T).Name}_all", mixed.ToArray());
+        }
+
+        public class Criteria
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
         }
 
         /// <summary>

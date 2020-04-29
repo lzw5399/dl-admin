@@ -21,6 +21,8 @@ namespace Doublelives.Persistence
 
         IRepository<SysDict> DictRepository { get; }
 
+        IRepository<SysCfg> CfgRepository { get; }
+
         IMenuRepository MenuRepository { get; }
 
         void Commit();

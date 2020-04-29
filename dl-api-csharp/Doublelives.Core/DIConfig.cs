@@ -1,6 +1,7 @@
 ﻿using CSRedis;
 using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
+using Doublelives.Service.Cfgs;
 using Doublelives.Service.Depts;
 using Doublelives.Service.Dicts;
 using Doublelives.Service.Menus;
@@ -38,6 +39,7 @@ namespace Doublelives.Core
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<IDictService, DictService>();
+            services.AddScoped<ICfgService, CfgService>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
@@ -57,7 +59,8 @@ namespace Doublelives.Core
 
         private static void ConfigureDistributedCache(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton(new CSRedisClient(configuration["cache:redisconn"]));
+            var csredis = new CSRedisClient(configuration["cache:redisconn"]);
+            services.AddSingleton(csredis);
             services.AddSingleton<ICacheManager, CacheManager>();
         }
 

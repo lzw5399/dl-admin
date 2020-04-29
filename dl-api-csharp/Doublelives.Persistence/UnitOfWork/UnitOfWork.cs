@@ -19,6 +19,7 @@ namespace Doublelives.Persistence
             NoticeRepository = new Repository<SysNotice>(albumDbContext);
             MenuRepository = new MenuRepository(albumDbContext);
             TaskLogRepository = new Repository<SysTaskLog>(albumDbContext);
+            CfgRepository = new Repository<SysCfg>(albumDbContext);
             DictRepository = new Repository<SysDict>(albumDbContext);
         }
 
@@ -35,6 +36,8 @@ namespace Doublelives.Persistence
         public IRepository<SysTaskLog> TaskLogRepository { get; private set; }
 
         public IRepository<SysDict> DictRepository { get; private set; }
+
+        public IRepository<SysCfg> CfgRepository { get; private set; }
 
         public IMenuRepository MenuRepository { get; private set; }
 
