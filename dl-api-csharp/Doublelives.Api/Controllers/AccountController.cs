@@ -33,7 +33,7 @@ namespace Doublelives.Api.Controllers
         {
             ModelValidator<AccountLoginRequest, LoginRequestValidator>.Validate(request);
 
-            (var valid, var token) = _userService.Login(request.UserName, request.Password);
+            var (valid, token) = _userService.Login(request.UserName, request.Password);
 
             if (!valid) return NotFound("用户名或密码错误，请检查");
 

@@ -48,11 +48,11 @@ namespace Doublelives.Core
                 options =>
                 {
                     options.UseNpgsql(configuration.GetConnectionString("dl"),
-                            it =>
-                            {
-                                it.MigrationsAssembly("Doublelives.Migrations");
-                                it.EnableRetryOnFailure();
-                            });
+                        it =>
+                        {
+                            it.MigrationsAssembly("Doublelives.Migrations");
+                            it.EnableRetryOnFailure();
+                        });
                 });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

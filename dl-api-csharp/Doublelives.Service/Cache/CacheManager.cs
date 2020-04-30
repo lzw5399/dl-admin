@@ -81,7 +81,8 @@ namespace Doublelives.Service.Cache
                 return await GetPagedListWithFuzzySearch<T>(criteria);
 
             // 整个是没有模糊查询的过程
-            var ids = await _redisClient.ZRangeByLexAsync($"{typeof(T).Name}_ids", "-", "+", criteria.Count, criteria.Offset);
+            var ids = await _redisClient.ZRangeByLexAsync($"{typeof(T).Name}_ids", "-", "+", criteria.Count,
+                criteria.Offset);
 
             if (!ids.Any())
                 return await GetPagedListAndTriggerCacheFiller<T>(criteria);
@@ -94,15 +95,19 @@ namespace Doublelives.Service.Cache
             return list.ToList();
         }
 
-        public async Task<bool> SetWholeTableToCache<T>() where T : EntityBase
+        public void SetWholeTableToCache<T>() where T : EntityBase
         {
-            var datas = await _dbContext.Set<T>().ToListAsync();
-            var 
+            Task.Run(async () =>
+            {
+                var data = await _dbContext.Set<T>().ToListAsync();
+                var ids = data.Select(it => ((decimal) it.Id, (object) it.Id)).ToArray();
+                var mixed = data.SelectMany(it => new object[] {it.Id, it}).ToArray();
 
-            _redisClient.ZAdd($"{typeof(T).Name}_ids", );
+                // 将id添加到zrange(就是sorted set)
+                await _redisClient.ZAddAsync($"{typeof(T).Name}_ids", ids);
 
-            var mixed = datas.SelectMany(it => new object[] { it.Id, it }).ToArray();
-
+                await _redisClient.HMSetAsync($"{typeof(T).Name}_all", mixed);
+            }).Wait();
         }
 
         /// <summary>
@@ -110,7 +115,6 @@ namespace Doublelives.Service.Cache
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="criteria"></param>
-        /// <param name="round">因为包含递归，每次取10000，代表第几轮</param>
         /// <returns></returns>
         private async Task<List<T>> GetPagedListWithFuzzySearch<T>(SearchCriteria criteria) where T : EntityBase
         {
@@ -137,7 +141,8 @@ namespace Doublelives.Service.Cache
 
                 // 如果最终list的数量符合，或者ids的数量少于【(当前轮数+1)*1W】说明整张表不超过这个数
                 // 直接返回分页的
-                if (finalResult.Count >= criteria.Offset + criteria.Count || ids.Count() <= QUERY_PER_ROUND * (round + 1))
+                if (finalResult.Count >= criteria.Offset + criteria.Count ||
+                    ids.Count() <= QUERY_PER_ROUND * (round + 1))
                 {
                     notenough = false;
                 }
@@ -164,10 +169,10 @@ namespace Doublelives.Service.Cache
             var expression = GetPagedConditionExpression<T>(criteria);
 
             var list = await _dbContext.Set<T>()
-                 .Where(expression)
-                 .Skip(criteria.Offset)
-                 .Take(criteria.Count)
-                 .ToListAsync();
+                .Where(expression)
+                .Skip(criteria.Offset)
+                .Take(criteria.Count)
+                .ToListAsync();
 
             return list;
         }

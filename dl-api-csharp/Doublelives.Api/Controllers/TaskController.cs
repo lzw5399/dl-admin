@@ -38,7 +38,7 @@ namespace Doublelives.Api.Controllers
         [HttpGet("cachefiller")]
         public IActionResult CacheFiller()
         {
-            _taskService.FlushallCache();
+            _taskService.FillCache();
 
             return Ok();
         }

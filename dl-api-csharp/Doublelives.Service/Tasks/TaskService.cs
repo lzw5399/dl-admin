@@ -69,30 +69,31 @@ namespace Doublelives.Service.Tasks
         {
             var datas = new Dictionary<string, object>
             {
-                { "CmsArticle", _dbContext.Set<CmsArticle>().ToList()} ,
-                { "CmsBanner" ,_dbContext.Set<CmsBanner>().ToList()} ,
-                { "CmsChannel" ,_dbContext.Set<CmsChannel>().ToList()} ,
-                { "CmsContacts" ,_dbContext.Set<CmsContacts>().ToList()} ,
-                { "Message" ,_dbContext.Set<Message>().ToList()} ,
-                { "MessageSender" , _dbContext.Set<MessageSender>().ToList()} ,
-                { "MessageTemplate" ,_dbContext.Set<MessageTemplate>().ToList()} ,
-                { "SysCfg" ,_dbContext.Set<SysCfg>().ToList()} ,
-                { "SysDept" ,_dbContext.Set<SysDept>().ToList()} ,
-                { "SysDict" , _dbContext.Set<SysDict>().ToList()} ,
-                { "SysFileInfo" ,_dbContext.Set<SysFileInfo>().ToList()} ,
-                { "SysLoginLog" ,_dbContext.Set<SysLoginLog>().ToList()} ,
-                { "SysMenu" ,_dbContext.Set<SysMenu>().ToList()} ,
-                { "SysNotice" ,_dbContext.Set<SysNotice>().ToList()} ,
-                { "SysOperationLog" ,_dbContext.Set<SysOperationLog>().ToList()} ,
-                { "SysRelation" ,_dbContext.Set<SysRelation>().ToList()} ,
-                { "SysRole" ,_dbContext.Set<SysRole>().ToList()} ,
-                { "SysTask" ,_dbContext.Set<SysTask>().ToList()} ,
-                { "SysTaskLog" , _dbContext.Set<SysTaskLog>().ToList()} ,
-                { "SysUser" ,_dbContext.Set<SysUser>().ToList()}
+                {"CmsArticle", _dbContext.Set<CmsArticle>().ToList()},
+                {"CmsBanner", _dbContext.Set<CmsBanner>().ToList()},
+                {"CmsChannel", _dbContext.Set<CmsChannel>().ToList()},
+                {"CmsContacts", _dbContext.Set<CmsContacts>().ToList()},
+                {"Message", _dbContext.Set<Message>().ToList()},
+                {"MessageSender", _dbContext.Set<MessageSender>().ToList()},
+                {"MessageTemplate", _dbContext.Set<MessageTemplate>().ToList()},
+                {"SysCfg", _dbContext.Set<SysCfg>().ToList()},
+                {"SysDept", _dbContext.Set<SysDept>().ToList()},
+                {"SysDict", _dbContext.Set<SysDict>().ToList()},
+                {"SysFileInfo", _dbContext.Set<SysFileInfo>().ToList()},
+                {"SysLoginLog", _dbContext.Set<SysLoginLog>().ToList()},
+                {"SysMenu", _dbContext.Set<SysMenu>().ToList()},
+                {"SysNotice", _dbContext.Set<SysNotice>().ToList()},
+                {"SysOperationLog", _dbContext.Set<SysOperationLog>().ToList()},
+                {"SysRelation", _dbContext.Set<SysRelation>().ToList()},
+                {"SysRole", _dbContext.Set<SysRole>().ToList()},
+                {"SysTask", _dbContext.Set<SysTask>().ToList()},
+                {"SysTaskLog", _dbContext.Set<SysTaskLog>().ToList()},
+                {"SysUser", _dbContext.Set<SysUser>().ToList()}
             };
             foreach (var data in datas)
             {
-                var json = JsonConvert.SerializeObject(data.Value, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+                var json = JsonConvert.SerializeObject(data.Value,
+                    new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
                 Write(data.Key, json);
             }
         }
@@ -119,12 +120,14 @@ namespace Doublelives.Service.Tasks
             foreach (var item in arr)
             {
                 var types = AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(a => a.GetTypes().Where(t => (t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType) || (t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase))))
+                    .SelectMany(a => a.GetTypes().Where(t =>
+                        (t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType) ||
+                        (t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase))))
                     .ToArray();
 
                 var type = types.FirstOrDefault(it => it.Name == item);
-                var mi = GetType().GetMethod("Read").MakeGenericMethod(type);
-                mi.Invoke(this, new object[] { item });
+                var mi = GetType().GetMethod("Read")?.MakeGenericMethod(type);
+                if (mi != null) mi.Invoke(this, new object[] {item});
             }
         }
 
@@ -135,10 +138,20 @@ namespace Doublelives.Service.Tasks
 
         public void FillCache()
         {
-            throw new NotImplementedException();
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes().Where(t =>
+                    (t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType) ||
+                    (t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase))))
+                .ToArray();
+
+            foreach (var type in types)
+            {
+                var mi = _cacheManager.GetType().GetMethod("SetWholeTableToCache")?.MakeGenericMethod(type);
+                if (mi != null) mi.Invoke(_cacheManager, null);
+            }
         }
 
-        public void Read<T>(string fileName) where T: EntityBase
+        public void Read<T>(string fileName) where T : EntityBase
         {
             var jsonPath = new DirectoryInfo(@$"C:\Users\11301\Desktop\json\{fileName}.json").FullName;
 
