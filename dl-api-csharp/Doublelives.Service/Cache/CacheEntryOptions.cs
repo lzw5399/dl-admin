@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Doublelives.Infrastructure.Cache
+namespace Doublelives.Service.Cache
 {
     public class CacheEntryOptions
     {

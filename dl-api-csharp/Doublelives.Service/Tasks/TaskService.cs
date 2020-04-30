@@ -2,15 +2,14 @@
 using Doublelives.Domain.Infrastructure;
 using Doublelives.Domain.Messages;
 using Doublelives.Domain.Sys;
-using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
+using Doublelives.Service.Cache;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Doublelives.Service.Tasks
 {
@@ -132,6 +131,11 @@ namespace Doublelives.Service.Tasks
         public void FlushallCache()
         {
             _cacheManager.Flushall();
+        }
+
+        public void FillCache()
+        {
+            throw new NotImplementedException();
         }
 
         public void Read<T>(string fileName) where T: EntityBase

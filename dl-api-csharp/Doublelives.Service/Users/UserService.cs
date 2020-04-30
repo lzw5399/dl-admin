@@ -7,7 +7,6 @@ using Doublelives.Shared.ConfigModels;
 using IdentityModel;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Doublelives.Infrastructure.Cache;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -23,6 +22,7 @@ using System.Linq.Expressions;
 using Doublelives.Shared.Models;
 using Doublelives.Service.Depts;
 using Doublelives.Service.Roles;
+using Doublelives.Service.Cache;
 
 namespace Doublelives.Service.Users
 {

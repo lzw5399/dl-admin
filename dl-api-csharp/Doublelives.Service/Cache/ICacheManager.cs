@@ -1,11 +1,14 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Doublelives.Domain.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Doublelives.Infrastructure.Cache
+namespace Doublelives.Service.Cache
 {
     public interface ICacheManager
     {
+        Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria) where T : EntityBase;
+
         Task<T> GetOrCreateAsync<T>(string cacheKey, Func<CacheEntryOptions, Task<T>> factory);
 
         bool CreateOrUpdate<T>(string cacheKey, T cacheValue, CacheEntryOptions options = null);

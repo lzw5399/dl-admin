@@ -1,8 +1,8 @@
 ﻿using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
-using Doublelives.Infrastructure.Cache;
 using Doublelives.Infrastructure.Extensions;
 using Doublelives.Persistence;
+using Doublelives.Service.Cache;
 using Doublelives.Service.Mappers;
 using Doublelives.Shared.Models;
 using System;

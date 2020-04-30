@@ -9,5 +9,10 @@
         void ImportDataFromJsonFile();
 
         void FlushallCache();
+
+        /// <summary>
+        /// 填充缓存数据
+        /// </summary>
+        void FillCache();
     }
 }

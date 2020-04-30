@@ -19,7 +19,7 @@ namespace Doublelives.Infrastructure.Extensions
                 Expression.OrElse(left, right), parameter);
         }
 
-        public static Expression<Func<T, bool>> And<T>( this Expression<Func<T, bool>> expr1,
+        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
             Expression<Func<T, bool>> expr2)
         {
             var parameter = Expression.Parameter(typeof(T));
@@ -89,6 +89,59 @@ namespace Doublelives.Infrastructure.Extensions
             return memberExpression.Member;
         }
 
+        public static Expression<Func<T, bool>> AndCondition<T>(
+            this Expression<Func<T, bool>> expression,
+            string fieldName,
+            string fieldValue,
+            ConditionType type)
+        {
+            ParameterExpression param = Expression.Parameter(typeof(T), "c");
+            if (string.IsNullOrEmpty(fieldName))
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
+            if (typeof(T).GetProperty(fieldName) == null)
+            {
+                throw new ArgumentException($"{fieldName} field not exist");
+            }
+            Expression left = Expression.Property(param, typeof(T).GetProperty(fieldName));
+            Expression right = Expression.Constant(fieldValue);
+            Expression filter;
+            switch (type)
+            {
+                case ConditionType.Equal:
+                    filter = Expression.Equal(left, right);
+                    break;
+                case ConditionType.NotEqual:
+                    filter = Expression.NotEqual(left, right);
+                    break;
+                case ConditionType.MoreThan:
+                    filter = Expression.GreaterThan(left, right);
+                    break;
+                case ConditionType.MoreThanOrEqualTo:
+                    filter = Expression.GreaterThanOrEqual(left, right);
+                    break;
+                case ConditionType.LessThan:
+                    filter = Expression.LessThan(left, right);
+                    break;
+                case ConditionType.LessThanOrEqualTo:
+                    filter = Expression.LessThanOrEqual(left, right);
+                    break;
+                case ConditionType.Like:
+                    filter = Expression.Call(left, typeof(string).GetMethod("Contains"), right);
+                    break;
+                case ConditionType.NotLike:
+                    filter = Expression.Not(Expression.Call(left, typeof(string).GetMethod("Contains"), right));
+                    break;
+                default:
+                    filter = Expression.Equal(left, right);
+                    break;
+            }
+            Expression<Func<T, bool>> finalExpression = Expression.Lambda<Func<T, bool>>(filter, param);
+
+            return expression.And(finalExpression);
+        }
+
         private static MemberExpression ExtractMemberExpression(Expression expression)
         {
             if (expression.NodeType == ExpressionType.MemberAccess)
@@ -104,5 +157,32 @@ namespace Doublelives.Infrastructure.Extensions
 
             return null;
         }
+    }
+
+    public enum ConditionType
+    {
+        // 等于
+        Equal,
+
+        // 不等于
+        NotEqual,
+
+        // 大于
+        MoreThan,
+
+        // 大于等于
+        MoreThanOrEqualTo,
+
+        // 小于
+        LessThan,
+
+        // 小于等于
+        LessThanOrEqualTo,
+
+        // 模糊搜索
+        Like,
+
+        // 反向模糊搜索
+        NotLike
     }
 }

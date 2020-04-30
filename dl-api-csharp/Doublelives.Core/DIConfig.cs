@@ -1,6 +1,6 @@
 ﻿using CSRedis;
-using Doublelives.Infrastructure.Cache;
 using Doublelives.Persistence;
+using Doublelives.Service.Cache;
 using Doublelives.Service.Cfgs;
 using Doublelives.Service.Depts;
 using Doublelives.Service.Dicts;
