@@ -38,6 +38,7 @@ namespace Doublelives.Service.Menus
 
                 dtos.Add(dto);
             }
+
             dtos = dtos.OrderBy(it => it.Num).ToList();
 
             return dtos;

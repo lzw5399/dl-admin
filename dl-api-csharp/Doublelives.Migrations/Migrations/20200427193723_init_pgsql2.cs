@@ -9,11 +9,12 @@ namespace Doublelives.Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "cms_article",
-                columns: table => new
+                "cms_article",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -24,18 +25,16 @@ namespace Doublelives.Migrations.Migrations
                     img = table.Column<string>(maxLength: 64, nullable: true, comment: "文章题图id"),
                     title = table.Column<string>(maxLength: 128, nullable: true, comment: "文章标题")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cms_article", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_cms_article", x => x.id); },
                 comment: "文章");
 
             migrationBuilder.CreateTable(
-                name: "cms_banner",
-                columns: table => new
+                "cms_banner",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -45,17 +44,15 @@ namespace Doublelives.Migrations.Migrations
                     type = table.Column<string>(maxLength: 32, nullable: true, comment: "类型"),
                     url = table.Column<string>(maxLength: 128, nullable: true, comment: "点击banner跳转到url")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cms_banner", x => x.id);
-                });
+                constraints: table => { table.PrimaryKey("PK_cms_banner", x => x.id); });
 
             migrationBuilder.CreateTable(
-                name: "cms_channel",
-                columns: table => new
+                "cms_channel",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -63,18 +60,16 @@ namespace Doublelives.Migrations.Migrations
                     code = table.Column<string>(maxLength: 64, nullable: true, comment: "编码"),
                     name = table.Column<string>(maxLength: 64, nullable: true, comment: "名称")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cms_channel", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_cms_channel", x => x.id); },
                 comment: "文章栏目");
 
             migrationBuilder.CreateTable(
-                name: "cms_contacts",
-                columns: table => new
+                "cms_contacts",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -84,18 +79,16 @@ namespace Doublelives.Migrations.Migrations
                     remark = table.Column<string>(maxLength: 128, nullable: true, comment: "备注"),
                     user_name = table.Column<string>(maxLength: 64, nullable: true, comment: "邀约人名称")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cms_contacts", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_cms_contacts", x => x.id); },
                 comment: "邀约信息");
 
             migrationBuilder.CreateTable(
-                name: "message",
-                columns: table => new
+                "message",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -106,18 +99,16 @@ namespace Doublelives.Migrations.Migrations
                     tpl_code = table.Column<string>(maxLength: 32, nullable: true, comment: "模板编码"),
                     type = table.Column<int>(nullable: false, comment: "消息类型,0:短信,1:邮件")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_message", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_message", x => x.id); },
                 comment: "历史消息");
 
             migrationBuilder.CreateTable(
-                name: "message_sender",
-                columns: table => new
+                "message_sender",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -126,18 +117,16 @@ namespace Doublelives.Migrations.Migrations
                     name = table.Column<string>(maxLength: 64, nullable: true, comment: "名称"),
                     tpl_code = table.Column<string>(maxLength: 64, nullable: true, comment: "运营商模板编号")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_message_sender", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_message_sender", x => x.id); },
                 comment: "消息发送者");
 
             migrationBuilder.CreateTable(
-                name: "sys_cfg",
-                columns: table => new
+                "sys_cfg",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -146,18 +135,16 @@ namespace Doublelives.Migrations.Migrations
                     cfg_name = table.Column<string>(maxLength: 256, nullable: true, comment: "参数名"),
                     cfg_value = table.Column<string>(maxLength: 512, nullable: true, comment: "参数值")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_cfg", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_cfg", x => x.id); },
                 comment: "系统参数");
 
             migrationBuilder.CreateTable(
-                name: "sys_dept",
-                columns: table => new
+                "sys_dept",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -170,18 +157,16 @@ namespace Doublelives.Migrations.Migrations
                     tips = table.Column<string>(maxLength: 255, nullable: true),
                     version = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_dept", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_dept", x => x.id); },
                 comment: "部门");
 
             migrationBuilder.CreateTable(
-                name: "sys_dict",
-                columns: table => new
+                "sys_dict",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -191,18 +176,16 @@ namespace Doublelives.Migrations.Migrations
                     pid = table.Column<int>(nullable: true),
                     tips = table.Column<string>(maxLength: 255, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_dict", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_dict", x => x.id); },
                 comment: "字典");
 
             migrationBuilder.CreateTable(
-                name: "sys_file_info",
-                columns: table => new
+                "sys_file_info",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -210,18 +193,16 @@ namespace Doublelives.Migrations.Migrations
                     original_file_name = table.Column<string>(maxLength: 255, nullable: true, comment: "实际名称"),
                     real_file_name = table.Column<string>(maxLength: 255, nullable: true, comment: "显示名称")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_file_info", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_file_info", x => x.id); },
                 comment: "文件信息");
 
             migrationBuilder.CreateTable(
-                name: "sys_login_log",
-                columns: table => new
+                "sys_login_log",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     ip = table.Column<string>(maxLength: 255, nullable: true, comment: "登录ip"),
                     logname = table.Column<string>(maxLength: 255, nullable: true, comment: "登陆者姓名"),
@@ -229,18 +210,16 @@ namespace Doublelives.Migrations.Migrations
                     succeed = table.Column<bool>(nullable: false, comment: "是否成功"),
                     userid = table.Column<int>(nullable: true, comment: "用户id")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_login_log", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_login_log", x => x.id); },
                 comment: "登录日志");
 
             migrationBuilder.CreateTable(
-                name: "sys_menu",
-                columns: table => new
+                "sys_menu",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -260,18 +239,16 @@ namespace Doublelives.Migrations.Migrations
                     tips = table.Column<string>(maxLength: 32, nullable: true, comment: "鼠标悬停提示信息"),
                     url = table.Column<string>(maxLength: 32, nullable: true, comment: "链接")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_menu", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_menu", x => x.id); },
                 comment: "菜单");
 
             migrationBuilder.CreateTable(
-                name: "sys_notice",
-                columns: table => new
+                "sys_notice",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -280,18 +257,16 @@ namespace Doublelives.Migrations.Migrations
                     title = table.Column<string>(maxLength: 255, nullable: true, comment: "标题"),
                     type = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_notice", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_notice", x => x.id); },
                 comment: "欢迎弹窗");
 
             migrationBuilder.CreateTable(
-                name: "sys_operation_log",
-                columns: table => new
+                "sys_operation_log",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     classname = table.Column<string>(maxLength: 255, nullable: true, comment: "操作类名"),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     logname = table.Column<string>(maxLength: 255, nullable: true),
@@ -301,33 +276,29 @@ namespace Doublelives.Migrations.Migrations
                     succeed = table.Column<bool>(nullable: false),
                     userid = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_operation_log", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_operation_log", x => x.id); },
                 comment: "操作日志");
 
             migrationBuilder.CreateTable(
-                name: "sys_relation",
-                columns: table => new
+                "sys_relation",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     menuid = table.Column<int>(nullable: false),
                     roleid = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_relation", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_relation", x => x.id); },
                 comment: "角色和菜单的多对多中间表");
 
             migrationBuilder.CreateTable(
-                name: "sys_role",
-                columns: table => new
+                "sys_role",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -339,17 +310,15 @@ namespace Doublelives.Migrations.Migrations
                     tips = table.Column<string>(maxLength: 255, nullable: true),
                     version = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_role", x => x.id);
-                });
+                constraints: table => { table.PrimaryKey("PK_sys_role", x => x.id); });
 
             migrationBuilder.CreateTable(
-                name: "sys_task",
-                columns: table => new
+                "sys_task",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -365,36 +334,32 @@ namespace Doublelives.Migrations.Migrations
                     name = table.Column<string>(maxLength: 50, nullable: true, comment: "任务名"),
                     note = table.Column<string>(maxLength: 50, nullable: true, comment: "任务说明")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_task", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_task", x => x.id); },
                 comment: "定时任务");
 
             migrationBuilder.CreateTable(
-                name: "sys_task_log",
-                columns: table => new
+                "sys_task_log",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     exec_at = table.Column<DateTime>(nullable: true, comment: "执行时间"),
                     exec_success = table.Column<bool>(nullable: true, comment: "是否执行成功"),
                     id_task = table.Column<int>(nullable: true, comment: "任务id"),
                     job_exception = table.Column<string>(maxLength: 500, nullable: true, comment: "异常日志"),
                     name = table.Column<string>(maxLength: 50, nullable: true, comment: "任务名")
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_task_log", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_task_log", x => x.id); },
                 comment: "定时任务日志");
 
             migrationBuilder.CreateTable(
-                name: "sys_user",
-                columns: table => new
+                "sys_user",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -413,18 +378,16 @@ namespace Doublelives.Migrations.Migrations
                     status = table.Column<int>(nullable: true, comment: "账户状态"),
                     version = table.Column<int>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_sys_user", x => x.id);
-                },
+                constraints: table => { table.PrimaryKey("PK_sys_user", x => x.id); },
                 comment: "用户表");
 
             migrationBuilder.CreateTable(
-                name: "message_template",
-                columns: table => new
+                "message_template",
+                table => new
                 {
                     id = table.Column<int>(nullable: false, comment: "主键")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     create_time = table.Column<DateTime>(nullable: true, comment: "创建时间"),
                     create_by = table.Column<int>(nullable: true, comment: "创建者"),
                     modify_time = table.Column<DateTime>(nullable: true, comment: "最后修改时间"),
@@ -440,87 +403,87 @@ namespace Doublelives.Migrations.Migrations
                 {
                     table.PrimaryKey("PK_message_template", x => x.id);
                     table.ForeignKey(
-                        name: "FK_message_template_message_sender_id_message_sender",
-                        column: x => x.id_message_sender,
-                        principalTable: "message_sender",
-                        principalColumn: "id",
+                        "FK_message_template_message_sender_id_message_sender",
+                        x => x.id_message_sender,
+                        "message_sender",
+                        "id",
                         onDelete: ReferentialAction.Restrict);
                 },
                 comment: "消息模板");
 
             migrationBuilder.CreateIndex(
-                name: "FK942sadqk5x9kbrwil0psyek3n",
-                table: "message_template",
-                column: "id_message_sender");
+                "FK942sadqk5x9kbrwil0psyek3n",
+                "message_template",
+                "id_message_sender");
 
             migrationBuilder.CreateIndex(
-                name: "UK_s37unj3gh67ujhk83lqva8i1t",
-                table: "sys_menu",
-                column: "code",
+                "UK_s37unj3gh67ujhk83lqva8i1t",
+                "sys_menu",
+                "code",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "cms_article");
+                "cms_article");
 
             migrationBuilder.DropTable(
-                name: "cms_banner");
+                "cms_banner");
 
             migrationBuilder.DropTable(
-                name: "cms_channel");
+                "cms_channel");
 
             migrationBuilder.DropTable(
-                name: "cms_contacts");
+                "cms_contacts");
 
             migrationBuilder.DropTable(
-                name: "message");
+                "message");
 
             migrationBuilder.DropTable(
-                name: "message_template");
+                "message_template");
 
             migrationBuilder.DropTable(
-                name: "sys_cfg");
+                "sys_cfg");
 
             migrationBuilder.DropTable(
-                name: "sys_dept");
+                "sys_dept");
 
             migrationBuilder.DropTable(
-                name: "sys_dict");
+                "sys_dict");
 
             migrationBuilder.DropTable(
-                name: "sys_file_info");
+                "sys_file_info");
 
             migrationBuilder.DropTable(
-                name: "sys_login_log");
+                "sys_login_log");
 
             migrationBuilder.DropTable(
-                name: "sys_menu");
+                "sys_menu");
 
             migrationBuilder.DropTable(
-                name: "sys_notice");
+                "sys_notice");
 
             migrationBuilder.DropTable(
-                name: "sys_operation_log");
+                "sys_operation_log");
 
             migrationBuilder.DropTable(
-                name: "sys_relation");
+                "sys_relation");
 
             migrationBuilder.DropTable(
-                name: "sys_role");
+                "sys_role");
 
             migrationBuilder.DropTable(
-                name: "sys_task");
+                "sys_task");
 
             migrationBuilder.DropTable(
-                name: "sys_task_log");
+                "sys_task_log");
 
             migrationBuilder.DropTable(
-                name: "sys_user");
+                "sys_user");
 
             migrationBuilder.DropTable(
-                name: "message_sender");
+                "message_sender");
         }
     }
 }

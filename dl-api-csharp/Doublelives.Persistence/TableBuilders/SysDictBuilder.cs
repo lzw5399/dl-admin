@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Doublelives.Persistence.TableBuilders
 {
-
     public class SysDictBuilder : IEntityTypeConfiguration<SysDict>
     {
         public void Configure(EntityTypeBuilder<SysDict> builder)

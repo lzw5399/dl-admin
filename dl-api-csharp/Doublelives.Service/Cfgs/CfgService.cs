@@ -27,14 +27,10 @@ namespace Doublelives.Service.Cfgs
             Expression<Func<SysCfg, bool>> condition = it => true;
 
             if (!string.IsNullOrWhiteSpace(criteria.CfgName))
-            {
                 condition = condition.And(it => it.CfgName.Contains(criteria.CfgName));
-            }
 
             if (!string.IsNullOrWhiteSpace(criteria.CfgValue))
-            {
                 condition = condition.And(it => it.CfgValue.Contains(criteria.CfgValue));
-            }
 
             var result = await _unitOfWork.CfgRepository.PagedAsync(
                 criteria.Page,

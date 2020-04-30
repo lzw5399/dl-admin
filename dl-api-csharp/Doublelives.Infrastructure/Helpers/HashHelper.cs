@@ -76,18 +76,11 @@ namespace Doublelives.Infrastructure.Helpers
         {
             char[] array;
             if (isNumberOnly)
-            {
                 array = ConstantNumber;
-            }
             else
-            {
                 array = Constant;
-            }
             var stringBuilder = new StringBuilder(length);
-            for (var i = 0; i < length; i++)
-            {
-                stringBuilder.Append(array[Random.Next(array.Length)]);
-            }
+            for (var i = 0; i < length; i++) stringBuilder.Append(array[Random.Next(array.Length)]);
             return stringBuilder.ToString();
         }
 
@@ -99,10 +92,7 @@ namespace Doublelives.Infrastructure.Helpers
         /// <returns>加密后字符串</returns>
         public static string MD5(string sourceString, bool isLower = false)
         {
-            if (string.IsNullOrEmpty(sourceString))
-            {
-                return "";
-            }
+            if (string.IsNullOrEmpty(sourceString)) return "";
             return HashHelper.GetHashedString(HashType.MD5, sourceString, isLower);
         }
 
@@ -111,10 +101,7 @@ namespace Doublelives.Infrastructure.Helpers
         /// </summary>
         public static string SHA1(string sourceString, bool isLower = false)
         {
-            if (string.IsNullOrEmpty(sourceString))
-            {
-                return "";
-            }
+            if (string.IsNullOrEmpty(sourceString)) return "";
             return HashHelper.GetHashedString(HashType.SHA1, sourceString, isLower);
         }
 
@@ -123,10 +110,7 @@ namespace Doublelives.Infrastructure.Helpers
         /// </summary>
         public static string SHA256(string sourceString, bool isLower = false)
         {
-            if (string.IsNullOrEmpty(sourceString))
-            {
-                return "";
-            }
+            if (string.IsNullOrEmpty(sourceString)) return "";
             return HashHelper.GetHashedString(HashType.SHA256, sourceString, isLower);
         }
 
@@ -135,10 +119,7 @@ namespace Doublelives.Infrastructure.Helpers
         /// </summary>
         public static string SHA512(string sourceString, bool isLower = false)
         {
-            if (string.IsNullOrEmpty(sourceString))
-            {
-                return "";
-            }
+            if (string.IsNullOrEmpty(sourceString)) return "";
             return HashHelper.GetHashedString(HashType.SHA512, sourceString, isLower);
         }
     }
@@ -154,7 +135,10 @@ namespace Doublelives.Infrastructure.Helpers
         /// <param name="type">hash类型</param>
         /// <param name="str">要hash的字符串</param>
         /// <returns>hash过的字节数组</returns>
-        public static byte[] GetHashedBytes(HashType type, string str) => GetHashedBytes(type, str, Encoding.UTF8);
+        public static byte[] GetHashedBytes(HashType type, string str)
+        {
+            return GetHashedBytes(type, str, Encoding.UTF8);
+        }
 
         /// <summary>
         /// 计算字符串Hash值
@@ -163,7 +147,10 @@ namespace Doublelives.Infrastructure.Helpers
         /// <param name="str">要hash的字符串</param>
         /// <param name="key">key</param>
         /// <returns>hash过的字节数组</returns>
-        public static byte[] GetHashedBytes(HashType type, string str, string key) => GetHashedBytes(type, str.GetBytes(), !string.IsNullOrEmpty(key) ? key.GetBytes() : null);
+        public static byte[] GetHashedBytes(HashType type, string str, string key)
+        {
+            return GetHashedBytes(type, str.GetBytes(), !string.IsNullOrEmpty(key) ? key.GetBytes() : null);
+        }
 
         /// <summary>
         /// 计算字符串Hash值
@@ -184,68 +171,71 @@ namespace Doublelives.Infrastructure.Helpers
         /// <param name="type">哈希类型</param>
         /// <param name="str">源字符串</param>
         /// <returns>哈希算法处理之后的字符串</returns>
-        public static string GetHashedString(HashType type, string str) => GetHashedString(type, str, Encoding.UTF8);
-
-        /// <summary>
-        /// 获取哈希之后的字符串
-        /// </summary>
-        /// <param name="type">哈希类型</param>
-        /// <param name="str">源字符串</param>
-        /// <param name="isLower">是否是小写</param>
-        /// <returns>哈希算法处理之后的字符串</returns>
-        public static string GetHashedString(HashType type, string str, bool isLower) => GetHashedString(type, str, Encoding.UTF8, isLower);
-
-        /// <summary>
-        /// 获取哈希之后的字符串
-        /// </summary>
-        /// <param name="type">哈希类型</param>
-        /// <param name="str">源字符串</param>
-        /// <param name="key">key</param>
-        /// <param name="isLower">是否是小写</param>
-        /// <returns>哈希算法处理之后的字符串</returns>
-        public static string GetHashedString(HashType type, string str, string key, bool isLower = false) => GetHashedString(type, str, key, Encoding.UTF8, isLower);
-
-        /// <summary>
-        /// 获取哈希之后的字符串
-        /// </summary>
-        /// <param name="type">哈希类型</param>
-        /// <param name="str">源字符串</param>
-        /// <param name="encoding">编码类型</param>
-        /// <param name="isLower">是否是小写</param>
-        /// <returns>哈希算法处理之后的字符串</returns>
-        public static string GetHashedString(HashType type, string str, Encoding encoding, bool isLower = false) => GetHashedString(type, str, null, encoding, isLower);
-
-        /// <summary>
-        /// 获取哈希之后的字符串
-        /// </summary>
-        /// <param name="type">哈希类型</param>
-        /// <param name="str">源字符串</param>
-        /// <param name="key">key</param>
-        /// <param name="encoding">编码类型</param>
-        /// <param name="isLower">是否是小写</param>
-        /// <returns>哈希算法处理之后的字符串</returns>
-        public static string GetHashedString(HashType type, string str, string key, Encoding encoding, bool isLower = false)
+        public static string GetHashedString(HashType type, string str)
         {
-            if (string.IsNullOrEmpty(str))
-            {
-                return "";
-            }
-            var hashedBytes = GetHashedBytes(type, encoding.GetBytes(str), !string.IsNullOrEmpty(key) ? encoding.GetBytes(key) : null);
+            return GetHashedString(type, str, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// 获取哈希之后的字符串
+        /// </summary>
+        /// <param name="type">哈希类型</param>
+        /// <param name="str">源字符串</param>
+        /// <param name="isLower">是否是小写</param>
+        /// <returns>哈希算法处理之后的字符串</returns>
+        public static string GetHashedString(HashType type, string str, bool isLower)
+        {
+            return GetHashedString(type, str, Encoding.UTF8, isLower);
+        }
+
+        /// <summary>
+        /// 获取哈希之后的字符串
+        /// </summary>
+        /// <param name="type">哈希类型</param>
+        /// <param name="str">源字符串</param>
+        /// <param name="key">key</param>
+        /// <param name="isLower">是否是小写</param>
+        /// <returns>哈希算法处理之后的字符串</returns>
+        public static string GetHashedString(HashType type, string str, string key, bool isLower = false)
+        {
+            return GetHashedString(type, str, key, Encoding.UTF8, isLower);
+        }
+
+        /// <summary>
+        /// 获取哈希之后的字符串
+        /// </summary>
+        /// <param name="type">哈希类型</param>
+        /// <param name="str">源字符串</param>
+        /// <param name="encoding">编码类型</param>
+        /// <param name="isLower">是否是小写</param>
+        /// <returns>哈希算法处理之后的字符串</returns>
+        public static string GetHashedString(HashType type, string str, Encoding encoding, bool isLower = false)
+        {
+            return GetHashedString(type, str, null, encoding, isLower);
+        }
+
+        /// <summary>
+        /// 获取哈希之后的字符串
+        /// </summary>
+        /// <param name="type">哈希类型</param>
+        /// <param name="str">源字符串</param>
+        /// <param name="key">key</param>
+        /// <param name="encoding">编码类型</param>
+        /// <param name="isLower">是否是小写</param>
+        /// <returns>哈希算法处理之后的字符串</returns>
+        public static string GetHashedString(HashType type, string str, string key, Encoding encoding,
+            bool isLower = false)
+        {
+            if (string.IsNullOrEmpty(str)) return "";
+            var hashedBytes = GetHashedBytes(type, encoding.GetBytes(str),
+                !string.IsNullOrEmpty(key) ? encoding.GetBytes(key) : null);
             var sbText = new StringBuilder();
             if (isLower)
-            {
                 foreach (var b in hashedBytes)
-                {
                     sbText.Append(b.ToString("x2"));
-                }
-            }
             else
-            {
                 foreach (var b in hashedBytes)
-                {
                     sbText.Append(b.ToString("X2"));
-                }
-            }
             return sbText.ToString();
         }
 
@@ -255,7 +245,10 @@ namespace Doublelives.Infrastructure.Helpers
         /// <param name="type">哈希类型</param>
         /// <param name="bytes">原字节数组</param>
         /// <returns></returns>
-        public static byte[] GetHashedBytes(HashType type, byte[] bytes) => GetHashedBytes(type, bytes, null);
+        public static byte[] GetHashedBytes(HashType type, byte[] bytes)
+        {
+            return GetHashedBytes(type, bytes, null);
+        }
 
         /// <summary>
         /// 获取Hash后的字节数组
@@ -270,7 +263,6 @@ namespace Doublelives.Infrastructure.Helpers
             try
             {
                 if (key == null)
-                {
                     switch (type)
                     {
                         case HashType.MD5:
@@ -297,9 +289,7 @@ namespace Doublelives.Infrastructure.Helpers
                             algorithm = MD5.Create();
                             break;
                     }
-                }
                 else
-                {
                     switch (type)
                     {
                         case HashType.MD5:
@@ -326,7 +316,7 @@ namespace Doublelives.Infrastructure.Helpers
                             algorithm = new HMACMD5(key);
                             break;
                     }
-                }
+
                 return algorithm.ComputeHash(bytes);
             }
             finally

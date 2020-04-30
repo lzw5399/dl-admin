@@ -71,10 +71,7 @@ namespace Doublelives.Service.Cache
         /// <returns></returns>
         public async Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria) where T : EntityBase
         {
-            if (!_cacheOptions.Enable)
-            {
-                return await GetPagedFromDbAsync<T>(criteria);
-            }
+            if (!_cacheOptions.Enable) return await GetPagedFromDbAsync<T>(criteria);
 
             // 如果包含模糊查询
             if (criteria.FuzzySearch)
@@ -143,13 +140,9 @@ namespace Doublelives.Service.Cache
                 // 直接返回分页的
                 if (finalResult.Count >= criteria.Offset + criteria.Count ||
                     ids.Count() <= QUERY_PER_ROUND * (round + 1))
-                {
                     notenough = false;
-                }
                 else
-                {
                     round += 1;
-                }
             }
 
             return finalResult.Skip(criteria.Offset).Take(criteria.Count).ToList();
@@ -184,9 +177,7 @@ namespace Doublelives.Service.Cache
             if (!criteria.FuzzySearch) return expression;
 
             foreach (var field in criteria.SearchFields)
-            {
                 expression = expression.AndCondition(field, criteria.Keyword, ConditionType.Like);
-            }
 
             return expression;
         }
@@ -225,10 +216,7 @@ namespace Doublelives.Service.Cache
         {
             var keys = _redisClient.Keys("*");
 
-            foreach (var key in keys)
-            {
-                _redisClient.Del(key);
-            }
+            foreach (var key in keys) _redisClient.Del(key);
         }
 
         private CacheEntryOptions GetDefaultCacheEntryOptions()

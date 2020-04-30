@@ -28,7 +28,7 @@ namespace Doublelives.Api.Controllers
         /// 获取分页的dict
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery]DictListSearchRequest request)
+        public IActionResult List([FromQuery] DictListSearchRequest request)
         {
             var result = _dictService.GetPagedList(DictMapper.ToDictSearchDto(request));
             var viewModels = _mapper.Map<List<DictViewModel>>(result.Data);

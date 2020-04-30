@@ -43,7 +43,8 @@ namespace Doublelives.Infrastructure.Helpers
                     attribute.SetWrapMode(WrapMode.TileFlipXY);
 
                     // 将调整大小的图像绘制到bitmap
-                    graphics.DrawImage(rotatedImage, new Rectangle(new Point(0, 0), newSize), 0, 0, rotatedImage.Width, rotatedImage.Height, GraphicsUnit.Pixel, attribute);
+                    graphics.DrawImage(rotatedImage, new Rectangle(new Point(0, 0), newSize), 0, 0, rotatedImage.Width,
+                        rotatedImage.Height, GraphicsUnit.Pixel, attribute);
                 }
             }
 
@@ -59,16 +60,16 @@ namespace Doublelives.Infrastructure.Helpers
         /// <returns>具有调整大小的尺寸的大小实例</returns>
         private static Size CalculateResizedDimensions(Image image, int desiredWidth, int desiredHeight)
         {
-            var widthScale = (double)desiredWidth / image.Width;
-            var heightScale = (double)desiredHeight / image.Height;
+            var widthScale = (double) desiredWidth / image.Width;
+            var heightScale = (double) desiredHeight / image.Height;
 
             // 缩放到较小的比例，这适用于放大和缩小
             var scale = widthScale < heightScale ? widthScale : heightScale;
 
             return new Size
             {
-                Width = (int)(scale * image.Width),
-                Height = (int)(scale * image.Height)
+                Width = (int) (scale * image.Width),
+                Height = (int) (scale * image.Height)
             };
         }
     }

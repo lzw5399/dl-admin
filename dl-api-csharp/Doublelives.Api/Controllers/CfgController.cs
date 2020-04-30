@@ -23,7 +23,7 @@ namespace Doublelives.Api.Controllers
         /// 获取分页的cfg
         /// </summary>
         [HttpGet("list")]
-        public async Task<IActionResult> List([FromQuery]CfgListSearchRequest request)
+        public async Task<IActionResult> List([FromQuery] CfgListSearchRequest request)
         {
             var result = await _cfgService.GetPagedList(CfgMapper.ToCfgSearchDto(request));
 

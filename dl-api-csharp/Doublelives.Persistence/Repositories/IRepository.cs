@@ -30,8 +30,12 @@ namespace Doublelives.Persistence
 
         Task InsertAsync(TEntity entity);
 
-        PagedModel<TEntity> Paged<TProperty>(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TProperty>> orderByExpression, bool ascending = false);
-        
-        Task<PagedModel<TEntity>> PagedAsync<TProperty>(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TProperty>> orderByExpression, bool ascending = false);
+        PagedModel<TEntity> Paged<TProperty>(int pageNumber, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TProperty>> orderByExpression,
+            bool ascending = false);
+
+        Task<PagedModel<TEntity>> PagedAsync<TProperty>(int pageNumber, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TProperty>> orderByExpression,
+            bool ascending = false);
     }
 }

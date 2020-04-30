@@ -31,7 +31,7 @@ namespace Doublelives.Api.Controllers
         /// 获取分页用户列表
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery]UserListSearchRequest request)
+        public IActionResult List([FromQuery] UserListSearchRequest request)
         {
             var result = _userService.GetPagedList(UserMapper.ToUserSearchDto(request));
 

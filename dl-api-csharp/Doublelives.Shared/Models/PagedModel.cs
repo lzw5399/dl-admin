@@ -31,7 +31,7 @@ namespace Doublelives.Shared.Models
         /// <summary>
         /// 总共有多少页
         /// </summary>
-        public int PageCount => (int)Math.Ceiling((decimal)TotalCount / PageSize);
+        public int PageCount => (int) Math.Ceiling((decimal) TotalCount / PageSize);
 
         /// <summary>
         /// 当前页的数据数量

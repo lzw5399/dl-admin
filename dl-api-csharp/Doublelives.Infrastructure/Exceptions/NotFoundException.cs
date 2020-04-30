@@ -20,7 +20,7 @@ namespace Doublelives.Infrastructure.Exceptions
         }
 
         protected NotFoundException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
+            : base(info, context)
         {
         }
     }

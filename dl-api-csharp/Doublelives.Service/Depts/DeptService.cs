@@ -55,10 +55,8 @@ namespace Doublelives.Service.Depts
 
         public SysDept GetById(int id)
         {
-            var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(id), async entry =>
-            {
-                return await _unitOfWork.DeptRepository.GetByIdAsync(id);
-            }).Result;
+            var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(id),
+                async entry => { return await _unitOfWork.DeptRepository.GetByIdAsync(id); }).Result;
 
             return result;
         }

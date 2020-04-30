@@ -11,7 +11,7 @@ namespace Doublelives.Persistence.TableBuilders
             builder
                 .HasComment("文章栏目")
                 .ToTable("cms_channel");
-            
+
             builder.Property(e => e.Id)
                 .HasColumnName("id")
                 .HasComment("主键")
@@ -44,5 +44,4 @@ namespace Doublelives.Persistence.TableBuilders
                 .HasColumnName("name");
         }
     }
-
 }

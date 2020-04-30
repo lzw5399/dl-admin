@@ -8,7 +8,8 @@ namespace Doublelives.Infrastructure.Exceptions
     [Serializable]
     public class InvalidException : Exception
     {
-        public IEnumerable<InvalidExceptionError> Errors { get; private set; } = Enumerable.Empty<InvalidExceptionError>();
+        public IEnumerable<InvalidExceptionError> Errors { get; private set; } =
+            Enumerable.Empty<InvalidExceptionError>();
 
         public InvalidException()
             : base()
@@ -57,7 +58,7 @@ namespace Doublelives.Infrastructure.Exceptions
         }
 
         protected InvalidException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
+            : base(info, context)
         {
         }
     }

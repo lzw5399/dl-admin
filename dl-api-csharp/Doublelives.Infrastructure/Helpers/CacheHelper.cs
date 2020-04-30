@@ -2,6 +2,9 @@
 {
     public static class CacheHelper
     {
-        public static string ToCacheKey(string prefix, params object[] parameters) => $"{prefix}_{string.Join('_', parameters)}";
+        public static string ToCacheKey(string prefix, params object[] parameters)
+        {
+            return $"{prefix}_{string.Join('_', parameters)}";
+        }
     }
 }

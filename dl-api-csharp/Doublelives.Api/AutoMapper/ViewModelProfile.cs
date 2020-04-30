@@ -18,7 +18,7 @@ namespace Doublelives.Api.AutoMapper
         public ViewModelProfile()
         {
             CreateMap<Picture, PicturesViewModel>();
-            
+
             // user related
             CreateMap<User, UserViewModel>();
             CreateMap<CurrentUserDto, UserViewModel>();

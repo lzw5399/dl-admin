@@ -41,23 +41,23 @@ namespace Doublelives.Service.TencentCos
             var request = new GetBucketRequest(bucket);
             //设置签名有效时长
             request.SetSign(TimeUtils.GetCurrentTime(TimeUnit.SECONDS), _cosConfig.DurationSecond);
-            GetBucketResult response = _cosXml.GetBucket(request);
+            var response = _cosXml.GetBucket(request);
 
             var result = response.listBucket.contentsList
-                    .Select(it =>
+                .Select(it =>
+                {
+                    var picture = new Picture
                     {
-                        var picture = new Picture
-                        {
-                            Url = $"{_cosConfig.BaseUrl}/{HttpUtility.HtmlEncode(it.key)}",
-                            Size = it.size,
-                            ETag = it.eTag
-                        };
-                        DateTime.TryParse(it.lastModified, out var time);
-                        picture.LastModified = time;
+                        Url = $"{_cosConfig.BaseUrl}/{HttpUtility.HtmlEncode(it.key)}",
+                        Size = it.size,
+                        ETag = it.eTag
+                    };
+                    DateTime.TryParse(it.lastModified, out var time);
+                    picture.LastModified = time;
 
-                        return picture;
-                    })
-                    .OrderByDescending(it => it.LastModified);
+                    return picture;
+                })
+                .OrderByDescending(it => it.LastModified);
 
             return result;
         }

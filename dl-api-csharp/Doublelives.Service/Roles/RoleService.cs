@@ -33,10 +33,8 @@ namespace Doublelives.Service.Roles
 
         public SysRole GetById(int id)
         {
-            var result = _cacheManager.GetOrCreateAsync(GetRoleCacheKey(id), async entry =>
-            {
-                return await _unitOfWork.RoleRepository.GetByIdAsync(id);
-            }).Result;
+            var result = _cacheManager.GetOrCreateAsync(GetRoleCacheKey(id),
+                async entry => { return await _unitOfWork.RoleRepository.GetByIdAsync(id); }).Result;
 
             return result;
         }
@@ -45,10 +43,9 @@ namespace Doublelives.Service.Roles
         {
             // e.g. role_list_1_2
             var key = GetRoleCacheKey($"list_{string.Join('_', ids)}");
-            var result = _cacheManager.GetOrCreateAsync(key, async entry =>
-             {
-                 return (await _unitOfWork.RoleRepository.GetByIdsAsync(ids.ToArray())).ToList();
-             }).Result;
+            var result = _cacheManager.GetOrCreateAsync(key,
+                    async entry => { return (await _unitOfWork.RoleRepository.GetByIdsAsync(ids.ToArray())).ToList(); })
+                .Result;
 
             return result;
         }
@@ -58,7 +55,8 @@ namespace Doublelives.Service.Roles
             Expression<Func<SysRole, bool>> condition = it => true;
 
             if (!string.IsNullOrWhiteSpace(criteria.RoleName))
-                condition = condition.And(it => it.Name.Contains(criteria.RoleName) || it.Tips.Contains(criteria.RoleName));
+                condition = condition.And(it =>
+                    it.Name.Contains(criteria.RoleName) || it.Tips.Contains(criteria.RoleName));
 
             var result = _unitOfWork.RoleRepository.Paged(
                 criteria.Page,

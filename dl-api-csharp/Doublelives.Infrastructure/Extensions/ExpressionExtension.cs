@@ -6,7 +6,8 @@ namespace Doublelives.Infrastructure.Extensions
 {
     public static class ExpressionExtension
     {
-        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
+        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1,
+            Expression<Func<T, bool>> expr2)
         {
             var parameter = Expression.Parameter(typeof(T));
 
@@ -61,8 +62,10 @@ namespace Doublelives.Infrastructure.Extensions
         /// <param name="memberExpression">get member expression</param>
         /// <returns></returns>
         public static string
-            GetMemberName<TEntity, TMember>(this Expression<Func<TEntity, TMember>> memberExpression) =>
-            GetMemberInfo(memberExpression)?.Name;
+            GetMemberName<TEntity, TMember>(this Expression<Func<TEntity, TMember>> memberExpression)
+        {
+            return GetMemberInfo(memberExpression)?.Name;
+        }
 
         /// <summary>
         /// GetMemberInfo
@@ -73,18 +76,12 @@ namespace Doublelives.Infrastructure.Extensions
         /// <returns></returns>
         public static MemberInfo GetMemberInfo<TEntity, TMember>(this Expression<Func<TEntity, TMember>> expression)
         {
-            if (expression.NodeType != ExpressionType.Lambda)
-            {
-                throw new ArgumentException(nameof(expression));
-            }
+            if (expression.NodeType != ExpressionType.Lambda) throw new ArgumentException(nameof(expression));
 
-            var lambda = (LambdaExpression)expression;
+            var lambda = (LambdaExpression) expression;
 
             var memberExpression = ExtractMemberExpression(lambda.Body);
-            if (memberExpression == null)
-            {
-                throw new ArgumentException(nameof(memberExpression));
-            }
+            if (memberExpression == null) throw new ArgumentException(nameof(memberExpression));
 
             return memberExpression.Member;
         }
@@ -95,15 +92,9 @@ namespace Doublelives.Infrastructure.Extensions
             string fieldValue,
             ConditionType type)
         {
-            ParameterExpression param = Expression.Parameter(typeof(T), "c");
-            if (string.IsNullOrEmpty(fieldName))
-            {
-                throw new ArgumentNullException(nameof(fieldName));
-            }
-            if (typeof(T).GetProperty(fieldName) == null)
-            {
-                throw new ArgumentException($"{fieldName} field not exist");
-            }
+            var param = Expression.Parameter(typeof(T), "c");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
+            if (typeof(T).GetProperty(fieldName) == null) throw new ArgumentException($"{fieldName} field not exist");
             Expression left = Expression.Property(param, typeof(T).GetProperty(fieldName));
             Expression right = Expression.Constant(fieldValue);
             Expression filter;
@@ -137,21 +128,19 @@ namespace Doublelives.Infrastructure.Extensions
                     filter = Expression.Equal(left, right);
                     break;
             }
-            Expression<Func<T, bool>> finalExpression = Expression.Lambda<Func<T, bool>>(filter, param);
+
+            var finalExpression = Expression.Lambda<Func<T, bool>>(filter, param);
 
             return expression.And(finalExpression);
         }
 
         private static MemberExpression ExtractMemberExpression(Expression expression)
         {
-            if (expression.NodeType == ExpressionType.MemberAccess)
-            {
-                return (MemberExpression)expression;
-            }
+            if (expression.NodeType == ExpressionType.MemberAccess) return (MemberExpression) expression;
 
             if (expression.NodeType == ExpressionType.Convert)
             {
-                var operand = ((UnaryExpression)expression).Operand;
+                var operand = ((UnaryExpression) expression).Operand;
                 return ExtractMemberExpression(operand);
             }
 

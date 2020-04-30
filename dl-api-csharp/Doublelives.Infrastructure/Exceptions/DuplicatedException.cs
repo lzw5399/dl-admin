@@ -8,7 +8,7 @@ namespace Doublelives.Infrastructure.Exceptions
     {
         public ErrorMessage ErrorMessage { get; private set; } = new ErrorMessage();
 
-        public DuplicatedException() 
+        public DuplicatedException()
             : base()
         {
         }
@@ -20,7 +20,7 @@ namespace Doublelives.Infrastructure.Exceptions
         }
 
         protected DuplicatedException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
+            : base(info, context)
         {
         }
     }

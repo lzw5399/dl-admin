@@ -16,7 +16,7 @@ namespace Doublelives.Service.Cache
         bool Remove(string cacheKey);
 
         bool Exist(string cacheKey);
-        
+
         void SetWholeTableToCache<T>() where T : EntityBase;
 
         /// <summary>

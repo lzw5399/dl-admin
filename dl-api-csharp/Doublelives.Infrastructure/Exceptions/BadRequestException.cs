@@ -19,8 +19,8 @@ namespace Doublelives.Infrastructure.Exceptions
             ErrorMessage = new ErrorMessage(code, message);
         }
 
-        protected BadRequestException(SerializationInfo info, StreamingContext context) 
-        : base(info, context)
+        protected BadRequestException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

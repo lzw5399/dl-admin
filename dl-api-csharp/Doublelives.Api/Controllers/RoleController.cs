@@ -22,7 +22,7 @@ namespace Doublelives.Api.Controllers
         /// 获取角色分页列表
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery]RoleListSearchRequest request)
+        public IActionResult List([FromQuery] RoleListSearchRequest request)
         {
             var result = _roleService.GetPagedList(RoleMapper.ToRoleSearchDto(request));
             var viewModels = RoleMapper.ToPagedListViewModel(result);

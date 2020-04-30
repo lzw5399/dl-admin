@@ -20,15 +20,9 @@ namespace Doublelives.Api.MockResponse
             }
             finally
             {
-                if (stream != null)
-                {
-                    stream.Dispose();
-                }
+                if (stream != null) stream.Dispose();
 
-                if (sr != null)
-                {
-                    sr.Dispose();
-                }
+                if (sr != null) sr.Dispose();
             }
 
             var model = JsonConvert.DeserializeObject<T>(json);

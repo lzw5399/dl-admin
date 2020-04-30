@@ -75,7 +75,8 @@ namespace Doublelives.Service.Users
                     new Claim(JwtClaimTypes.Subject, id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtConfig.ExpireMinutes),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
 
             var securityToken = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
@@ -102,6 +103,7 @@ namespace Doublelives.Service.Users
 
                     roles.Add(role);
                 }
+
                 permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
             }
 
@@ -116,14 +118,10 @@ namespace Doublelives.Service.Users
             Expression<Func<SysUser, bool>> condition = it => it.Id > 0;
 
             if (!string.IsNullOrWhiteSpace(criteria.Account))
-            {
                 condition = condition.And(it => it.Account.Contains(criteria.Account));
-            }
 
             if (!string.IsNullOrWhiteSpace(criteria.Name))
-            {
                 condition = condition.And(it => it.Name.Contains(criteria.Name));
-            }
 
             var result = _unitOfWork.UserRepository.Paged(
                 criteria.Page,
@@ -216,6 +214,9 @@ namespace Doublelives.Service.Users
             return ids.TrimEnd(',').Split(',').Select(id => int.Parse(id)).ToList();
         }
 
-        private string GetUserCacheKey(long id) => CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
+        private string GetUserCacheKey(long id)
+        {
+            return CacheHelper.ToCacheKey(CacheKeyPrefix.USER_CACHE_PREFIX, id);
+        }
     }
 }

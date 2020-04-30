@@ -72,7 +72,7 @@ namespace Doublelives.Persistence
             var query = Entities.Where(whereExpression);
 
             var total = query.Count();
-            if (total == 0) return new PagedModel<TEntity>() { PageSize = pageSize };
+            if (total == 0) return new PagedModel<TEntity>() {PageSize = pageSize};
 
             if (pageNumber <= 0) pageNumber = 1;
             if (pageSize <= 0) pageSize = 10;
@@ -102,7 +102,7 @@ namespace Doublelives.Persistence
             bool ascending = false)
         {
             var total = await Entities.CountAsync();
-            if (total == 0) return new PagedModel<TEntity>() { PageSize = pageSize };
+            if (total == 0) return new PagedModel<TEntity>() {PageSize = pageSize};
 
             if (pageNumber <= 0) pageNumber = 1;
             if (pageSize <= 0) pageSize = 10;

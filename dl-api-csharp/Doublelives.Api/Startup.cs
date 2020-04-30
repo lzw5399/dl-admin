@@ -102,9 +102,7 @@ namespace Doublelives.Api
                         OnMessageReceived = it =>
                         {
                             if (!string.IsNullOrEmpty(it.HttpContext.Request.Headers[ApiHeaders.TOKEN]))
-                            {
                                 it.Token = it.HttpContext.Request.Headers[ApiHeaders.TOKEN];
-                            }
 
                             return Task.CompletedTask;
                         }

@@ -97,6 +97,6 @@ namespace Doublelives.Domain.Sys.Dto
 
         public string StatusName => Status ? "启用" : "禁用";
 
-        public string SexName => Sex.HasValue ? (Sex.Value == (int)Gender.Male ? "男" : "女") : string.Empty;
+        public string SexName => Sex.HasValue ? Sex.Value == (int) Gender.Male ? "男" : "女" : string.Empty;
     }
 }

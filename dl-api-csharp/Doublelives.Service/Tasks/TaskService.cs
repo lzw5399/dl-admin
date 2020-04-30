@@ -30,7 +30,7 @@ namespace Doublelives.Service.Tasks
         {
             var xx = _dbContext.Set<SysUser>().ToList();
             var sw = Stopwatch.StartNew();
-            int count = 0;
+            var count = 0;
             count += _dbContext.Set<CmsArticle>().ToList().Count();
             count += _dbContext.Set<CmsBanner>().ToList().Count();
             count += _dbContext.Set<CmsChannel>().ToList().Count();
@@ -121,8 +121,8 @@ namespace Doublelives.Service.Tasks
             {
                 var types = AppDomain.CurrentDomain.GetAssemblies()
                     .SelectMany(a => a.GetTypes().Where(t =>
-                        (t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType) ||
-                        (t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase))))
+                        t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType ||
+                        t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase)))
                     .ToArray();
 
                 var type = types.FirstOrDefault(it => it.Name == item);
@@ -140,8 +140,8 @@ namespace Doublelives.Service.Tasks
         {
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes().Where(t =>
-                    (t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType) ||
-                    (t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase))))
+                    t != typeof(AuditableEntityBase) && typeof(AuditableEntityBase) == t.BaseType ||
+                    t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase)))
                 .ToArray();
 
             foreach (var type in types)
@@ -157,7 +157,7 @@ namespace Doublelives.Service.Tasks
 
             using (var sr = new StreamReader(jsonPath))
             {
-                string json = sr.ReadToEnd();
+                var json = sr.ReadToEnd();
                 var range = JsonConvert.DeserializeObject<List<T>>(json);
 
                 _dbContext.Set<T>().AddRange(range);
@@ -167,10 +167,10 @@ namespace Doublelives.Service.Tasks
 
         private void Write(string fileName, string json)
         {
-            using (FileStream fs = new FileStream(@$"C:\Users\11301\Desktop\json\{fileName}.json", FileMode.Create))
+            using (var fs = new FileStream(@$"C:\Users\11301\Desktop\json\{fileName}.json", FileMode.Create))
             {
                 //获得字节数组
-                byte[] data = System.Text.Encoding.Default.GetBytes(json);
+                var data = System.Text.Encoding.Default.GetBytes(json);
                 //开始写入
                 fs.Write(data, 0, data.Length);
                 //清空缓冲区、关闭流

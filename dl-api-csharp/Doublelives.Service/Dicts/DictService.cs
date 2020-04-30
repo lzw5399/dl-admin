@@ -60,10 +60,8 @@ namespace Doublelives.Service.Dicts
         /// </summary>
         public List<SysDict> GetAll()
         {
-            var result = _cacheManager.GetOrCreateAsync("dict_all", async entry =>
-             {
-                 return await _unitOfWork.DictRepository.GetAsQueryable().ToListAsync();
-             }).Result;
+            var result = _cacheManager.GetOrCreateAsync("dict_all",
+                async entry => { return await _unitOfWork.DictRepository.GetAsQueryable().ToListAsync(); }).Result;
 
             return result;
         }

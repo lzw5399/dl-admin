@@ -6,8 +6,14 @@ namespace Doublelives.Infrastructure.Extensions
 {
     public static class ByteExtension
     {
-        public static byte[] GetBytes(this string str) => str.GetBytes(Encoding.UTF8);
+        public static byte[] GetBytes(this string str)
+        {
+            return str.GetBytes(Encoding.UTF8);
+        }
 
-        public static byte[] GetBytes(this string str, Encoding encoding) => encoding.GetBytes(str);
+        public static byte[] GetBytes(this string str, Encoding encoding)
+        {
+            return encoding.GetBytes(str);
+        }
     }
 }

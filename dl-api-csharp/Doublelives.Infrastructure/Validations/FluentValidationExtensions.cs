@@ -16,27 +16,22 @@ namespace Doublelives.Infrastructure.Validations
             Func<T, string> errorCodeProvider)
         {
             if (errorCodeProvider == null)
-            {
                 throw new ArgumentNullException(nameof(errorCodeProvider), "A errorCodeProvider must be provided.");
-            }
 
-            return rule.Configure((Action<PropertyRule>)(config =>
+            return rule.Configure((Action<PropertyRule>) (config =>
                 config.CurrentValidator.Options.ErrorCodeSource =
-                    (IStringSource)new LazyStringSource((Func<IValidationContext, string>)(ctx =>
-                        errorCodeProvider((T)ctx.InstanceToValidate)))));
+                    (IStringSource) new LazyStringSource((Func<IValidationContext, string>) (ctx =>
+                        errorCodeProvider((T) ctx.InstanceToValidate)))));
         }
 
-        public static void SetValidator<T, TValidator>(this CustomContext context, TValidator validator, T newObj) where TValidator : AbstractValidator<T>
+        public static void SetValidator<T, TValidator>(this CustomContext context, TValidator validator, T newObj)
+            where TValidator : AbstractValidator<T>
         {
             var result = validator.Validate(newObj);
 
             if (!result.IsValid)
-            {
                 foreach (var error in result.Errors)
-                {
                     context.AddFailure(error);
-                }
-            }
         }
 
         public static void ThrowException(ValidationResult result)

@@ -29,18 +29,14 @@ namespace Doublelives.Service.Notices
             {
                 List<SysNotice> notices;
                 if (string.IsNullOrEmpty(title))
-                {
                     notices = await _unitOfWork.NoticeRepository
-                    .GetAsQueryable()
-                    .ToListAsync();
-                }
+                        .GetAsQueryable()
+                        .ToListAsync();
                 else
-                {
                     notices = await _unitOfWork.NoticeRepository
-                    .GetAsQueryable()
-                    .Where(it => it.Title == title)
-                    .ToListAsync();
-                }
+                        .GetAsQueryable()
+                        .Where(it => it.Title == title)
+                        .ToListAsync();
 
                 return notices.Select(it => NoticeMapper.ToNoticeDto(it)).ToList();
             }).Result;

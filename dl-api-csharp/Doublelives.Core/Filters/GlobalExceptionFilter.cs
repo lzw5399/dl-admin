@@ -25,7 +25,8 @@ namespace Doublelives.Core.Filters
         {
             if (context.Exception is CosClientException clientException)
             {
-                _logger.LogError($"ErrorType: {nameof(CosClientException)}\r\n\r\nErrorMessage: {clientException.Message}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
+                _logger.LogError(
+                    $"ErrorType: {nameof(CosClientException)}\r\n\r\nErrorMessage: {clientException.Message}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
 
                 context.Result = new ObjectResult(clientException.Message)
                 {
@@ -35,7 +36,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is CosServerException serverException)
             {
-                _logger.LogError($"ErrorType: {nameof(CosServerException)}\r\n\r\nErrorMessage: {serverException.GetInfo()}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
+                _logger.LogError(
+                    $"ErrorType: {nameof(CosServerException)}\r\n\r\nErrorMessage: {serverException.GetInfo()}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
 
                 context.Result = new ObjectResult(serverException.GetInfo())
                 {
@@ -45,7 +47,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is UserNotFoundException userNotFoundException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(userNotFoundException.Message)}\r\n\r\nStackTrace: {userNotFoundException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(userNotFoundException.Message)}\r\n\r\nStackTrace: {userNotFoundException.StackTrace}");
 
                 context.Result = new ObjectResult(userNotFoundException.Message)
                 {
@@ -53,9 +56,10 @@ namespace Doublelives.Core.Filters
                     DeclaredType = typeof(IEnumerable<UserNotFoundException>)
                 };
             }
-            else if(context.Exception is InvalidException invalidException)
+            else if (context.Exception is InvalidException invalidException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(invalidException.Errors)}\r\n\r\nStackTrace: {invalidException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(invalidException.Errors)}\r\n\r\nStackTrace: {invalidException.StackTrace}");
 
                 context.Result = new ObjectResult(invalidException.Errors)
                 {
@@ -65,7 +69,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is DuplicatedException duplicatedException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(duplicatedException.ErrorMessage)}\r\n\r\nStackTrace: {duplicatedException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(duplicatedException.ErrorMessage)}\r\n\r\nStackTrace: {duplicatedException.StackTrace}");
 
                 context.Result = new ObjectResult(duplicatedException.ErrorMessage)
                 {
@@ -75,7 +80,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is NotFoundException notFoundException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(notFoundException.ErrorMessage)}\r\n\r\nStackTrace: {notFoundException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(notFoundException.ErrorMessage)}\r\n\r\nStackTrace: {notFoundException.StackTrace}");
 
                 context.Result = new ObjectResult(notFoundException.ErrorMessage)
                 {
@@ -85,7 +91,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is InternalException internalException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(internalException.ErrorMessage)}\r\n\r\nStackTrace: {internalException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(internalException.ErrorMessage)}\r\n\r\nStackTrace: {internalException.StackTrace}");
 
                 context.Result = new ObjectResult(internalException.ErrorMessage)
                 {
@@ -95,7 +102,8 @@ namespace Doublelives.Core.Filters
             }
             else if (context.Exception is BadRequestException badRequestException)
             {
-                _logger.LogWarning($"Error: {JsonConvert.SerializeObject(badRequestException.ErrorMessage)}\r\n\r\nStackTrace: {badRequestException.StackTrace}");
+                _logger.LogWarning(
+                    $"Error: {JsonConvert.SerializeObject(badRequestException.ErrorMessage)}\r\n\r\nStackTrace: {badRequestException.StackTrace}");
 
                 context.Result = new ObjectResult(badRequestException.ErrorMessage)
                 {
@@ -105,9 +113,11 @@ namespace Doublelives.Core.Filters
             }
             else
             {
-                _logger.LogError($"ErrorType: Unknown\r\n\r\nErrorMessage: {context.Exception.Message}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
+                _logger.LogError(
+                    $"ErrorType: Unknown\r\n\r\nErrorMessage: {context.Exception.Message}\r\n\r\nStackTrace: {context.Exception.StackTrace}");
 
-                context.Result = new ObjectResult(new ErrorMessage(ErrorMessages.UNKNOWN_EXCEPTION_CODE, ErrorMessages.UNKNOWN_EXCEPTION_MESSAGE))
+                context.Result = new ObjectResult(new ErrorMessage(ErrorMessages.UNKNOWN_EXCEPTION_CODE,
+                    ErrorMessages.UNKNOWN_EXCEPTION_MESSAGE))
                 {
                     StatusCode = StatusCodes.Status500InternalServerError,
                     DeclaredType = typeof(ErrorResponseModel)
