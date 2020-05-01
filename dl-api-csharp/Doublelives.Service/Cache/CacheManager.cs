@@ -20,11 +20,11 @@ namespace Doublelives.Service.Cache
         private readonly DlAdminDbContext _dbContext;
         private const int QUERY_PER_ROUND = 10000;
 
-        public CacheManager(IOptions<CacheOptions> options, CSRedisClient client, DlAdminDbContext dbContext)
+        public CacheManager(IOptions<CacheOptions> options, CSRedisClient client/*, DlAdminDbContext dbContext*/)
         {
             _cacheOptions = options.Value;
             _redisClient = client;
-            _dbContext = dbContext;
+            // _dbContext = dbContext;
         }
 
         /// <summary>
