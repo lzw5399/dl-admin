@@ -14,7 +14,7 @@ namespace Doublelives.Api.Controllers
     {
         protected WorkContext WorkContext { get; }
 
-        public AuthControllerBase(IWorkContextAccessor workContextAccessor)
+        protected AuthControllerBase(IWorkContextAccessor workContextAccessor)
         {
             WorkContext = workContextAccessor.WorkContext;
         }

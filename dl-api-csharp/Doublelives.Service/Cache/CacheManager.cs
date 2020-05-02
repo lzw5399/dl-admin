@@ -48,7 +48,7 @@ namespace Doublelives.Service.Cache
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
 
-            var value = _redisClient.Get<T>(cacheKey);
+            var value = await _redisClient.GetAsync<T>(cacheKey);
 
             if (value != null)
                 return value;
@@ -58,7 +58,7 @@ namespace Doublelives.Service.Cache
             if (value == null)
                 return default;
 
-            _redisClient.Set(cacheKey, value, entry.Expire);
+            await _redisClient.SetAsync(cacheKey, value, entry.Expire);
 
             return value;
         }
