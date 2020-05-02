@@ -2,21 +2,19 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: '/cfg/list',
+    url: 'api/cfg/list',
     method: 'get',
     params
   })
 }
-
 
 export function exportXls(params) {
   return request({
-    url: '/cfg/export',
+    url: 'api/cfg/export',
     method: 'get',
     params
   })
 }
-
 
 export function save(params) {
   return request({
@@ -28,7 +26,7 @@ export function save(params) {
 
 export function remove(id) {
   return request({
-    url: '/cfg',
+    url: 'api/cfg',
     method: 'delete',
     params: {
       id: id

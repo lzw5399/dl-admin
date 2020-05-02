@@ -1,9 +1,7 @@
 ﻿using CSRedis;
 using Doublelives.Domain.Infrastructure;
 using Doublelives.Infrastructure.Extensions;
-using Doublelives.Persistence;
 using Doublelives.Shared.ConfigModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -17,10 +15,9 @@ namespace Doublelives.Service.Cache
     {
         private readonly CacheOptions _cacheOptions;
         private readonly CSRedisClient _redisClient;
-        private readonly DlAdminDbContext _dbContext;
         private const int QUERY_PER_ROUND = 10000;
 
-        public CacheManager(IOptions<CacheOptions> options, CSRedisClient client/*, DlAdminDbContext dbContext*/)
+        public CacheManager(IOptions<CacheOptions> options, CSRedisClient client /*, DlAdminDbContext dbContext*/)
         {
             _cacheOptions = options.Value;
             _redisClient = client;
@@ -63,15 +60,19 @@ namespace Doublelives.Service.Cache
             return value;
         }
 
-        /// <summary>
-        ///整张表缓存的一个封装，从缓存获取分页数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        public async Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria) where T : EntityBase
+        ///  <summary>
+        /// 整张表缓存的一个封装，从缓存获取分页数据
+        ///  </summary>
+        ///  <typeparam name="T"></typeparam>
+        ///  <param name="criteria"></param>
+        ///  <param name="factory"></param>
+        ///  <returns></returns>
+        public async Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria,
+            Func<CacheEntryOptions, Task<List<T>>> factory) where T : EntityBase
         {
-            if (!_cacheOptions.Enable) return await GetPagedFromDbAsync<T>(criteria);
+            var entry = GetDefaultCacheEntryOptions();
+
+            if (!_cacheOptions.Enable) return await factory(entry);
 
             // 如果包含模糊查询
             if (criteria.FuzzySearch)
@@ -82,29 +83,14 @@ namespace Doublelives.Service.Cache
                 criteria.Offset);
 
             if (!ids.Any())
-                return await GetPagedListAndTriggerCacheFiller<T>(criteria);
+                return await GetPagedListAndTriggerCacheFiller<T>(criteria, factory);
 
             var list = await _redisClient.HMGetAsync<T>($"{typeof(T).Name}_all", ids);
 
             if (!list.Any() || ids.Count() != list.Count())
-                return await GetPagedListAndTriggerCacheFiller<T>(criteria);
+                return await GetPagedListAndTriggerCacheFiller<T>(criteria, factory);
 
             return list.ToList();
-        }
-
-        public void SetWholeTableToCache<T>() where T : EntityBase
-        {
-            Task.Run(async () =>
-            {
-                var data = await _dbContext.Set<T>().ToListAsync();
-                var ids = data.Select(it => ((decimal) it.Id, (object) it.Id)).ToArray();
-                var mixed = data.SelectMany(it => new object[] {it.Id, it}).ToArray();
-
-                // 将id添加到zrange(就是sorted set)
-                await _redisClient.ZAddAsync($"{typeof(T).Name}_ids", ids);
-
-                await _redisClient.HMSetAsync($"{typeof(T).Name}_all", mixed);
-            }).Wait();
         }
 
         /// <summary>
@@ -148,27 +134,29 @@ namespace Doublelives.Service.Cache
             return finalResult.Skip(criteria.Offset).Take(criteria.Count).ToList();
         }
 
-        private async Task<List<T>> GetPagedListAndTriggerCacheFiller<T>(SearchCriteria criteria) where T : EntityBase
+        private async Task<List<T>> GetPagedListAndTriggerCacheFiller<T>(SearchCriteria criteria,
+            Func<CacheEntryOptions, Task<List<T>>> factory) where T : EntityBase
         {
-            var data = await GetPagedFromDbAsync<T>(criteria);
+            var options = GetDefaultCacheEntryOptions();
+            var data = await factory(options);
 
             // todo 触发filler
 
             return data;
         }
 
-        private async Task<List<T>> GetPagedFromDbAsync<T>(SearchCriteria criteria) where T : EntityBase
-        {
-            var expression = GetPagedConditionExpression<T>(criteria);
-
-            var list = await _dbContext.Set<T>()
-                .Where(expression)
-                .Skip(criteria.Offset)
-                .Take(criteria.Count)
-                .ToListAsync();
-
-            return list;
-        }
+        // private async Task<List<T>> GetPagedFromDbAsync<T>(SearchCriteria criteria) where T : EntityBase
+        // {
+        //     var expression = GetPagedConditionExpression<T>(criteria);
+        //
+        //     var list = await _dbContext.Set<T>()
+        //         .Where(expression)
+        //         .Skip(criteria.Offset)
+        //         .Take(criteria.Count)
+        //         .ToListAsync();
+        //
+        //     return list;
+        // }
 
         private Expression<Func<T, bool>> GetPagedConditionExpression<T>(SearchCriteria criteria)
         {

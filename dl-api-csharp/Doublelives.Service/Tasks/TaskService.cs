@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using CSRedis;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doublelives.Service.Tasks
 {
@@ -18,12 +21,15 @@ namespace Doublelives.Service.Tasks
         private readonly DlAdminDbContext _dbContext;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICacheManager _cacheManager;
+        private readonly CSRedisClient _redisClient;
 
-        public TaskService(DlAdminDbContext dbContext, IUnitOfWork unitOfWork, ICacheManager cacheManager)
+        public TaskService(DlAdminDbContext dbContext, IUnitOfWork unitOfWork, ICacheManager cacheManager,
+            CSRedisClient redisClient)
         {
             _dbContext = dbContext;
             _unitOfWork = unitOfWork;
             _cacheManager = cacheManager;
+            _redisClient = redisClient;
         }
 
         public void WarmupDatabase()
@@ -58,7 +64,7 @@ namespace Doublelives.Service.Tasks
                 ExecSuccess = true,
                 Name = "刷新",
                 IdTask = 1,
-                JobException = $"成功！执行时间:{sw.ElapsedMilliseconds}"
+                JobException = $"成功！执行时间:{sw.ElapsedMilliseconds}, count={count}"
             });
         }
 
@@ -144,10 +150,20 @@ namespace Doublelives.Service.Tasks
                     t.BaseType == typeof(EntityBase) && t != typeof(AuditableEntityBase)))
                 .ToArray();
 
+            // 移除user和piture
+            types = types.Where(it => it.Name != "User" && it.Name != "Picture").ToArray();
+
             foreach (var type in types)
             {
-                var mi = _cacheManager.GetType().GetMethod("SetWholeTableToCache")?.MakeGenericMethod(type);
-                if (mi != null) mi.Invoke(_cacheManager, null);
+                var mi = this.GetType().GetMethod("SetWholeTableToCache")?.MakeGenericMethod(type);
+                try
+                {
+                    mi?.Invoke(this, null);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -165,7 +181,22 @@ namespace Doublelives.Service.Tasks
             }
         }
 
-        private void Write(string fileName, string json)
+        public void SetWholeTableToCache<T>() where T : EntityBase
+        {
+            Task.Run(async () =>
+            {
+                var data = await _dbContext.Set<T>().ToListAsync();
+                var ids = data.Select(it => ((decimal) it.Id, (object) it.Id)).ToArray();
+                var mixed = data.SelectMany(it => new object[] {it.Id, it}).ToArray();
+
+                // 将id添加到zrange(就是sorted set)
+                await _redisClient.ZAddAsync($"{typeof(T).Name}_ids", ids);
+
+                await _redisClient.HMSetAsync($"{typeof(T).Name}_all", mixed);
+            }).Wait();
+        }
+
+        private static void Write(string fileName, string json)
         {
             using (var fs = new FileStream(@$"C:\Users\11301\Desktop\json\{fileName}.json", FileMode.Create))
             {

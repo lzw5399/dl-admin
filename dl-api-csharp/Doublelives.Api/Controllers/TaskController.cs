@@ -35,6 +35,7 @@ namespace Doublelives.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("cachefiller")]
         public IActionResult CacheFiller()
         {

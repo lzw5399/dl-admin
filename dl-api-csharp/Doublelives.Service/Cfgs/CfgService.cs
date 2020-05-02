@@ -6,6 +6,7 @@ using Doublelives.Service.Cache;
 using Doublelives.Service.Mappers;
 using Doublelives.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -23,6 +24,25 @@ namespace Doublelives.Service.Cfgs
         }
 
         public async Task<PagedModel<CfgDto>> GetPagedList(CfgSearchDto criteria)
+        {
+            var searchCriteria = new SearchCriteria
+            {
+                Keyword = criteria.CfgName,
+                SearchFields = new string[] {"CfgName"},
+                Offset = (criteria.Page -1) * criteria.Limit,
+                Count = criteria.Limit
+            };
+            var result = await _cacheManager.GetOrCreatePagedListAsync<SysCfg>(searchCriteria, async options =>
+            {
+                return new List<SysCfg>();
+            });
+           
+            var dto = CfgMapper.ToCfgDto(new PagedModel<SysCfg>());
+
+            return dto;
+        }
+
+        public async Task<PagedModel<CfgDto>> GetPagedListV2(CfgSearchDto criteria)
         {
             Expression<Func<SysCfg, bool>> condition = it => true;
 

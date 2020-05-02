@@ -7,7 +7,8 @@ namespace Doublelives.Service.Cache
 {
     public interface ICacheManager
     {
-        Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria) where T : EntityBase;
+        Task<List<T>> GetOrCreatePagedListAsync<T>(SearchCriteria criteria,
+            Func<CacheEntryOptions, Task<List<T>>> factory) where T : EntityBase;
 
         Task<T> GetOrCreateAsync<T>(string cacheKey, Func<CacheEntryOptions, Task<T>> factory);
 
@@ -16,8 +17,6 @@ namespace Doublelives.Service.Cache
         bool Remove(string cacheKey);
 
         bool Exist(string cacheKey);
-
-        void SetWholeTableToCache<T>() where T : EntityBase;
 
         /// <summary>
         /// 清空所有缓存
