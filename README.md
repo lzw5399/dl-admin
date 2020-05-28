@@ -15,7 +15,7 @@
 ## 技术选型
 - 核心框架：ASP.NET Core 3.1
 - 数据访问层：EntityFramework Core
-- 数据库：PostgreSQL
+- 数据库：MySQL
 - 缓存：Redis
 - 前端：基于vue-element-admin
 
