@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using AutoMapper;
 using Doublelives.Api.Models.Account;
 using Doublelives.Api.Models.Account.Requests;
@@ -29,11 +30,11 @@ namespace Doublelives.Api.Controllers
         /// <summary>账户登陆</summary>
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login(AccountLoginRequest request)
+        public async Task<IActionResult> Login(AccountLoginRequest request)
         {
             ModelValidator<AccountLoginRequest, LoginRequestValidator>.Validate(request);
 
-            var (valid, token) = _userService.Login(request.UserName, request.Password);
+            var (valid, token) = await _userService.Login(request.UserName, request.Password);
 
             if (!valid) return NotFound("用户名或密码错误，请检查");
 

@@ -48,9 +48,9 @@ namespace Doublelives.Service.Users
             _roleService = roleService;
         }
 
-        public (bool, string) Login(string account, string pwd)
+        public async Task<(bool, string)> Login(string account, string pwd)
         {
-            var user = GetByAccountName(account);
+            var user = await GetByAccountName(account);
 
             if (user == null) return (false, null);
 
@@ -86,9 +86,9 @@ namespace Doublelives.Service.Users
             return tokenString;
         }
 
-        public AccountInfoDto GetInfo(long userid)
+        public async Task<AccountInfoDto> GetInfo(long userid)
         {
-            var user = GetById(userid).Result;
+            var user = await GetById(userid);
             if (user == null) throw new UserNotFoundException();
 
             var roles = new List<SysRole>();
@@ -112,7 +112,7 @@ namespace Doublelives.Service.Users
             return UserMapper.ToAccountInfoDto(user, dept, roles, permissions);
         }
 
-        public PagedModel<AccountProfileDto> GetPagedList(UserSearchDto criteria)
+        public async Task<PagedModel<AccountProfileDto>> GetPagedList(UserSearchDto criteria)
         {
             // 排除"应用系统"用户
             Expression<Func<SysUser, bool>> condition = it => it.Id > 0;
@@ -123,7 +123,7 @@ namespace Doublelives.Service.Users
             if (!string.IsNullOrWhiteSpace(criteria.Name))
                 condition = condition.And(it => it.Name.Contains(criteria.Name));
 
-            var result = _unitOfWork.UserRepository.Paged(
+            var result = await _unitOfWork.UserRepository.PagedAsync(
                 criteria.Page,
                 criteria.Limit,
                 condition,
@@ -157,24 +157,27 @@ namespace Doublelives.Service.Users
             return user;
         }
 
-        public SysUser GetByAccountName(string account)
+        public async Task<SysUser> GetByAccountName(string account)
         {
-            var user = _unitOfWork.UserRepository.GetAsQueryable().FirstOrDefault(it => it.Account == account);
+            var user = await _unitOfWork
+                .UserRepository
+                .GetAsQueryable()
+                .FirstOrDefaultAsync(it => it.Account == account);
 
             return user;
         }
 
-        public void Add(SysUser user)
+        public async Task Add(SysUser user)
         {
-            _unitOfWork.UserRepository.Insert(user);
-            _unitOfWork.Commit();
+            await _unitOfWork.UserRepository.InsertAsync(user);
+            await _unitOfWork.CommitAsync();
 
             _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
-        public void Update(UserUpdateDto request)
+        public async Task Update(UserUpdateDto request)
         {
-            var user = GetById(request.Id).Result;
+            var user = await GetById(request.Id);
             if (user == null) throw new NotFoundException();
 
             user.Account = request.Account;
@@ -194,10 +197,10 @@ namespace Doublelives.Service.Users
             _cacheManager.Remove(GetUserCacheKey(user.Id));
         }
 
-        public void Delete(long id)
+        public async Task Delete(long id)
         {
             _unitOfWork.UserRepository.DeleteById(id);
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
 
             _cacheManager.Remove(GetUserCacheKey(id));
         }

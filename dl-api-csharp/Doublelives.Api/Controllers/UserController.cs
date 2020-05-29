@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -31,9 +32,9 @@ namespace Doublelives.Api.Controllers
         /// 获取分页用户列表
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery] UserListSearchRequest request)
+        public async Task<IActionResult> List([FromQuery] UserListSearchRequest request)
         {
-            var result = _userService.GetPagedList(UserMapper.ToUserSearchDto(request));
+            var result = await _userService.GetPagedList(UserMapper.ToUserSearchDto(request));
 
             var viewModel = new UserPagedListViewModel
             {

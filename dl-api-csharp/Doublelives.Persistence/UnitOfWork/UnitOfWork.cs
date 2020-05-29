@@ -1,4 +1,5 @@
-﻿using Doublelives.Domain.Pictures;
+﻿using System.Threading.Tasks;
+using Doublelives.Domain.Pictures;
 using Doublelives.Domain.Sys;
 using Doublelives.Domain.Users;
 using Doublelives.Persistence.Repositories;
@@ -44,6 +45,11 @@ namespace Doublelives.Persistence
         public void Commit()
         {
             _albumDbContext.SaveChanges();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _albumDbContext.SaveChangesAsync();
         }
     }
 }

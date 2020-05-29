@@ -7,20 +7,20 @@ namespace Doublelives.Service.Users
 {
     public interface IUserService
     {
-        (bool, string) Login(string username, string pwd);
+        Task<(bool, string)> Login(string username, string pwd);
 
         string GenerateToken(long id);
 
         Task<SysUser> GetById(long id);
 
-        void Add(SysUser user);
+        Task Add(SysUser user);
 
-        void Update(UserUpdateDto dto);
+        Task Update(UserUpdateDto dto);
 
-        void Delete(long id);
+        Task Delete(long id);
 
-        AccountInfoDto GetInfo(long userid);
+        Task<AccountInfoDto> GetInfo(long userid);
 
-        PagedModel<AccountProfileDto> GetPagedList(UserSearchDto userSearchDto);
+        Task<PagedModel<AccountProfileDto>> GetPagedList(UserSearchDto userSearchDto);
     }
 }

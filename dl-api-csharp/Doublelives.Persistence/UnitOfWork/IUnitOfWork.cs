@@ -1,4 +1,5 @@
-﻿using Doublelives.Domain.Pictures;
+﻿using System.Threading.Tasks;
+using Doublelives.Domain.Pictures;
 using Doublelives.Domain.Sys;
 using Doublelives.Domain.Users;
 using Doublelives.Persistence.Repositories;
@@ -26,5 +27,7 @@ namespace Doublelives.Persistence
         IMenuRepository MenuRepository { get; }
 
         void Commit();
+
+        Task CommitAsync();
     }
 }
