@@ -1,4 +1,5 @@
-﻿using Doublelives.Api.Mappers;
+﻿using System.Threading.Tasks;
+using Doublelives.Api.Mappers;
 using Doublelives.Api.Models.Roles.Requests;
 using Doublelives.Service.Roles;
 using Doublelives.Service.WorkContextAccess;
@@ -22,9 +23,9 @@ namespace Doublelives.Api.Controllers
         /// 获取角色分页列表
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery] RoleListSearchRequest request)
+        public async Task<IActionResult> List([FromQuery] RoleListSearchRequest request)
         {
-            var result = _roleService.GetPagedList(RoleMapper.ToRoleSearchDto(request));
+            var result = await _roleService.GetPagedList(RoleMapper.ToRoleSearchDto(request));
             var viewModels = RoleMapper.ToPagedListViewModel(result);
 
             return Ok(viewModels);

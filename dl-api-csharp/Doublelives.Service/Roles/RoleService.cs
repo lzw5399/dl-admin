@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Roles
 {
@@ -31,26 +32,25 @@ namespace Doublelives.Service.Roles
             _deptService = deptService;
         }
 
-        public SysRole GetById(int id)
+        public async Task<SysRole> GetById(int id)
         {
-            var result = _cacheManager.GetOrCreateAsync(GetRoleCacheKey(id),
-                async entry => { return await _unitOfWork.RoleRepository.GetByIdAsync(id); }).Result;
+            var result = await _cacheManager.GetOrCreateAsync(GetRoleCacheKey(id),
+                async entry => { return await _unitOfWork.RoleRepository.GetByIdAsync(id); });
 
             return result;
         }
 
-        public List<SysRole> GetListByIds(List<int> ids)
+        public async Task<List<SysRole>> GetListByIds(List<int> ids)
         {
             // e.g. role_list_1_2
             var key = GetRoleCacheKey($"list_{string.Join('_', ids)}");
-            var result = _cacheManager.GetOrCreateAsync(key,
-                    async entry => { return (await _unitOfWork.RoleRepository.GetByIdsAsync(ids.ToArray())).ToList(); })
-                .Result;
+            var result = await _cacheManager.GetOrCreateAsync(key,
+                async entry => { return (await _unitOfWork.RoleRepository.GetByIdsAsync(ids.ToArray())).ToList(); });
 
             return result;
         }
 
-        public PagedModel<RoleProfileDto> GetPagedList(RoleSearchDto criteria)
+        public async Task<PagedModel<RoleProfileDto>> GetPagedList(RoleSearchDto criteria)
         {
             Expression<Func<SysRole, bool>> condition = it => true;
 
@@ -58,7 +58,7 @@ namespace Doublelives.Service.Roles
                 condition = condition.And(it =>
                     it.Name.Contains(criteria.RoleName) || it.Tips.Contains(criteria.RoleName));
 
-            var result = _unitOfWork.RoleRepository.Paged(
+            var result = await _unitOfWork.RoleRepository.PagedAsync(
                 criteria.Page,
                 criteria.Limit,
                 condition,
@@ -71,7 +71,7 @@ namespace Doublelives.Service.Roles
 
             foreach (var item in dto.Data)
             {
-                var dept = _deptService.GetById(item.Deptid.Value());
+                var dept = await _deptService.GetById(item.Deptid.Value());
                 item.DeptName = dept?.Simplename;
 
                 if (!item.Pid.HasValue || item.Pid.Value == 0) continue;
@@ -84,7 +84,7 @@ namespace Doublelives.Service.Roles
                 }
 
                 // 单独取
-                item.PName = GetById(item.Pid.Value)?.Name;
+                item.PName = (await GetById(item.Pid.Value))?.Name;
             }
 
             return dto;

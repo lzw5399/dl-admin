@@ -98,7 +98,7 @@ namespace Doublelives.Service.Users
                 var ids = SplitId(user.Roleid);
                 foreach (var id in ids)
                 {
-                    var role = _roleService.GetById(id);
+                    var role = await _roleService.GetById(id);
                     if (role == null) continue;
 
                     roles.Add(role);
@@ -138,7 +138,7 @@ namespace Doublelives.Service.Users
             {
                 var dept = await _deptService.GetById(item.Deptid);
                 var roleIds = SplitId(item.Roleid);
-                var roles = _roleService.GetListByIds(roleIds);
+                var roles = await _roleService.GetListByIds(roleIds);
 
                 // mapping
                 item.Dept = dept?.Fullname;
