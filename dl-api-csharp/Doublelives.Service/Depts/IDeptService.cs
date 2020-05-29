@@ -1,13 +1,14 @@
 ﻿using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Depts
 {
     public interface IDeptService
     {
-        List<DeptDto> List();
+        Task<List<DeptDto>> List();
 
-        SysDept GetById(int id);
+        Task<SysDept> GetById(int id);
     }
 }

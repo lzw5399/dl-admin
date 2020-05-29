@@ -5,6 +5,7 @@ using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -25,9 +26,9 @@ namespace Doublelives.Api.Controllers
 
         /// <summary>获取部门层级</summary>
         [HttpGet("list")]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            var dtos = _deptService.List();
+            var dtos = await _deptService.List();
             var model = _mapper.Map<List<DeptViewModel>>(dtos);
 
             return Ok(model);

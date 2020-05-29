@@ -8,6 +8,7 @@ using Doublelives.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Depts
 {
@@ -25,9 +26,9 @@ namespace Doublelives.Service.Depts
         }
 
         /// <summary>获取所有的部门树</summary>
-        public List<DeptDto> List()
+        public async Task<List<DeptDto>> List()
         {
-            var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(), async entry =>
+            var result = await _cacheManager.GetOrCreateAsync(GetDeptCacheKey(), async entry =>
             {
                 var dtos = new List<DeptDto>();
                 var depts = await _unitOfWork.DeptRepository.GetAsQueryable().ToListAsync();
@@ -48,15 +49,15 @@ namespace Doublelives.Service.Depts
                 }
 
                 return dtos;
-            }).Result;
+            });
 
             return result;
         }
 
-        public SysDept GetById(int id)
+        public async Task<SysDept> GetById(int id)
         {
-            var result = _cacheManager.GetOrCreateAsync(GetDeptCacheKey(id),
-                async entry => { return await _unitOfWork.DeptRepository.GetByIdAsync(id); }).Result;
+            var result = await _cacheManager.GetOrCreateAsync(GetDeptCacheKey(id),
+                async entry => { return await _unitOfWork.DeptRepository.GetByIdAsync(id); });
 
             return result;
         }

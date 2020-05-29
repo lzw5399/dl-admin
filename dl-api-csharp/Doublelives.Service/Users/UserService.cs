@@ -107,7 +107,7 @@ namespace Doublelives.Service.Users
                 permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
             }
 
-            var dept = _deptService.GetById(user.Deptid.Value());
+            var dept = await _deptService.GetById(user.Deptid.Value());
 
             return UserMapper.ToAccountInfoDto(user, dept, roles, permissions);
         }
@@ -136,7 +136,7 @@ namespace Doublelives.Service.Users
 
             foreach (var item in dto.Data)
             {
-                var dept = _deptService.GetById(item.Deptid);
+                var dept = await _deptService.GetById(item.Deptid);
                 var roleIds = SplitId(item.Roleid);
                 var roles = _roleService.GetListByIds(roleIds);
 

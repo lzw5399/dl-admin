@@ -45,10 +45,10 @@ namespace Doublelives.Api.Controllers
 
         /// <summary>获取当前账户信息</summary>
         [HttpGet("info")]
-        public IActionResult Info()
+        public async Task<IActionResult> Info()
         {
             // todo kankan cache?
-            var result = _userService.GetInfo(WorkContext.CurrentUser.Id);
+            var result = await _userService.GetInfo(WorkContext.CurrentUser.Id);
             var info = _mapper.Map<AccountInfoViewModel>(result);
 
             return Ok(info);
