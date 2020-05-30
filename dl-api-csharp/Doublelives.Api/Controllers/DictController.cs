@@ -6,6 +6,7 @@ using Doublelives.Service.Dicts;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -28,9 +29,9 @@ namespace Doublelives.Api.Controllers
         /// 获取分页的dict
         /// </summary>
         [HttpGet("list")]
-        public IActionResult List([FromQuery] DictListSearchRequest request)
+        public async Task<IActionResult> List([FromQuery] DictListSearchRequest request)
         {
-            var result = _dictService.GetPagedList(DictMapper.ToDictSearchDto(request));
+            var result = await _dictService.GetPagedList(DictMapper.ToDictSearchDto(request));
             var viewModels = _mapper.Map<List<DictViewModel>>(result.Data);
 
             return Ok(viewModels);

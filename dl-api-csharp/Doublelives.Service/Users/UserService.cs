@@ -104,7 +104,7 @@ namespace Doublelives.Service.Users
                     roles.Add(role);
                 }
 
-                permissions = _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
+                permissions = await _unitOfWork.MenuRepository.GetPermissionsByRoleIds(ids);
             }
 
             var dept = await _deptService.GetById(user.Deptid.Value());

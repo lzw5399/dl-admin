@@ -4,6 +4,7 @@ using Doublelives.Service.Menus;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -24,9 +25,9 @@ namespace Doublelives.Api.Controllers
 
         /// <summary>获取侧边路由</summary>
         [HttpGet("listForRouter")]
-        public IActionResult ListForRouter()
+        public async Task<IActionResult> ListForRouter()
         {
-            var list = _menuService.GetMenuRouterList(WorkContext.CurrentUser.Id);
+            var list = await _menuService.GetMenuRouterList(WorkContext.CurrentUser.Id);
             var routers = _mapper.Map<List<RouterViewModel>>(list);
 
             return Ok(routers);

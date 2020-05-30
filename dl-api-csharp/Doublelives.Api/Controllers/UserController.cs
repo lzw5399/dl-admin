@@ -53,10 +53,10 @@ namespace Doublelives.Api.Controllers
         /// 更新用户信息
         /// </summary>
         [HttpPut]
-        public IActionResult ModifyUser(UserUpdateRequest request)
+        public async Task<IActionResult> ModifyUser(UserUpdateRequest request)
         {
             // todo model validate
-            _userService.Update(UserMapper.ToUserUpdateDto(request, WorkContext.CurrentUser));
+            await _userService.Update(UserMapper.ToUserUpdateDto(request, WorkContext.CurrentUser));
 
             return Ok("1");
         }

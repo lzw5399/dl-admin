@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Menus
 {
     public interface IMenuService
     {
-        List<RouterDto> GetMenuRouterList(int userid);
+        Task<List<RouterDto>> GetMenuRouterList(int userid);
     }
 }

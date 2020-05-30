@@ -2,6 +2,8 @@
 using Doublelives.Shared.Enum;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doublelives.Persistence.Repositories
 {
@@ -14,9 +16,9 @@ namespace Doublelives.Persistence.Repositories
             _context = context;
         }
 
-        public List<SysMenu> GetTopLevelMenusByRoleIds(List<int> roleIds)
+        public async Task<List<SysMenu>> GetTopLevelMenusByRoleIds(List<int> roleIds)
         {
-            var menus = _context.Set<SysRelation>()
+            var menus = await _context.Set<SysRelation>()
                 .Where(it => roleIds.Contains(it.Roleid))
                 .Join(
                     _context.Set<SysMenu>().Where(
@@ -25,49 +27,49 @@ namespace Doublelives.Persistence.Repositories
                     relation => relation.Menuid,
                     menu => menu.Id,
                     (relation, menu) => menu)
-                .ToList();
+                .ToListAsync();
 
             return menus;
         }
 
-        public List<SysMenu> GetSubMenusByParentCode(string pcode)
+        public async Task<List<SysMenu>> GetSubMenusByParentCode(string pcode)
         {
             var menus =
-                _context
+                await _context
                     .Set<SysMenu>()
                     .Where(menu => menu.Status == MenuStatus.Active &&
                                    menu.Ismenu &&
                                    menu.Pcode == pcode)
-                    .ToList();
+                    .ToListAsync();
 
             return menus;
         }
 
-        public List<string> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
+        public async Task<List<string>> GetPermissionsByRoleIds(List<int> roleIds, bool activeOnly = true)
         {
             List<string> permissions;
             if (activeOnly)
-                permissions = _context.Set<SysRelation>()
+                permissions = await _context.Set<SysRelation>()
                     .Where(it => roleIds.Contains(it.Roleid))
                     .Join(
                         _context.Set<SysMenu>().Where(menu => menu.Status == MenuStatus.Active),
                         relation => relation.Menuid,
                         menu => menu.Id,
                         (relation, menu) => menu.Url)
-                    .ToList();
+                    .ToListAsync();
             //permissions = (from r in _context.Set<SysRelation>()
             //               join m in _context.Set<SysMenu>() on r.Menuid equals m.Id
             //               where roleIds.Contains(r.Roleid) && m.Status == MenuStatus.Active
             //               select m.Url).ToList();
             else
-                permissions = _context.Set<SysRelation>()
+                permissions = await _context.Set<SysRelation>()
                     .Where(it => roleIds.Contains(it.Roleid))
                     .Join(
                         _context.Set<SysMenu>(),
                         relation => relation.Menuid,
                         menu => menu.Id,
                         (relation, menu) => menu.Url)
-                    .ToList();
+                    .ToListAsync();
 
             return permissions.Where(it => !string.IsNullOrWhiteSpace(it)).Distinct().ToList();
         }

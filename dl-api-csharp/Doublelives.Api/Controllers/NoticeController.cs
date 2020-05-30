@@ -4,6 +4,7 @@ using Doublelives.Service.Notices;
 using Doublelives.Service.WorkContextAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doublelives.Api.Controllers
 {
@@ -23,9 +24,9 @@ namespace Doublelives.Api.Controllers
         }
 
         [HttpGet("list")]
-        public IActionResult List(string title)
+        public async Task<IActionResult> List(string title)
         {
-            var result = _noticeService.List(title);
+            var result = await _noticeService.List(title);
             var list = _mapper.Map<List<NoticeViewModel>>(result);
 
             return Ok(list);

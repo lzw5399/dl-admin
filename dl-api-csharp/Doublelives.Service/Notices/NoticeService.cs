@@ -8,6 +8,7 @@ using Doublelives.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Notices
 {
@@ -22,10 +23,10 @@ namespace Doublelives.Service.Notices
             _unitOfWork = unitOfWork;
         }
 
-        public List<NoticeDto> List(string title)
+        public async Task<List<NoticeDto>> List(string title)
         {
             var cacheKey = CacheHelper.ToCacheKey(CacheKeyPrefix.NOTICE_CACHE_PREFIX, title);
-            var result = _cacheManager.GetOrCreateAsync(cacheKey, async entry =>
+            var result = await _cacheManager.GetOrCreateAsync(cacheKey, async entry =>
             {
                 List<SysNotice> notices;
                 if (string.IsNullOrEmpty(title))
@@ -38,8 +39,8 @@ namespace Doublelives.Service.Notices
                         .Where(it => it.Title == title)
                         .ToListAsync();
 
-                return notices.Select(it => NoticeMapper.ToNoticeDto(it)).ToList();
-            }).Result;
+                return notices.Select(NoticeMapper.ToNoticeDto).ToList();
+            });
 
             return result;
         }

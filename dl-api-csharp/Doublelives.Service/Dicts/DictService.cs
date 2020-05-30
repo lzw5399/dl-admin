@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Doublelives.Service.Dicts
 {
@@ -24,7 +25,7 @@ namespace Doublelives.Service.Dicts
             _cacheManager = cacheManager;
         }
 
-        public PagedModel<DictDto> GetPagedList(DictSearchDto criteria)
+        public async Task<PagedModel<DictDto>> GetPagedList(DictSearchDto criteria)
         {
             // 列表只显示id为0的dict，其他的是以"子节点"来显示的
             Expression<Func<SysDict, bool>> condition = it => it.Pid == 0;
@@ -32,7 +33,7 @@ namespace Doublelives.Service.Dicts
             if (!string.IsNullOrWhiteSpace(criteria.Name))
                 condition = condition.And(it => it.Name.Contains(criteria.Name));
 
-            var all = GetAll();
+            var all = await GetAll();
             var topDict = all
                 .Where(condition.Compile())
                 .Skip((criteria.Page - 1) * criteria.Limit)
@@ -58,10 +59,10 @@ namespace Doublelives.Service.Dicts
         /// <summary>
         /// 获取所有
         /// </summary>
-        public List<SysDict> GetAll()
+        public async Task<List<SysDict>> GetAll()
         {
-            var result = _cacheManager.GetOrCreateAsync("dict_all",
-                async entry => { return await _unitOfWork.DictRepository.GetAsQueryable().ToListAsync(); }).Result;
+            var result = await _cacheManager.GetOrCreateAsync("dict_all",
+                async entry => { return await _unitOfWork.DictRepository.GetAsQueryable().ToListAsync(); });
 
             return result;
         }

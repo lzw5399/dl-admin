@@ -1,4 +1,5 @@
-﻿using Doublelives.Domain.Sys;
+﻿using System.Threading.Tasks;
+using Doublelives.Domain.Sys;
 using Doublelives.Domain.Sys.Dto;
 using Doublelives.Shared.Models;
 
@@ -9,6 +10,6 @@ namespace Doublelives.Service.Dicts
         /// <summary>
         /// 获取分页数据
         /// </summary>
-        PagedModel<DictDto> GetPagedList(DictSearchDto criteria);
+        Task<PagedModel<DictDto>> GetPagedList(DictSearchDto criteria);
     }
 }
