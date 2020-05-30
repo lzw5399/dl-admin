@@ -21,6 +21,11 @@
     <Content Remove="MockResponse\info.json" />
     <Content Remove="MockResponse\listForRouter.json" />
     <Content Remove="MockResponse\noticelist.json" />
+    <Content Update="appsettings.Development.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
